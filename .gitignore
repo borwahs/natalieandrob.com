@@ -21,6 +21,14 @@
 /.bundle/
 /lib/bundler/man/
 
+# Ignore middleman files/directories
+/build
+.listen_test
+.cache
+
+# Ignore Sass cache
+/.sass-cache
+
 ## Mac OS X files
 ## source: https://github.com/github/gitignore/blob/master/Global/OSX.gitignore
 .DS_Store
