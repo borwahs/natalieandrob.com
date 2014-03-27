@@ -1,11 +1,61 @@
 @charset "utf-8";
 
-body { text-align: center; }
-
-header {
-    margin-top: 30px;
+body {
+    font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     padding-top: 20px;
     padding-bottom: 20px;
-    font-size: 3.0em;
-    font-weight: 600;
+    color: #4a525a;
+}
+
+section.card {
+    font-size: 2.0em;
+}
+
+.left {
+    text-align: left;
+    font-size: .8em;
+    line-height: 1.0em;
+}
+
+.names {
+    font-size: 1.5em;
+    line-height: 1.6em;
+}
+
+.date {
+    font-weight: 100;
+}
+
+.right {
+    text-align: right;
+    font-size: .8em;
+    line-height: 1.0em;
+}
+
+.city {
+    font-size: 1.5em;
+    line-height: 1.6em;
+}
+
+.state {
+    font-weight: 100;
+}
+
+.save-the-date {
+    text-align: center;
+    font-family: 'Great Vibes';
+    font-size: 2.5em;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+@media only screen and (max-width: 767px) {
+    .save-the-date { font-size: 1.3em; }
+    .names { font-size: 1.2em; line-height: 1.25em; }
+    .city { font-size: 1.2em; line-height: 1.25em; }
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
+    .save-the-date { font-size: 2.0em; }
+    .names { font-size: 1.34em; line-height: 1.38em; }
+    .city { font-size: 1.34em; line-height: 1.38em; }
 }
