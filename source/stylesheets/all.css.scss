@@ -1,12 +1,19 @@
 @charset "utf-8";
 
+$body-text-color: #4a525a;
+$card-background-color: rgba(240, 240, 240, 1);
+$box-border-color: #ddd;
+$red-heart-color: #ee0044;
+$text-shadow-color: rgba(0,0,0,0.1);
+$img-shadow-color: rgba(0,0,0,0.2);
+
 html {
     -webkit-font-smoothing: antialiased;
 }
 
 body {
     font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #4a525a;
+    color: $body-text-color;
 }
 
 footer {
@@ -17,9 +24,9 @@ footer {
 
 section.card {
     padding: 20px 0px;
-    background-color: rgba(240, 240, 240, 1);
+    background-color: $card-background-color;
     font-size: 2.0em;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid $box-border-color;
 }
 
 section.announcement {
@@ -69,17 +76,17 @@ section.announcement p {
     text-align: center;
     font-family: 'Great Vibes';
     font-size: 2.5em;
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+    text-shadow: 2px 2px 0px $text-shadow-color;
 }
 
 .colorize {
     padding: 0 5px;
-    color: #ee0044;
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+    color: $red-heart-color;
+    text-shadow: 2px 2px 0px $text-shadow-color;
 }
 
 .cover img {
-    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+    box-shadow: 3px 3px 3px $img-shadow-color;
 }
 
 .details {
