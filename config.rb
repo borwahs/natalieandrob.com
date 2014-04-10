@@ -2,12 +2,9 @@
 # Compass
 ###
 
-require 'slim'
 
-# Change Compass configuration
-# compass_config do |config|
-#   config.output_style = :compact
-# end
+# require slim templating
+require 'slim'
 
 ###
 # Page options, layouts, aliases and proxies
@@ -52,6 +49,9 @@ set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
+
+# Pretty URLs
+activate :directory_indexes
 
 # Build-specific configuration
 configure :build do
