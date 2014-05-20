@@ -3,12 +3,12 @@ title: Natalie & Rob - Subscribe
 backend: http://rob-and-natalie-114884.use1-2.nitrousbox.com:8888
 ---
 
-p= current_page.data.title
-
-p= current_page.data.backend
+p
+  | #{ current_page.data.title }
 
 p
-  | <%= current_page.data.backend %>
+  | #{ current_page.data.backend }
+
 section.card
   div.wrap.grid
     div.unit.whole.subscribe-form
