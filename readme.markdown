@@ -15,3 +15,22 @@ The following is a list of open-source components used:
 This site is using a [Symbolset](http://symbolset.com/) font set.
 
 The Symbolset files are not included in this repository.
+
+# Usage
+
+Clone this repo into a local dev environment then run bundler.
+
+    $ bundle install
+    $ bundle update
+    
+Once all the dependencies have been installed, the following rake tasks are defined:
+
+    $ rake build
+    $ rake serve
+    $ rake serve[port_number]
+
+# Disclaimer
+
+All images are copyright of Rob Shaw.
+
+Source code is MIT licensed with no added caveats. See LICENSE file for more details.
