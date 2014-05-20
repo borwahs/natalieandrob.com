@@ -48,3 +48,6 @@ Icon
 
 ## Ignore Webfonts
 /source/webfonts/
+
+# Node Modules
+node_modules
