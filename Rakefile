@@ -8,6 +8,11 @@ task :build do
   middleman "build"
 end
 
-task :serve do
-  middleman "server"
+task :serve, :port do |t, args|
+  port = "4567"
+  port = args[:port] unless args[:port].nil?
+
+  opts = "-p " << port
+
+  middleman "server #{opts}"
 end
