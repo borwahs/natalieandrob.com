@@ -53,6 +53,9 @@ set :images_dir, 'images'
 # Pretty URLs
 activate :directory_indexes
 
+# reload for development
+activate :livereload
+
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
