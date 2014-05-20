@@ -7,15 +7,16 @@ var server = Hapi.createServer("0.0.0.0", 8888);
 var db = Redis.createClient();
 
 server.route({
-  method: "*",
+  method: "POST",
   path: "/subscribe",
   handler: function (request, reply) {
-    subscribe(request.query.email);
+    console.log(request.payload);
+    subscribe(request.payload.email);
     reply("OK");
   },
   config: {
     validate: {
-      query: {
+      payload: {
         email: Joi.string().email()
       }
     }

@@ -1,5 +1,5 @@
 {
-  "name": "NatalieAndRob.com API Server",
+  "name": "natalieandrob-dot-com-api-server",
   "version": "0.0.1",
   "description": "A simple node.js server that implements the API for NatalieAndRob.com",
   "main": "server.js",
