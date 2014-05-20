@@ -12,71 +12,12 @@ html {
 }
 
 body {
-    font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: $body-text-color;
 }
 
 footer {
-    background-color: #fff;
-    padding: 10px 0px 20px 0px;
     text-align: center;
-}
-
-section.card {
-    padding: 20px 0px;
-    background-color: $card-background-color;
-    font-size: 2.0em;
-    border-bottom: 1px solid $box-border-color;
-}
-
-section.announcement {
-    padding-top: 10px;
-    font-family: 'Helvetica Neue';
-    text-align: center;
-    font-size: 1.2em;
-}
-
-section.announcement p {
-    margin: 10px 0px;
-}
-
-.left {
-    text-align: left;
-    font-size: .8em;
-    line-height: 1.0em;
-    letter-spacing: 2px;
-}
-
-.names {
-    font-size: 1.5em;
-}
-
-.date {
-    font-weight: 100;
-    letter-spacing: 1.5px;
-}
-
-.right {
-    text-align: right;
-    font-size: .8em;
-    line-height: 1.0em;
-    letter-spacing: 2px;
-}
-
-.city {
-    font-size: 1.5em;
-}
-
-.state {
-    font-weight: 100;
-    letter-spacing: 1.5px;
-}
-
-.save-the-date {
-    text-align: center;
-    font-family: 'Great Vibes';
-    font-size: 2.5em;
-    text-shadow: 2px 2px 0px $text-shadow-color;
 }
 
 .colorize {
@@ -85,24 +26,10 @@ section.announcement p {
     text-shadow: 2px 2px 0px $text-shadow-color;
 }
 
-.cover img {
-    box-shadow: 3px 3px 3px $img-shadow-color;
-}
-
-.details {
-    padding-top: 20px;
-}
-
 @media only screen and (max-width: 767px) {
-    .save-the-date { font-size: 1.3em; }
-    .names { font-size: 1.2em; line-height: 1.25em; }
-    .city { font-size: 1.2em; line-height: 1.25em; }
-    section.announcement { font-size: 1.3em; }
+
 }
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
-    .save-the-date { font-size: 2.0em; }
-    .names { font-size: 1.34em; line-height: 1.38em; }
-    .city { font-size: 1.34em; line-height: 1.38em; }
-    section.announcement { font-size: 1.4em; }
+
 }
