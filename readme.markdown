@@ -28,6 +28,12 @@ Once all the dependencies have been installed, the following rake tasks are defi
     $ rake build
     $ rake serve
     $ rake serve[port_number]
+    
+To get the node.js server set up, run the following:
+    
+    $ cd server
+    $ npm install
+    $ node server.js
 
 # Disclaimer
 
