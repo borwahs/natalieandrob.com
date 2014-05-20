@@ -49,5 +49,6 @@ Icon
 ## Ignore Webfonts
 /source/webfonts/
 
-# Node Modules
+# Node
 node_modules
+npm-debug.log
