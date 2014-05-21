@@ -34,6 +34,17 @@ nav ul li {
   min-width: 60px;
 }
 
+section.hero {
+    background-color: rgb(255, 255, 255);
+    color: rgb(74, 82, 90);
+    background: url(/images/cover.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    height: 500px;
+    width: 100%;
+}
+
 footer {
     text-align: center;
 }
@@ -44,10 +55,14 @@ footer {
     text-shadow: 2px 2px 0px $text-shadow-color;
 }
 
-@media only screen and (max-width: 767px) {
-
+@media only screen
+  and (min-device-width : 320px)
+  and (max-device-width : 480px) {
+    section.hero { height: 260px; }
 }
 
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
-
+@media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px) {
+    section.hero { height: 380px; }
 }
