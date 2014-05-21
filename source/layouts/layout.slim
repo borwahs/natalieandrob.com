@@ -13,7 +13,9 @@ html
     
     section.hero
 
-    == yield
+    section#content
+      div.wrap.grid
+        == yield
 
     == partial "footer"
 
