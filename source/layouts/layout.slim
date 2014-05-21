@@ -6,11 +6,16 @@ html
     | #{stylesheet_link_tag "normalize", "reset", "gridism", "all"}
     link href='/webfonts/ss-standard.css' rel='stylesheet' type='text/css'
     | #{javascript_include_tag "all"}
-    link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'
-    link href='http://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'
 
   body
-    == yield
+
+    == partial "header"
+    
+    section.hero
+
+    section#content
+      div.wrap.grid
+        == yield
 
     == partial "footer"
 
