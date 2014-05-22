@@ -144,8 +144,10 @@ section.grid
   div.unit.whole.section-header
     h3.title
       | Stay Up to Date
-    h5.sub-title
-      | Enter your email address below to be notified of updates
+
+  div.grid
+    div.unit.whole
+      | We will be continually updating the website as we countdown to the big day. Please enter your email address below so we can notify you when we update the site!
 
   div.grid
     form#subscribe-form action="/subscribers" method="POST"
@@ -157,7 +159,7 @@ section.grid
   div.grid
     div.unit.whole
       div#subscribe-form-success.hidden
-        p Success!
+        p Thanks! We will send you an email when we update the site with more information.
       div#subscribe-form-failure.hidden.error
         p 
           | Whoops! That's not a valid email :( <br />
