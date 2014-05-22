@@ -3,62 +3,96 @@
 $body-text-color: #4a525a;
 $card-background-color: rgba(240, 240, 240, 1);
 $box-border-color: #ddd;
-$red-heart-color: #ee0044;
+$red-heart-color: #C32148;
 $text-shadow-color: rgba(0,0,0,0.1);
 $img-shadow-color: rgba(0,0,0,0.2);
 
 html {
-    -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: $body-text-color;
+  font-family: Helvetica, Arial, sans-serif;
+  color: $body-text-color;
+  font-weight: 400;
 }
+
+h1, h2, h3, h4, h5, h6, h7, p {
+  font-size: 1em;
+  line-height: 1.75em;
+  padding: 0;
+  margin: 0 0 1em 0;
+}
+
+a {
+  text-decoration: none;
+  color: rgba(22, 51, 76, .5);
+}
+
+a:visited { color: rgba(22, 51, 76, .5); }
+a:hover { color: #C32148; }
 
 header #title {
   text-align: center;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  font-weight: 600;
 }
 
 header #top-nav {
+  height: 56px;
   text-align: center;
 }
 
 nav ul {
   margin: 0;
+  line-height: 1.40em;
   list-style-type: none;
 }
 
 nav ul li {
   display: inline-block;
   min-width: 60px;
+  width: 120px;
+}
+
+nav ul li a, nav ul li span {
+  line-height: 1.40em;
+  font-weight: 700;
+}
+
+nav ul li span.selected {
+  color: rgb(0, 0, 0);
+  border-bottom: dotted 1px #aaa;
 }
 
 section.hero {
-    background-color: rgb(255, 255, 255);
-    color: rgb(74, 82, 90);
-    background: url(/images/cover.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center top;
-    height: 500px;
-    width: 100%;
+  background-color: rgb(255, 255, 255);
+  color: rgb(74, 82, 90);
+  background: url(/images/cover.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  height: 500px;
+  width: 100%;
 }
 
 div.split {
   height: 2px;
   margin: 10px 0px;
-  border-bottom: 2px solid #cecece;
+  border-bottom: 2px dotted #cecece;
 }
 
 footer {
-    text-align: center;
+  color: #aaa;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .colorize {
-    padding: 0 5px;
-    color: $red-heart-color;
-    text-shadow: 2px 2px 0px $text-shadow-color;
+  padding: 0 5px;
+  color: $red-heart-color;
+  text-shadow: 2px 2px 0px $text-shadow-color;
 }
 
 @media only screen

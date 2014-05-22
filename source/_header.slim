@@ -8,15 +8,17 @@ header
         ul
           li
             - if current_page.url != "/" and current_page.url != "/index.html"
-              a href="/"
-                | Home
+              span
+                a href="/"
+                  | Our Wedding
             - else
               span.selected
-                | Home
+                | Our Wedding
           li
             - if current_page.url != "/subscribe/" and current_page.url != "/subscribe" and current_page.url != "/index.html"
-              a href="/subscribe/"
-                | Subscribe
+              span
+                a href="/subscribe/"
+                  | Subscribe
             - else
               span.selected
                 | Subscribe
