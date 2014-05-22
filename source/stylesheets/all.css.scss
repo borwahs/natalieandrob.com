@@ -108,6 +108,15 @@ footer {
   text-shadow: 2px 2px 0px $text-shadow-color;
 }
 
+.hidden {
+  display: none;
+}
+
+.error {
+  color: red;
+  font-style: bold;
+}
+
 @media only screen
   and (min-device-width : 320px)
   and (max-device-width : 480px) {
