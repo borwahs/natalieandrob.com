@@ -27,11 +27,11 @@ h1, h2, h3, h4, h5, h6, h7, p {
 
 a {
   text-decoration: none;
-  color: rgba(22, 51, 76, .5);
+  color: $red-heart-color
 }
 
-a:visited { color: rgba(22, 51, 76, .5); }
-a:hover { color: #C32148; }
+a:visited { color: $red-heart-color }
+a:hover { color: $red-heart-color }
 
 section h4 {
   font-size: 1.2em;
