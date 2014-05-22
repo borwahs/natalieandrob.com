@@ -5,7 +5,7 @@ html
     meta name="viewport" content="width=device-width,initial-scale=1"
     | #{stylesheet_link_tag "normalize", "reset", "gridism", "all"}
     link href='/webfonts/ss-standard.css' rel='stylesheet' type='text/css'
-    | #{javascript_include_tag "all"}
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
   body
 
@@ -29,3 +29,5 @@ html
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
+      
+  | #{javascript_include_tag "all"}
