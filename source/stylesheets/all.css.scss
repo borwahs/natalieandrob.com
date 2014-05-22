@@ -33,7 +33,7 @@ a {
 a:visited { color: rgba(22, 51, 76, .5); }
 a:hover { color: #C32148; }
 
-article h4 {
+section h4 {
   font-size: 1.2em;
   font-weight: 600;
 }
@@ -70,10 +70,6 @@ h5.sub-title {
   font-weight: 400;
 }
 
-article#ceremony div.card {
-  margin: 10px 0;
-}
-
 #ceremony p, #ceremony h3 {
   margin: 0;
 }
@@ -81,14 +77,6 @@ article#ceremony div.card {
 div.card h3.activity {
   font-size: 1.4em;
   font-weight: 600;
-}
-
-div.card p.location {
-  
-}
-
-div.card p.time {
-  
 }
 
 section.hero {
