@@ -30,11 +30,4 @@ html
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
 
-    | #{ javascript_include_tag "all", "floatlabels" }
-
-    javascript:
-      $(function() {
-        $('input#email').floatlabel({
-          labelEndTop: "10px"
-        });
-      });
+    | #{ javascript_include_tag "all" }
