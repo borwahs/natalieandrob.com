@@ -66,6 +66,46 @@ nav ul li span.selected {
   border-bottom: dotted 1px #aaa;
 }
 
+div.section-header {
+  margin: 20px 0;
+}
+
+h3.title {
+  margin: 0;
+  line-height: 1em;
+  font-size: 2em;
+  font-weight: 400;
+}
+
+h5.sub-title {
+  margin: 0;
+  font-size:1.2em;
+  font-weight: 400;
+}
+
+article#ceremony div.card {
+  border-left: 2px dashed #aaa;
+  padding-left: 15px;
+  margin: 10px 0;
+}
+
+div.card p, div.card h3 {
+  margin: 0;
+}
+
+div.card h3.activity {
+  font-size: 1.4em;
+  font-weight: 600;
+}
+
+div.card p.location {
+  
+}
+
+div.card p.time {
+  
+}
+
 section.hero {
   background-color: rgb(255, 255, 255);
   color: rgb(74, 82, 90);
