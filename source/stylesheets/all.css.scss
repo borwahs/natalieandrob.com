@@ -15,6 +15,7 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   color: $body-text-color;
   font-weight: 400;
+  font-size: 1.1em;
 }
 
 h1, h2, h3, h4, h5, h6, h7, p {
@@ -31,6 +32,11 @@ a {
 
 a:visited { color: rgba(22, 51, 76, .5); }
 a:hover { color: #C32148; }
+
+article h4 {
+  font-size: 1.2em;
+  font-weight: 600;
+}
 
 header #title {
   text-align: center;
@@ -89,7 +95,7 @@ article#ceremony div.card {
   margin: 10px 0;
 }
 
-div.card p, div.card h3 {
+#ceremony p, #ceremony h3 {
   margin: 0;
 }
 
