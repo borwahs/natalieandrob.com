@@ -134,21 +134,27 @@ section.grid
   div.unit.whole.split
   
 section.grid
-  div.unit.wholesection-header
+  div.unit.whole.section-header
     h3.title
       | Stay Up to Date
     h5.sub-title
       | Enter your email address below to be notified of updates
-    p
-      form#subscribe-form action="/subscribers" method="POST"
-        input type="text" name="email" placeholder="Email Address"
-        input type="submit" value="Subscribe"
-    div#subscribe-form-success.hidden
-      p Success!
-    div#subscribe-form-failure.hidden.error
-      p 
-        | Whoops! That's not a valid email :( <br />
-        | Can you try again?
+
+  div.grid
+    form#subscribe-form action="/subscribers" method="POST"
+      div.unit.three-quarters
+        input.text type="text" name="email" placeholder="Email Address"
+      div.unit.one-quarter
+        input.submit type="submit" value="Subscribe"
+
+  div.grid
+    div.unit.whole
+      div#subscribe-form-success.hidden
+        p Success!
+      div#subscribe-form-failure.hidden.error
+        p 
+          | Whoops! That's not a valid email :( <br />
+          | Can you try again?
 
 section.grid
   div.unit.whole.split
