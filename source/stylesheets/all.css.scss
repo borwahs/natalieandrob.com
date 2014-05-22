@@ -38,38 +38,15 @@ article h4 {
   font-weight: 600;
 }
 
-header #title {
+header {
   text-align: center;
   font-size: 1.5em;
   line-height: 1.5em;
   font-weight: 600;
 }
 
-header #top-nav {
-  height: 56px;
-  text-align: center;
-}
-
-nav ul {
-  margin: 0;
-  line-height: 1.40em;
-  list-style-type: none;
-}
-
-nav ul li {
-  display: inline-block;
-  min-width: 60px;
-  width: 120px;
-}
-
-nav ul li a, nav ul li span {
-  line-height: 1.40em;
-  font-weight: 700;
-}
-
-nav ul li span.selected {
-  color: rgb(0, 0, 0);
-  border-bottom: dotted 1px #aaa;
+header #date {
+  font-weight: 400;
 }
 
 div.section-header {
@@ -145,6 +122,7 @@ footer {
   and (min-device-width : 320px)
   and (max-device-width : 480px) {
     section.hero { height: 260px; }
+    header #date { font-size: .8em; font-weight: 300; }
 }
 
 @media only screen

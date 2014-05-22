@@ -1,24 +1,8 @@
 header
   div.wrap.grid
-    div.unit.one-quarter#title
+    div.unit.half#title
       span
         | Natalie & Rob
-    div.unit.three-quarters#top-nav
-      nav
-        ul
-          li
-            - if current_page.url != "/" and current_page.url != "/index.html"
-              span
-                a href="/"
-                  | Our Wedding
-            - else
-              span.selected
-                | Our Wedding
-          li
-            - if current_page.url != "/subscribe/" and current_page.url != "/subscribe" and current_page.url != "/index.html"
-              span
-                a href="/subscribe/"
-                  | Subscribe
-            - else
-              span.selected
-                | Subscribe
+    div.unit.half#date
+      span
+        | November 8th, 2014
