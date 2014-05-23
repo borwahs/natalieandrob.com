@@ -10,6 +10,6 @@ exports.endpoints = [
   { method: "POST", path: "/subscribers", config: Subscribers.add },
   // { method: "GET", path: "/subscribers", config: Subscribers.list },
   
-  // proxy to rake
+  // static files (either proxies to middleman or serves static files directly)
   { method: "*", path: "/{path*}", config: (Config.node.env.toLowerCase() === "production" ? Static.static : Static.proxy) }
 ];
