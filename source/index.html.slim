@@ -128,14 +128,14 @@ section.grid#gift-registry
   article.grid
     div.unit.whole
       p
-        | We are currently registered at the following places.
+        | We are currently registered at the following stores (click image to view).
 
     div.grid#registry-options
       div.unit.half.registry-card
         a href="http://www.crateandbarrel.com/Gift-Registry/Natalie-Merz-and-Rob-Shaw/r5182806"
-          img src="http://a.c-b.co/assets/logo/cratelogo.png"
+          img.registry-logo src="http://a.c-b.co/assets/logo/cratelogo.png"
       div.unit.half.registry-card
-        | To Be Decided
+        | Second Registry To Be Added Soon!
 
 section.grid
   div.unit.whole.split
@@ -147,7 +147,8 @@ section.grid
 
   div.grid
     div.unit.whole
-      | We will be continually updating the website as we countdown to the big day. Please enter your email address below so we can notify you when we update the site!
+      p
+        | We will be continually updating the website as we countdown to the big day. Please enter your email address below so we can notify you when we update the site!
 
   div.grid
     form#subscribe-form action="/subscribers" method="POST"
@@ -159,7 +160,8 @@ section.grid
   div.grid
     div.unit.whole
       div#subscribe-form-success.hidden
-        p Thanks! We will send you an email when we update the site with more information.
+        p
+          | Thanks! We will send you an email when we update the site with more information.
       div#subscribe-form-failure.hidden.error
         p 
           | Whoops! That's not a valid email :( <br />
