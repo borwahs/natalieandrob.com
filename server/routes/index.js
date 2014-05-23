@@ -1,5 +1,6 @@
 var Subscribers = require("./subscribers");
 var Static = require("./static");
+var Config = require("../config");
 
 exports.endpoints = [
   // just so we can test it is working
@@ -10,5 +11,5 @@ exports.endpoints = [
   // { method: "GET", path: "/subscribers", config: Subscribers.list },
   
   // proxy to rake
-  { method: "*", path: "/{path*}", config: Static.proxy }
+  { method: "*", path: "/{path*}", config: (Config.node.env.toLowerCase() === "production" ? Static.static : Static.proxy) }
 ];

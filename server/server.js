@@ -10,5 +10,6 @@ var server = Hapi.createServer(Config.host, Config.port);
 server.route(Routes.endpoints);
 
 server.start(function() {
-  console.log("Hapi server started at " + server.info.uri);
+  console.log("Hapi server started:", server.info.uri);
+  console.log("Configuration:", Config);
 });

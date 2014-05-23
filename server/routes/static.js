@@ -8,3 +8,13 @@ exports.proxy = {
      }
   }
 };
+
+exports.static = {
+  handler: {
+    directory: {
+      path: '../build',
+      listing: false,
+      index: true
+    }
+  }
+};
