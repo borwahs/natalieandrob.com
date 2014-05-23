@@ -16,6 +16,11 @@ html
     section#content
       div.wrap
         == yield
+        
+    - if current_page.path != "/"
+      section.back.wrap.grid
+        div.unit.whole
+          a href="/" &#8592 Back
 
     == partial "footer"
 
