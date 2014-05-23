@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Lato', Helvetica, Arial, sans-serif;
   color: $body-text-color;
   font-weight: 400;
   font-size: 1.1em;
@@ -31,7 +31,7 @@ a {
 }
 
 a:visited { color: $red-heart-color }
-a:hover { color: $red-heart-color }
+a:hover { cursor: hand; color: $red-heart-color }
 
 section h4 {
   font-size: 1.2em;
@@ -88,6 +88,10 @@ section.hero {
   background-position: center top;
   height: 500px;
   width: 100%;
+}
+
+div#registry-options {
+  text-align: center;
 }
 
 div.split {
@@ -149,6 +153,25 @@ input.submit {
   and (max-device-width : 480px) {
     section.hero { height: 260px; }
     header #date { font-size: .8em; font-weight: 300; }
+    
+    header { 
+      margin: 10px 0;
+      line-height: .5em;
+    }
+}
+
+@media only screen
+  and (min-device-width : 320px)
+  and (max-device-width : 568px) {
+    section.hero { height: 260px; }
+    header #date { font-size: .8em; font-weight: 300; }
+    
+    header { 
+      margin: 10px 0;
+      line-height: .5em;
+    }
+    
+    img.registry-logo { width: 200px; }
 }
 
 @media only screen
