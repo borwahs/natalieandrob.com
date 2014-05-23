@@ -8,3 +8,13 @@ exports.proxy = {
      }
   }
 };
+
+exports.static = {
+  handler: {
+    directory: {
+      path: Config.static.path,
+      listing: false,
+      index: true
+    }
+  }
+};

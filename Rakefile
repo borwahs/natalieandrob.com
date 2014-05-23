@@ -1,4 +1,4 @@
-task :default => :preview
+task :default => :build
 
 def middleman(opts="")
   sh "middleman " + opts
