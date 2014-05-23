@@ -12,7 +12,7 @@ exports.proxy = {
 exports.static = {
   handler: {
     directory: {
-      path: '../build',
+      path: Config.static.path,
       listing: false,
       index: true
     }
