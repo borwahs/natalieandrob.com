@@ -79,7 +79,7 @@ div.card h3.activity {
   font-weight: 600;
 }
 
-div.hero {
+section.hero {
   background-color: rgb(255, 255, 255);
   color: rgb(74, 82, 90);
   background: url(/images/cover.jpg);
@@ -136,7 +136,7 @@ footer {
   font-style: bold;
 }
 
-input { 
+input {
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -166,10 +166,10 @@ input.submit {
 @media only screen
   and (min-device-width : 320px)
   and (max-device-width : 480px) {
-    div.hero { height: 260px; }
+    section.hero { height: 260px; }
     header #date { font-size: .8em; font-weight: 300; }
-    
-    header { 
+
+    header {
       margin: 10px 0;
       line-height: .5em;
     }
@@ -178,19 +178,19 @@ input.submit {
 @media only screen
   and (min-device-width : 320px)
   and (max-device-width : 568px) {
-    div.hero { height: 260px; }
+    section.hero { height: 260px; }
     header #date { font-size: .8em; font-weight: 300; }
-    
-    header { 
+
+    header {
       margin: 10px 0;
       line-height: .5em;
     }
-    
+
     img.registry-logo { width: 200px; }
 }
 
 @media only screen
   and (min-device-width : 768px)
   and (max-device-width : 1024px) {
-    div.hero { height: 380px; }
+    section.hero { height: 380px; }
 }

@@ -4,19 +4,19 @@ html
     title #{current_page.data.title}
     meta name="viewport" content="width=device-width,initial-scale=1"
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    | #{stylesheet_link_tag "normalize", "gridism", "all"}
+    | #{stylesheet_link_tag "normalize", "reset", "gridism", "all"}
     link href='/webfonts/ss-standard.css' rel='stylesheet' type='text/css'
     link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'
   body
 
     == partial "header"
-    
-    div.hero
 
-    div#content
+    section.hero
+
+    section#content
       div.wrap
         == yield
-        
+
     - if current_page.url != "/" and current_page.url != "/index.html"
       section.back.wrap.grid
         div.unit.whole
