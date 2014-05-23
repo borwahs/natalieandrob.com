@@ -17,7 +17,7 @@ html
       div.wrap
         == yield
         
-    - if current_page.path != "/"
+    - if current_page.url != "/" and current_page.url != "/index.html"
       section.back.wrap.grid
         div.unit.whole
           a href="/" &#8592 Back
