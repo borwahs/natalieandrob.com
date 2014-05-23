@@ -40,7 +40,7 @@ Utils.walkPropertiesOfObjectsRecursivelyInSync = function walkPropertiesOfObject
 // for the current key path.
 Utils.mergeObjectWithGenerator = function mergeObjectWithGenerator(defaultsObj, generatorFn) {
   Utils.walkObjectPropertiesRecursively(defaultsObj, function(key, val, keyPath, obj) {
-    obj[key] = generatorFn(keyPath, val) || val;
+    obj[key] = generatorFn(key, val, keyPath, obj) || val;
   });
   
   return defaultsObj;
@@ -55,7 +55,9 @@ Utils.mergeObjectWithGenerator = function mergeObjectWithGenerator(defaultsObj, 
 // For example { foo: { bar: { baz : 1 } } }, would look for the environment
 // variable called FOO_BAR_BAZ.
 Utils.mergeObjectWithEnvironmentVariables = function mergeObjectWithEnvironmentVariables(defaultsObj) {
-  return Utils.mergeObjectWithGenerator(defaultsObj, function(keyPath) {
+  return Utils.mergeObjectWithGenerator(defaultsObj, function(key, val, keyPath, obj) {
+    if (typeof val === "object") { return; }
+    
     return process.env[keyPath.join("_").toUpperCase()];
   });
 };
