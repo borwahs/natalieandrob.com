@@ -25,6 +25,11 @@ h1, h2, h3, h4, h5, h6, h7, p {
   margin: 0 0 1em 0;
 }
 
+div.browser-warning {
+  padding: 10px;
+  background-color: #cecece;
+}
+
 a {
   text-decoration: none;
   color: $red-heart-color
