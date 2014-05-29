@@ -1,11 +1,6 @@
 @charset "utf-8";
 
-$body-text-color: #4a525a;
-$card-background-color: rgba(240, 240, 240, 1);
-$box-border-color: #ddd;
-$red-heart-color: #C32148;
-$text-shadow-color: rgba(0,0,0,0.1);
-$img-shadow-color: rgba(0,0,0,0.2);
+@import "_variables";
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -13,7 +8,7 @@ html {
 
 body {
   font-family: 'Lato', Helvetica, Arial, sans-serif;
-  color: $body-text-color;
+  color: @body-text-color;
   font-weight: 400;
   font-size: 1.1em;
 }
@@ -32,11 +27,11 @@ div.browser-warning {
 
 a {
   text-decoration: none;
-  color: $red-heart-color
+  color: @red-heart-color
 }
 
-a:visited { color: $red-heart-color }
-a:hover { cursor: hand; color: $red-heart-color }
+a:visited { color: @red-heart-color }
+a:hover { cursor: hand; color: @red-heart-color }
 
 section h4 {
   font-size: 1.2em;
@@ -128,8 +123,8 @@ footer {
 
 .colorize {
   padding: 0 5px;
-  color: $red-heart-color;
-  text-shadow: 2px 2px 0px $text-shadow-color;
+  color: @red-heart-color;
+  text-shadow: 2px 2px 0px @text-shadow-color;
 }
 
 .hidden {
@@ -162,7 +157,7 @@ input.submit {
   border: 0;
   width: 100%;
   padding: 10px 5px;
-  background: $red-heart-color;
+  background: @red-heart-color;
   text-align: center;
   color: white;
   font-weight: bold;

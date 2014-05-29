@@ -1,7 +1,3 @@
----
-title: Natalie & Rob
----
-
 section.grid#ceremony
   div.unit.whole.section-header
     h3.title
@@ -59,8 +55,10 @@ section.grid#downtown
       h4
         | Hotel Accommodations
       p
-        ' There are a number of great hotels all within close proximity to the church and venue. Please click
-        a href="/accommodations/" =' "here"
+        | There are a number of great hotels all within close proximity to the church and venue. Please click
+        = ' '
+        a(href="/accommodations/") here
+        = ' '
         | for more details.
 
     div.unit.half
@@ -74,15 +72,17 @@ section.grid#downtown
       h4
         | Flights to Indianapolis
       p
-        ' There is one major airport in Indianapolis (Airport Code: IND) if you are traveling from afar. Check
-        a href="http://hipmunk.com/" =' "Hipmunk"
+        | There is one major airport in Indianapolis (Airport Code: IND) if you are traveling from afar. Check
+        = ' '
+        a(href="http://hipmunk.com/") Hipmunk
+        = ' '
         | for an easy way to search flights.
 
     div.unit.half
       h4
         | Looking For Fun
       p
-        ' Never been to Indianapolis before? There are a lot of great things you can do! Please check back soon for more information.
+        | Never been to Indianapolis before? There are a lot of great things you can do! Please check back soon for more information.
 
 section.grid
   div.unit.whole.split
@@ -99,8 +99,9 @@ section.grid#hints
       h4
         | Weather?
       p
-        ' It is impossible to predict weather in the Midwest. We are hoping for a cool fall day. If you want to get a rough idea, check
-        a href="http://forecast.io/#/f/39.7669,-86.1500/1415466000" target="new" here
+        | It is impossible to predict weather in the Midwest. We are hoping for a cool fall day. If you want to get a rough idea, check
+        = ' '
+        a(href="http://forecast.io/#/f/39.7669,-86.1500/1415466000", target="new") here
         | .
 
     div.unit.half
@@ -124,8 +125,8 @@ section.grid#gift-registry
 
     div.grid#registry-options
       div.unit.half.registry-card
-        a href="http://www.crateandbarrel.com/Gift-Registry/Natalie-Merz-and-Rob-Shaw/r5182806"
-          img.registry-logo src="http://a.c-b.co/assets/logo/cratelogo.png"
+        a(href="http://www.crateandbarrel.com/Gift-Registry/Natalie-Merz-and-Rob-Shaw/r5182806")
+          img.registry-logo(src="http://a.c-b.co/assets/logo/cratelogo.png")
       div.unit.half.registry-card
         | Second Registry To Be Added Soon!
 
@@ -143,11 +144,11 @@ section.grid
         | We will be continually updating the website as we countdown to the big day. Please enter your email address below so we can notify you when we update the site!
 
   div.grid
-    form#subscribe-form action="/subscribers" method="POST"
+    form#subscribe-form(action="/subscribers", method="POST")
       div.unit.three-quarters
-        input.text#email type="text" name="email" placeholder="Email Address"
+        input.text#email(type="text", name="email", placeholder="Email Address")
       div.unit.one-quarter
-        input.submit type="submit" value="Subscribe"
+        input.submit(type="submit", value="Subscribe")
 
   div.grid
     div.unit.whole

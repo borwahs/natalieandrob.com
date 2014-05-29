@@ -1,0 +1,19 @@
+{
+  "name": "natalieandrob-dot-com",
+  "version": "0.0.1",
+  "description": "A simple node.js server/client for NatalieAndRob.com",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chandler Kent <chandler.kent@gmail.com>, Rob Shaw <rob@borwahs.com>",
+  "license": "MIT",
+  "dependencies": {
+    "hapi": "^5.0.0",
+    "joi": "^4.2.1",
+    "redis": "^0.10.2",
+    "forever": "^0.11.1",
+    "harp": "^0.12.1",
+    "jake": "^0.7.14"
+  }
+}

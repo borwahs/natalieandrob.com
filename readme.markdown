@@ -6,7 +6,10 @@ This is our website to celebrate the upcoming wedding.
 
 The following is a list of open-source components used:
 
-* [Middleman](https://github.com/middleman/middleman)
+* [Harp](http://harpjs.com/)
+* [Node.js](http://nodejs.org/)
+* [Jake](https://github.com/mde/jake/)
+* [LESS](http://lesscss.org/)
 * [Gridism](http://cobyism.com/gridism/)
 * [Eric Meyer's Reset CSS v2.0](http://meyerweb.com/eric/tools/css/reset/)
 
@@ -18,21 +21,16 @@ The Symbolset files are not included in this repository.
 
 # Usage
 
-Clone this repo into a local dev environment then run bundler.
+Install dependencies first for npm:
 
-    $ bundle install
-    $ bundle update
-    
-Once all the dependencies have been installed, the following rake tasks are defined:
-
-    $ rake build
-    $ rake serve
-    $ rake serve[port_number]
-    
-To get the node.js server set up, run the following:
-    
-    $ cd server
     $ npm install
+
+To use Harp to serve the static client, run the following:
+
+    $ harp server ./client
+
+To get the node.js API server set up, run the following:
+
     $ node server.js
 
 # Disclaimer
