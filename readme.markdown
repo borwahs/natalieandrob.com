@@ -35,6 +35,8 @@ To get the node.js API server set up, run the following:
 
 # Disclaimer
 
+Red and Black Heart SVG image is copyright [Stephanie Sharp](https://www.etsy.com/people/SincerelySweets/).
+
 All images are copyright of Rob Shaw.
 
 Source code is MIT licensed with no added caveats. See LICENSE file for more details.

@@ -1,4 +1,17 @@
 //= require_tree .
+function animateSVG(selector)
+{
+  var path = document.querySelector(selector);
+  var length = path.getTotalLength();
+
+  path.style.transition = path.style.WebkitTransition = 'none';
+  path.style.strokeDasharray = length + ' ' + length;
+  path.style.strokeDashoffset = length;
+  path.getBoundingClientRect();
+  path.style.transition = path.style.WebkitTransition = 'stroke-dashoffset 2s ease-in-out';
+  path.style.strokeDashoffset = '0';
+}
+
 $(function() {
   var subscribeFormEl = $("#subscribe-form");
   var subscribeFormSuccessEl = $("#subscribe-form-success");

@@ -162,3 +162,34 @@ section.grid
 
 section.grid
   div.unit.whole.split
+
+div#rb-heart-container
+  != partial("partials/_heart.jade")
+
+script.
+  $(function() {
+
+    // hide the elements when document is ready so
+    // it does not need to be done on the css elements
+    $('.hero').hide();
+    $('.unit').hide();
+
+    setTimeout(function() {
+      $("#outer-heart").show();
+      animateSVG("#outer-heart");
+
+      setTimeout(function() {
+        $("#inner-heart").fadeIn(800);
+
+        setTimeout(function() {
+          $('#red-black-heart').fadeOut(700);
+
+          setTimeout(function() {
+            $('.hero').slideDown(700);
+            $('.unit').fadeIn(500);
+          }, 800);
+        }, 1000);
+      }, 1200);
+    }, 600);
+
+  });
