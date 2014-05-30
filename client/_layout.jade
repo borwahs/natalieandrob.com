@@ -25,10 +25,11 @@ html(lang="en")
       div.wrap
         != yield
 
-    if current.source != 'index'
+    if current.path.length > 1
       section.back.wrap.grid
         div.unit.whole
-          a href="/" &#8592 Back
+          a(href="/")
+            | &#8592 Back to home
 
     != partial("partials/_footer")
 
