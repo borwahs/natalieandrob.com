@@ -1,33 +1,5 @@
-## Ruby gitignore
-## source: https://github.com/github/gitignore/blob/master/Ruby.gitignore
-*.gem
-*.rbc
-/.config
-/coverage/
-/InstalledFiles
-/pkg/
-/spec/reports/
-/test/tmp/
-/test/version_tmp/
-/tmp/
-
-# Documentation cache and generated files:
-/.yardoc/
-/_yardoc/
-/doc/
-/rdoc/
-
-# Environment normalisation:
-/.bundle/
-/lib/bundler/man/
-
-# Ignore middleman files/directories
-/build
-.listen_test
-.cache
-
-# Ignore Sass cache
-/.sass-cache
+# Ignore Harp build directory
+/build/
 
 ## Mac OS X files
 ## source: https://github.com/github/gitignore/blob/master/Global/OSX.gitignore
@@ -52,3 +24,4 @@ Icon
 # Node
 node_modules
 npm-debug.log
+

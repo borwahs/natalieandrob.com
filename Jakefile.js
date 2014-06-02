@@ -6,3 +6,12 @@ task('default', [], function (params) {
     complete();
   });
 });
+
+desc('build');
+task('build', [], function (params) {
+  console.log('build');
+  var cmd = 'harp compile ./client ./build'
+  jake.exec(cmd, {printStdout: true}, function () {
+    complete();
+  });
+});
