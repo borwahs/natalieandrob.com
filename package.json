@@ -4,12 +4,12 @@
   "description": "A simple node.js server/client for NatalieAndRob.com",
   "main": "server/server.js",
   "scripts": {
-    "clean": "rm -r ./build",
+    "clean": "rm -rf ./build",
     "build": "harp compile ./client ./build",
     "client-server": "harp server ./client",
     "api-server": "node server/server.js",
-    "server": "npm run client-server & npm run api-server",
-    "server-reload": "npm run client-server & forever --watch --watchDirectory server server/server.js",
+    "development-server": "npm run client-server & forever --watch --watchDirectory server server/server.js",
+    "production-server": "npm run clean && npm run build && (forever stopall ; forever server/server.js)",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Chandler Kent <chandler.kent@gmail.com>, Rob Shaw <rob@borwahs.com>",

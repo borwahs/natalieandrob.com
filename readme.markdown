@@ -26,17 +26,15 @@ Install dependencies first for npm:
 
 To start the development server (both the client and the API servers):
 
-    $ npm run server
+    $ npm run development-server
     
-You can also run the development server in "reload" mode using [forever](https://github.com/nodejitsu/forever) and [Harp](http://harpjs.com/):
+This will "live reload" both the client and the server code so you don't ever have to stop and start anything.
 
-    $ npm run server-reload
+To start the production server:
+
+    $ npm run production-server
     
-Now you do not need to restart the node.js server or rebuild the client if you make any changes.
-
-To build the static client code for deployment:
-
-    $ npm run build
+This will build the client side code and start the API server with forever.
 
 # Disclaimer
 
