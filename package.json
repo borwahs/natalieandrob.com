@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -r ./build",
     "build": "harp compile ./client ./build",
-    "client-server": "harp server ./client --port 9000",
+    "client-server": "harp server ./client",
     "api-server": "node server/server.js",
     "server": "npm run client-server & npm run api-server",
     "server-reload": "npm run client-server & forever --watch --watchDirectory server server/server.js",

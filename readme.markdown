@@ -8,7 +8,6 @@ The following is a list of open-source components used:
 
 * [Harp](http://harpjs.com/)
 * [Node.js](http://nodejs.org/)
-* [Jake](https://github.com/mde/jake/)
 * [LESS](http://lesscss.org/)
 * [Gridism](http://cobyism.com/gridism/)
 * [Eric Meyer's Reset CSS v2.0](http://meyerweb.com/eric/tools/css/reset/)
@@ -25,13 +24,19 @@ Install dependencies first for npm:
 
     $ npm install
 
-To use Harp to serve the static client, run the following:
+To start the development server (both the client and the API servers):
 
-    $ harp server ./client
+    $ npm run server
+    
+You can also run the development server in "reload" mode using [forever](https://github.com/nodejitsu/forever) and [Harp](http://harpjs.com/):
 
-To get the node.js API server set up, run the following:
+    $ npm run server-reload
+    
+Now you do not need to restart the node.js server or rebuild the client if you make any changes.
 
-    $ node server.js
+To build the static client code for deployment:
+
+    $ npm run build
 
 # Disclaimer
 
