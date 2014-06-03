@@ -6,6 +6,8 @@
   "scripts": {
     "clean": "rm -rf ./build",
     "build": "harp compile ./client ./build",
+    "redis-start": "(redis-cli ping || redis-server)",
+    "redis-stop": "redis-cli shutdown",
     "client-server": "harp server ./client",
     "api-server": "node server/server.js",
     "development-server": "npm run client-server & forever --watch --watchDirectory server server/server.js",
