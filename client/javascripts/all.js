@@ -1,7 +1,46 @@
 //= require_tree .
-function animateSVG(selector)
+
+// Simply a promise wrapper around setTimeout
+function wait(millis)
 {
-  var path = document.querySelector(selector);
+  return function waitInner() {
+    var deferred = new $.Deferred();
+    setTimeout(deferred.resolve, millis);
+    return deferred;
+  };
+}
+
+function initHeartAnimation()
+{
+  var heroClassEls = $(".hero");
+  var unitClassEls = $(".unit");
+  var outerHeartEl = $("#outer-heart");
+  var innerHeartEl = $("#inner-heart");
+  var redAndBlackHeartEl = $("#red-black-heart");
+ 
+  // hide the elements when document is ready so
+  // it does not need to be done on the css elements
+  heroClassEls.hide();
+  unitClassEls.hide();
+  
+  // To keep it clean, kick off the chain with a deferred
+  var deferred = new $.Deferred();
+  deferred.resolve();
+  
+  deferred
+  .then(wait(600))
+  .then(function() { outerHeartEl.show(); })
+  .then(function() { animateSVG(outerHeartEl[0]); })
+  .then(wait(1200))
+  .then(function() { innerHeartEl.fadeIn(800); })
+  .then(wait(2000))
+  .then(function() { redAndBlackHeartEl.fadeOut(1400); })
+  .then(function() { heroClassEls.fadeIn(1000); })
+  .then(function() { unitClassEls.fadeIn(1000); });
+}
+
+function animateSVG(path)
+{
   var length = path.getTotalLength();
 
   path.style.transition = path.style.WebkitTransition = 'none';
@@ -12,7 +51,8 @@ function animateSVG(selector)
   path.style.strokeDashoffset = '0';
 }
 
-$(function() {
+function initSubscribeForm()
+{
   var subscribeFormEl = $("#subscribe-form");
   var subscribeFormSuccessEl = $("#subscribe-form-success");
   var subscribeFormFailureEl = $("#subscribe-form-failure");
@@ -36,4 +76,9 @@ $(function() {
     
     evt.preventDefault();
   });
+}
+
+$(function() {
+  initHeartAnimation();
+  initSubscribeForm();
 });
