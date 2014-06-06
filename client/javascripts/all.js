@@ -17,6 +17,9 @@ function initHeartAnimation()
   var outerHeartEl = $("#outer-heart");
   var innerHeartEl = $("#inner-heart");
   var redAndBlackHeartEl = $("#red-black-heart");
+  
+  // Nothing to do if the heart doesn't exist
+  if (outerHeartEl.length <= 0) { return; }
  
   // hide the elements when document is ready so
   // it does not need to be done on the css elements
