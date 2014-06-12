@@ -38,8 +38,8 @@ This will build the client side code and start the API server with forever.
 
 # Disclaimer
 
-Red and Black Heart SVG image is copyright [Stephanie Sharp](https://www.etsy.com/people/SincerelySweets/).
+Red and Black Heart SVG image along with Red Heart icon is copyright and attributed to [Stephanie Sharp](https://www.etsy.com/people/SincerelySweets/).
 
-All images are copyright of Rob Shaw.
+All other images are copyright of Rob Shaw.
 
 Source code is MIT licensed with no added caveats. See LICENSE file for more details.
