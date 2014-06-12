@@ -4,6 +4,14 @@
   "description": "A simple node.js server/client for NatalieAndRob.com",
   "main": "server/server.js",
   "scripts": {
+    "clean": "rm -rf ./build",
+    "build": "harp compile ./client ./build",
+    "redis-start": "(redis-cli ping || redis-server)",
+    "redis-stop": "redis-cli shutdown",
+    "client-server": "harp server ./client",
+    "api-server": "node server/server.js",
+    "development-server": "npm run client-server & forever --watch --watchDirectory server server/server.js",
+    "production-server": "npm run clean && npm run build && (forever stopall ; forever server/server.js)",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Chandler Kent <chandler.kent@gmail.com>, Rob Shaw <rob@borwahs.com>",
@@ -13,7 +21,6 @@
     "joi": "^4.2.1",
     "redis": "^0.10.2",
     "forever": "^0.11.1",
-    "harp": "^0.12.1",
-    "jake": "^0.7.14"
+    "harp": "^0.12.1"
   }
 }
