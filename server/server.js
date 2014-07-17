@@ -12,4 +12,6 @@ server.route(Routes.endpoints);
 server.start(function() {
   console.log("Hapi server started:", server.info.uri);
   console.log("Configuration:", Config);
+  console.log("Directory:", process.cwd());
 });
+
