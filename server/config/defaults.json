@@ -6,10 +6,8 @@
     "port": 9000
   },
   "static": {
-    "path": "../build"    
-  },
-  "node": {
-    "env": "development"
+    "serveStatic": false,
+    "path": "../build"
   },
   "redis": {
     "host": "127.0.0.1",

@@ -5,11 +5,11 @@ var Config = require("../config");
 exports.endpoints = [
   // just so we can test it is working
   { method: "GET", path: "/ping", handler: function(request, reply) { reply("PING OK"); } },
-  
+
   // subscribe
   { method: "POST", path: "/subscribers", config: Subscribers.add },
   // { method: "GET", path: "/subscribers", config: Subscribers.list },
-  
+
   // static files (either proxies to harp or serves static files directly)
-  { method: "*", path: "/{path*}", config: (Config.node.env.toLowerCase() === "production" ? Static.static : Static.proxy) }
+  { method: "*", path: "/{path*}", config: (Config.static.serveStatic ? Static.static : Static.proxy) }
 ];
