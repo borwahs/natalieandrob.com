@@ -6,13 +6,13 @@ var Utils = {};
 // key path as an array, and an object scoped to the latest keyPath.
 Utils.walkObjectPropertiesRecursively = function walkObjectPropertiesRecursively(obj, fn, keyPath) {
   keyPath = keyPath || [];
-  
+
   Object.keys(obj).forEach(function(key) {
     var currentKeyPath = keyPath.slice(0);
     currentKeyPath.push(key);
-    
+
     fn(key, obj[key], currentKeyPath, obj);
-    
+
     if ((typeof obj[key]) === "object") {
       Utils.walkObjectPropertiesRecursively(obj[key], fn, currentKeyPath);
     }
@@ -25,9 +25,9 @@ Utils.walkPropertiesOfObjectsRecursivelyInSync = function walkPropertiesOfObject
     for (var i = 0; i < (keyPath.length - 1); i++) {
       currentObj = currentObj[keyPath[i]];
     }
-    
+
     var val2 = (currentObj && currentObj[key]) || undefined;
-    
+
     fn(key, val, val2, keyPath, obj, currentObj);
   });
 };
@@ -42,7 +42,7 @@ Utils.mergeObjectWithGenerator = function mergeObjectWithGenerator(defaultsObj, 
   Utils.walkObjectPropertiesRecursively(defaultsObj, function(key, val, keyPath, obj) {
     obj[key] = generatorFn(key, val, keyPath, obj) || val;
   });
-  
+
   return defaultsObj;
 };
 
@@ -57,7 +57,7 @@ Utils.mergeObjectWithGenerator = function mergeObjectWithGenerator(defaultsObj, 
 Utils.mergeObjectWithEnvironmentVariables = function mergeObjectWithEnvironmentVariables(defaultsObj) {
   return Utils.mergeObjectWithGenerator(defaultsObj, function(key, val, keyPath, obj) {
     if (typeof val === "object") { return; }
-    
+
     return process.env[keyPath.join("_").toUpperCase()];
   });
 };
@@ -72,7 +72,7 @@ Utils.augmentObjectWithObject = function augmentObjectWithObject(defaultObj, aug
       obj2[key] = val1;
     }
   });
-  
+
   return defaultObj;
 };
 
@@ -80,18 +80,17 @@ Utils.augmentObjectWithObject = function augmentObjectWithObject(defaultObj, aug
 // of overrideObj where they exist. If overrideObj does not have
 // a property, the defaultObj property will be maintained.
 // No properties will be added to the defaultObj.
-Utils.mergeObjectWithObject = function mergeObjectWithObject(defaultObj, overrideObj, shouldAugment) { 
+Utils.mergeObjectWithObject = function mergeObjectWithObject(defaultObj, overrideObj, shouldAugment) {
   Utils.walkPropertiesOfObjectsRecursivelyInSync(defaultObj, overrideObj, function(key, val1, val2, keyPath, obj1, obj2) {
     if (val2 === undefined) { return; }
     if (typeof val1 === "object") { return; }
-    
+
     if (val2 !== undefined) {
       obj1[key] = val2;
     }
   });
-  
+
   return defaultObj;
 };
 
 module.exports = Utils;
-
