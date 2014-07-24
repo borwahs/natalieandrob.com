@@ -1,5 +1,7 @@
 //= require_tree .
 
+var ANIMATION_COOKIE_NAME = "playIntroAnimation";
+
 // Simply a promise wrapper around setTimeout
 function wait(millis)
 {
@@ -12,6 +14,9 @@ function wait(millis)
 
 function initHeartAnimation()
 {
+  // Don't play animation intro on every visit
+  if (!shouldPlayIntroAnimation()) { return; }
+
   var heroClassEls = $(".hero");
   var unitClassEls = $(".unit");
   var innerHeartEl = $("#inner-heart");
@@ -53,4 +58,26 @@ function animateSVG(path)
   path.getBoundingClientRect();
   path.style.transition = path.style.WebkitTransition = 'stroke-dashoffset 2s ease-in-out';
   path.style.strokeDashoffset = '0';
+}
+
+function shouldPlayIntroAnimation() {
+  var hasPlayedAnimationPreviously = readCookie(ANIMATION_COOKIE_NAME);
+  if ((hasPlayedAnimationPreviously === null) || (hasPlayedAnimationPreviously === undefined))
+  {
+    hasPlayedAnimationPreviously = false;
+  }
+  if (hasPlayedAnimationPreviously === "true")
+  {
+    hasPlayedAnimationPreviously = true;
+  }
+
+  return !hasPlayedAnimationPreviously;
+}
+
+function setPlayedAnimationCookie(didPlay) {
+  if (didPlay) {
+    createCookie(ANIMATION_COOKIE_NAME, false);
+  } else {
+    eraseCookie(ANIMATION_COOKIE_NAME);
+  }
 }
