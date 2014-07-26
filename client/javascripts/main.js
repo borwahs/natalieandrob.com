@@ -9,4 +9,5 @@ function scrollToAnchor(element) {
 
 function toggleMobileMenu(element) {
   $('#mobile-nav').toggle(800);
+  $('#menu-toggle').toggleClass("ischecked");
 }

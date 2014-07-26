@@ -19,10 +19,6 @@ div#rb-heart-container {
   margin: auto;
 }
 
-.icon { height: 64px; padding: 0 8px; width: 64px; }
-
-#mobile-nav { display: none; }
-
 path#outer-heart { display: none; }
 path#inner-heart { display: none; }
 
@@ -203,7 +199,28 @@ input.submit {
   font-weight: bold;
 }
 
-#menu-toggle { display: none; }
+#menu-toggle {
+  display: none;
+  height: 48px;
+  width: 48px;
+  padding: 8px 8px 0px 8px;
+}
+
+.icon {
+  height: 32px;
+  width: 32px;
+  fill: #858484;
+}
+
+.ischecked {
+  border-style: solid;
+  border-color: @red-heart-color;
+  background-color:  @red-heart-color;
+  color: #fff;
+  fill: #fff;
+}
+
+#mobile-nav { display: none; }
 
 @media only screen
   and (min-width : 320px)
@@ -247,7 +264,7 @@ input.submit {
 
     img.registry-logo { width: 200px; }
 
-    #menu-toggle { display: block; }
+    #menu-toggle { display: block; float: right; }
 }
 
 @media only screen
