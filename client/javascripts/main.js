@@ -8,6 +8,6 @@ function scrollToAnchor(element) {
 }
 
 function toggleMobileMenu(element) {
-  $('#mobile-nav').toggle(800);
+  $('#mobile-nav').slideToggle(400);
   $('#menu-toggle').toggleClass("ischecked");
 }
