@@ -20,23 +20,15 @@ html(lang="en")
 
     != partial("partials/_header")
 
+    section.grid#mobile-nav
+      div.unit.whole
+        != partial("partials/_navigation")
+
     section.hero
 
-    section.grid#nav
+    section.grid#nav.hide-on-mobiles
       div.unit.whole
-        ul
-          li
-            a(href="#" onclick="javascript:scrollToAnchor('#ceremony');return false;")
-              | Our Wedding
-          li
-            a(href="#" onclick="javascript:scrollToAnchor('#accommodations');return false;")
-              | Accommodations
-          li
-            a(href="#" onclick="javascript:scrollToAnchor('#registry');return false;")
-              | Registry
-          li
-            a(href="#" onclick="javascript:scrollToAnchor('#downtown');return false;")
-              | Downtown
+        != partial("partials/_navigation")
 
     section#content
       div.wrap
