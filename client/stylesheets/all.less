@@ -63,10 +63,12 @@ header {
 
 header #title {
   text-align: left;
+  float: left;
 }
 
 header #date {
   font-weight: 400;
+  float: right;
 }
 
 section#nav {
@@ -128,6 +130,11 @@ section.hero {
 #accommodations ul {
   margin-left: 30px;
   list-style-type: square;
+}
+
+#h-container {
+  overflow: auto;
+  width: 100%
 }
 
 div#registry-options {
@@ -192,15 +199,32 @@ input.submit {
   font-weight: bold;
 }
 
+#menu-toggle { display: none; }
+
 @media only screen
   and (min-device-width : 320px)
   and (max-device-width : 480px) {
     section.hero { height: 260px; }
-    header #date { font-size: .8em; font-weight: 300; }
+    header #date {
+      font-size: .8em; font-weight: 300;
+      float: none;
+      text-align: left;
+      line-height: 1em;
+    }
+
+    header #title {
+      float: none;
+      line-height: 1em;
+    }
 
     header {
       margin: 10px 0;
       line-height: .5em;
+    }
+
+    .menu-toggle {
+      display: block;
+      float: right;
     }
 }
 
@@ -210,12 +234,16 @@ input.submit {
     section.hero { height: 260px; }
     header #date { font-size: .8em; font-weight: 300; }
 
+    #header-info { float: left; }
+
     header {
       margin: 10px 0;
       line-height: .5em;
     }
 
     img.registry-logo { width: 200px; }
+
+    #menu-toggle { display: block; }
 }
 
 @media only screen
