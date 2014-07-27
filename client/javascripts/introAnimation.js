@@ -25,7 +25,7 @@ function initHeartAnimation()
   }
 
   var heroClassEls = $(".hero");
-  var unitClassEls = $(".unit");
+  var containerEls = $(".container");
   var innerHeartEl = $("#inner-heart");
   var redAndBlackHeartEl = $("#red-black-heart");
   var outerHeartEl = $("#outer-heart");
@@ -36,7 +36,7 @@ function initHeartAnimation()
   // hide the elements when document is ready so
   // it does not need to be done on the css elements
   heroClassEls.hide();
-  unitClassEls.hide();
+  containerEls.hide();
 
   // To keep it clean, kick off the chain with a deferred
   var deferred = new $.Deferred();
@@ -51,7 +51,7 @@ function initHeartAnimation()
   .then(wait(2000))
   .then(function() { redAndBlackHeartEl.fadeOut(1400); })
   .then(function() { heroClassEls.fadeIn(1000); })
-  .then(function() { unitClassEls.fadeIn(1000); })
+  .then(function() { containerEls.fadeIn(1000); })
   .then(function() { setPlayedAnimationCookie(true); })
   .then(function() { heartAnimationContainer.remove()});
 }
