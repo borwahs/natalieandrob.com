@@ -2,6 +2,7 @@ var TOGGLE_NAV_MENU_BUTTON_SELECTED_CLASS = "isChecked";
 var TOGGLE_NAV_MENU_BUTTON_ID = "menu-toggle";
 var SCROLL_TOP_BUTTON_ID = "scrollTop";
 var NAV_MENU_ID = "mobile-nav";
+var NAV_MENU_ITEMS_ID = "mobile-nav-items";
 var SCROLL_CLASS = "scroll";
 var TOGGLE_SPEED_MS = 400;
 var CONTENT_ID = "content";
@@ -33,7 +34,7 @@ function scrollToAnchor(element) {
 
 function toggleMobileMenu(element) {
   var toggleNavMenuButton = $("#" + TOGGLE_NAV_MENU_BUTTON_ID);
-  var navMenu = $("#" + NAV_MENU_ID);
+  var navMenu = $("#" + NAV_MENU_ITEMS_ID);
 
   var shouldToggleNavMenuButton = true;
   if (!toggleNavMenuButton.hasClass(TOGGLE_NAV_MENU_BUTTON_SELECTED_CLASS)) {
