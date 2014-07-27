@@ -22,9 +22,13 @@ html(lang="en")
 
     != partial("partials/_header")
 
-    section.grid#mobile-nav
-      div.unit.whole
+    section.grid.relative
+      div.unit.whole#mobile-nav
         != partial("partials/_navigation")
+      div#menu-toggle
+        a(href="#")
+          svg#toggle-icon.icon(viewBox="0 0 32 32")
+              use(xlink:href="#menu")
 
     section.hero
 
@@ -58,4 +62,5 @@ html(lang="en")
     script(src="/javascripts/cookies.js")
     script(src="/javascripts/introAnimation.js")
     script(src="/javascripts/subscriberForm.js")
+    script(src="/javascripts/navigation.js")
     script(src="/javascripts/main.js")
