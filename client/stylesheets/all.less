@@ -46,8 +46,15 @@ a {
   color: @red-heart-color
 }
 
-a:visited { color: @red-heart-color }
-a:hover { cursor: hand; color: @red-heart-color }
+a:visited {
+  color: @red-heart-color;
+}
+
+a:hover {
+  cursor: hand;
+  color: @red-heart-color;
+  text-decoration: underline;
+}
 
 section h4 {
   font-size: 1.2em;
@@ -59,14 +66,26 @@ header {
   font-size: 1.5em;
   line-height: 1.5em;
   font-weight: 600;
+  border-bottom: 1px solid @red-heart-color;
 }
 
 header #title {
   text-align: left;
+  float: left;
 }
 
 header #date {
   font-weight: 400;
+  float: right;
+}
+
+section#nav {
+  text-align: center;
+}
+
+section#nav ul li {
+  width: 200px;
+  display:inline-block;
 }
 
 div.section-header {
@@ -121,8 +140,15 @@ section.hero {
   list-style-type: square;
 }
 
+#h-container {
+  overflow: auto;
+  width: 100%
+}
+
 div#registry-options {
   text-align: center;
+  height: 60px;
+  line-height: 60px;
 }
 
 div.split {
@@ -152,6 +178,12 @@ footer {
   font-style: bold;
 }
 
+.relative {
+  position: relative;
+}
+
+img.registry-logo { width: 300px; vertical-align: middle; }
+
 input {
   border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -179,34 +211,112 @@ input.submit {
   font-weight: bold;
 }
 
+div.logo {
+  height: 80px;
+}
+
+#menu-toggle {
+  display: none;
+  padding: 8px 12px;
+  float: right;
+  position: relative;
+  top: 10px;
+  position: absolute;
+  top: -51px;
+  right: 12px;
+}
+
+.icon {
+  height: 32px;
+  width: 32px;
+  fill: #858484;
+}
+
+.isChecked {
+  border-style: solid;
+  border: 1px solid @red-heart-color;
+  border-bottom: none;
+  background-color: rgb(253, 243, 248);
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+#mobile-nav {
+  background-color: rgb(253, 243, 248);
+  display: none;
+  border-bottom: 1px solid @red-heart-color;
+}
+
+#mobile-nav li {
+  height: 40px;
+  line-height: 40px;
+}
+
+#mobile-nav li a {
+  display: block;
+}
+
+#scrollTop {
+  position: fixed;
+  right: 12px;
+  top: 12px;
+  display: none;
+  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  text-decoration: none;
+}
+
 @media only screen
-  and (min-device-width : 320px)
-  and (max-device-width : 480px) {
+  and (min-width : 320px)
+  and (max-width : 480px) {
     section.hero { height: 260px; }
-    header #date { font-size: .8em; font-weight: 300; }
+    header #date {
+      font-size: .8em; font-weight: 300;
+      float: none;
+      text-align: left;
+      line-height: 1em;
+    }
+
+    header #title {
+      float: none;
+      line-height: 1em;
+    }
 
     header {
-      margin: 10px 0;
       line-height: .5em;
+    }
+
+    .menu-toggle {
+      display: block;
+      float: right;
     }
 }
 
 @media only screen
-  and (min-device-width : 320px)
-  and (max-device-width : 568px) {
+  and (min-width : 320px)
+  and (max-width : 568px) {
     section.hero { height: 260px; }
     header #date { font-size: .8em; font-weight: 300; }
 
+    #header-info { float: left; }
+
     header {
-      margin: 10px 0;
       line-height: .5em;
     }
 
     img.registry-logo { width: 200px; }
+
+    #menu-toggle { display: block; }
 }
 
 @media only screen
-  and (min-device-width : 768px)
-  and (max-device-width : 1024px) {
+  and (min-width : 768px)
+  and (max-width : 1024px) {
     section.hero { height: 380px; }
+
+    #scrollTop {
+      display: none !important;
+    }
 }

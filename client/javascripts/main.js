@@ -1,4 +1,5 @@
 $(function() {
   initHeartAnimation();
   initSubscribeForm();
+  initNavigation();
 });

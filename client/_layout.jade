@@ -13,14 +13,31 @@ html(lang="en")
     link(href='/webfonts/ss-standard.css',rel='stylesheet',type='text/css')
     link(href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900',rel='stylesheet' type='text/css')
   body
+    != partial("partials/_svg-icons.jade")
+
     <!--[if lt IE 9]>
     div.browser-warning
       | You are using a browser that is not supported. Please note that things may not display correctly.
     <![endif]-->
 
+    a#scrollTop.scroll(href="#header")
+      | Up &#8593;
+
     != partial("partials/_header")
 
+    section.grid.relative
+      div.unit.whole#mobile-nav
+        != partial("partials/_navigation")
+      div#menu-toggle
+        a(href="#")
+          svg#toggle-icon.icon(viewBox="0 0 32 32")
+              use(xlink:href="#menu")
+
     section.hero
+
+    section.grid#nav.hide-on-mobiles
+      div.unit.whole
+        != partial("partials/_navigation")
 
     section#content
       div.wrap
@@ -48,4 +65,5 @@ html(lang="en")
     script(src="/javascripts/cookies.js")
     script(src="/javascripts/introAnimation.js")
     script(src="/javascripts/subscriberForm.js")
+    script(src="/javascripts/navigation.js")
     script(src="/javascripts/main.js")
