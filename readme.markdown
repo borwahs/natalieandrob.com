@@ -12,6 +12,10 @@ The following is a list of open-source components used:
 * [Gridism](http://cobyism.com/gridism/)
 * [Eric Meyer's Reset CSS v2.0](http://meyerweb.com/eric/tools/css/reset/)
 
+## Icon Melon
+
+This site is using SVG icons from [iconmelon](http://iconmelon.com/).
+
 ## Symbolset
 
 This site is using a [Symbolset](http://symbolset.com/) font set.

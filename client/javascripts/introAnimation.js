@@ -14,8 +14,15 @@ function wait(millis)
 
 function initHeartAnimation()
 {
+  var heartAnimationContainer = $("#rb-heart-container");
+
   // Don't play animation intro on every visit
-  if (!shouldPlayIntroAnimation()) { return; }
+  if (!shouldPlayIntroAnimation()) {
+    if (heartAnimationContainer) {
+      heartAnimationContainer.remove();
+    }
+    return;
+  }
 
   var heroClassEls = $(".hero");
   var unitClassEls = $(".unit");
@@ -45,7 +52,8 @@ function initHeartAnimation()
   .then(function() { redAndBlackHeartEl.fadeOut(1400); })
   .then(function() { heroClassEls.fadeIn(1000); })
   .then(function() { unitClassEls.fadeIn(1000); })
-  .then(function() { setPlayedAnimationCookie(true); });
+  .then(function() { setPlayedAnimationCookie(true); })
+  .then(function() { heartAnimationContainer.remove()});
 }
 
 function animateSVG(path)
