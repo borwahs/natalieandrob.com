@@ -15,6 +15,16 @@ function initNavigation() {
   $("#" + TOGGLE_NAV_MENU_BUTTON_ID).find("a").click(function(evt) {
     toggleMobileMenu(this);
   });
+
+  $(window).scroll(function(evt) {
+    var scrollTop = $(this).scrollTop();
+    var contentTop = $("#" + CONTENT_ID).offset().top;
+    if (scrollTop > contentTop) {
+      $("#" + SCROLL_TOP_BUTTON_ID).fadeIn(100);
+    } else {
+      $("#" + SCROLL_TOP_BUTTON_ID).fadeOut(100);
+    }
+  });
 }
 
 function scrollToAnchor(element) {
