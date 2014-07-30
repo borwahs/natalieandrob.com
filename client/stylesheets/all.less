@@ -79,11 +79,11 @@ header #date {
   float: right;
 }
 
-section#nav {
+section#desktop-nav {
   text-align: center;
 }
 
-section#nav ul li {
+section#desktop-nav ul li {
   width: 200px;
   display:inline-block;
 }
@@ -121,6 +121,7 @@ section.hero {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
+  border-bottom: 1px solid @red-heart-color;
   height: 500px;
   width: 100%;
 }
@@ -269,9 +270,10 @@ div.logo {
 }
 
 @media only screen
-  and (min-width : 320px)
   and (max-width : 480px) {
+
     section.hero { height: 260px; }
+
     header #date {
       font-size: .8em; font-weight: 300;
       float: none;
@@ -287,13 +289,25 @@ div.logo {
     header {
       line-height: .5em;
     }
+    #desktop-nav { display: none; }
+
+    #menu-toggle { display: block; }
 }
 
 @media only screen
-  and (min-width : 320px)
   and (max-width : 568px) {
     section.hero { height: 260px; }
-    header #date { font-size: .8em; font-weight: 300; }
+    header #date {
+      line-height: 1em;
+      font-size: .8em; font-weight: 300;
+      float: none;
+    }
+
+    header #title {
+      float: none;
+      line-height: 1em;
+    }
+
 
     #header-info { float: left; }
 
@@ -301,15 +315,28 @@ div.logo {
       line-height: .5em;
     }
 
+    #desktop-nav { display: none; }
     img.registry-logo { width: 200px; }
 
     #menu-toggle { display: block; }
 }
 
 @media only screen
-  and (min-width : 768px)
   and (max-width : 1024px) {
     section.hero { height: 380px; }
+
+    header #date {
+      float: none;
+    }
+
+    header #title {
+      float: none;
+    }
+
+    #desktop-nav { display: none; }
+
+    #menu-toggle { display: block; }
+    #header-info { float: left; }
 
     #scrollTop {
       display: none !important;
