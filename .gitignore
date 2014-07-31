@@ -1,6 +1,10 @@
 # Ignore Harp build directory
 /build/
 
+# gift registry logos
+cratelogo.png
+macyslogo.png
+
 ## Mac OS X files
 ## source: https://github.com/github/gitignore/blob/master/Global/OSX.gitignore
 .DS_Store
