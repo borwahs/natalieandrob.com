@@ -1,6 +1,7 @@
 //= require_tree .
 
 var ANIMATION_COOKIE_NAME = "playIntroAnimation";
+var ANIMATION_HASH_NAME = "#animation";
 
 // Simply a promise wrapper around setTimeout
 function wait(millis)
@@ -53,7 +54,7 @@ function initHeartAnimation()
   .then(function() { heroClassEls.fadeIn(1000); })
   .then(function() { containerEls.fadeIn(1000); })
   .then(function() { setPlayedAnimationCookie(true); })
-  .then(function() { heartAnimationContainer.remove()});
+  .then(function() { heartAnimationContainer.remove(); });
 }
 
 function animateSVG(path)
@@ -69,6 +70,10 @@ function animateSVG(path)
 }
 
 function shouldPlayIntroAnimation() {
+  if (window.location.hash === ANIMATION_HASH_NAME) {
+    return true;
+  }
+  
   var hasPlayedAnimationPreviously = readCookie(ANIMATION_COOKIE_NAME);
   if ((hasPlayedAnimationPreviously === null) || (hasPlayedAnimationPreviously === undefined))
   {
