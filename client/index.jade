@@ -10,35 +10,47 @@ section.grid#ceremony.container
       p
         | On November 8th, 2014, we're making it official in downtown Indianapolis.
 
-    div.grid.card-layout
-      div.unit.one-third.card
-        h3.activity
-          | Ceremony
-        p.location
-          | St. Mary Catholic Church
-        p.time
-          | 2:30 pm
-
-      div.unit.one-third.card
-        h3.activity
-          | Cocktail Hour
-        p.location
-          | D'Amore
-        p.time
-          | 5:00 pm
-
-      div.unit.one-third.card
-        h3.activity
-          | Reception
-        p.location
-          | D'Amore
-        p.time
-          | 6:00 pm
-
     div.grid
-      div.unit.whole
-        p
-          | We are looking forward to celebrating this special day with you!
+      div.unit.one-third
+        div.grid
+          div.unit.whole.card.no-gutters
+            h3.activity
+              | Ceremony
+            p.location
+              | St. Mary Catholic Church
+              p
+                | 311 N New Jersey Street
+                br
+                | Indianapolis, IN
+            p.time
+              | 2:30 pm
+
+          div.unit.whole.card.no-gutters
+            h3.activity
+              | Cocktail Hour
+            p.location
+              | D'Amore
+              p
+                | 111 Monument Circle #4800
+                br
+                | Indianapolis, IN
+            p.time
+              | 5:00 pm
+
+          div.unit.whole.card.no-gutters
+            h3.activity
+              | Reception
+            p.location
+              | D'Amore
+            p.time
+              | 6:00 pm
+
+      div.unit.two-thirds
+        != partial("partials/_map.jade")
+
+    div.unit.whole
+      p
+        | We are looking forward to celebrating this special day with you!
 
 section.grid.container
   div.unit.whole.split
