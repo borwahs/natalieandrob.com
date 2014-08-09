@@ -16,34 +16,80 @@ section.grid#ceremony.container
           div.unit.whole.card.no-gutters
             h3.activity
               | Ceremony
-            p.location
-              | St. Mary Catholic Church
-              p
-                | 311 N New Jersey Street
-                br
-                | Indianapolis, IN
-            p.time
-              | 2:30 pm
+            div
+              div.grid.location
+                div.unit.whole
+                  | St. Mary Catholic Church
+              div.grid.address
+                div.unit.one-eigth.do-not-stack
+                  div.icon-col
+                    svg.geotag-icon.small-icon(viewBox="0 0 32 32")
+                      use(xlink:href="#geotag")
+                div.unit.seven-eigths.do-not-stack
+                  p.address-info
+                    | 311 N New Jersey Street
+                    br
+                    | Indianapolis, IN
+              div.grid.time
+                div.unit.one-eigth.do-not-stack
+                  div.icon-col
+                    svg.geotag-icon.small-icon(viewBox="0 0 32 32")
+                      use(xlink:href="#clock")
+                div.unit.seven-eigths.do-not-stack
+                  p.time-info
+                    | 2:30 pm
 
           div.unit.whole.card.no-gutters
             h3.activity
               | Cocktail Hour
-            p.location
-              | D'Amore
-              p
-                | 111 Monument Circle #4800
-                br
-                | Indianapolis, IN
-            p.time
-              | 5:00 pm
+            div
+              div.grid.location
+                div.unit.whole
+                  | D'Amore
+              div.grid.address
+                div.unit.one-eigth.do-not-stack
+                  div.icon-col
+                    svg.geotag-icon.small-icon(viewBox="0 0 32 32")
+                      use(xlink:href="#geotag")
+                div.unit.seven-eigths.do-not-stack
+                  p.address-info
+                    | 111 Monument Circle #4800
+                    br
+                    | Indianapolis, IN
+            div.grid.time
+              div.unit.one-eigth.do-not-stack
+                div.icon-col
+                  svg.geotag-icon.small-icon(viewBox="0 0 32 32")
+                    use(xlink:href="#clock")
+              div.unit.seven-eigths.do-not-stack
+                p.time-info
+                  | 5:00 pm
 
           div.unit.whole.card.no-gutters
             h3.activity
               | Reception
-            p.location
-              | D'Amore
-            p.time
-              | 6:00 pm
+            div
+              div.grid.location
+                div.unit.whole
+                  | D'Amore
+              div.grid.address
+                div.unit.one-eigth.do-not-stack
+                  div.icon-col
+                    svg.geotag-icon.small-icon(viewBox="0 0 32 32")
+                      use(xlink:href="#geotag")
+                div.unit.seven-eigths.do-not-stack
+                  p.address-info
+                    | 111 Monument Circle #4800
+                    br
+                    | Indianapolis, IN
+            div.grid.time
+              div.unit.one-eigth.do-not-stack
+                div.icon-col
+                  svg.geotag-icon.small-icon(viewBox="0 0 32 32")
+                    use(xlink:href="#clock")
+              div.unit.seven-eigths.do-not-stack
+                p.time-info
+                  | 6:00 pm
 
       div.unit.two-thirds#map
         != partial("partials/_map.jade")

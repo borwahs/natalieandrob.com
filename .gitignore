@@ -22,10 +22,6 @@ Icon
 .Spotlight-V100
 .Trashes
 
-## Ignore Webfonts
-/source/webfonts/
-
 # Node
 node_modules
 npm-debug.log
-

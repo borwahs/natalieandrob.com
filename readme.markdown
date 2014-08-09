@@ -16,12 +16,6 @@ The following is a list of open-source components used:
 
 This site is using SVG icons from [iconmelon](http://iconmelon.com/).
 
-## Symbolset
-
-This site is using a [Symbolset](http://symbolset.com/) font set.
-
-The Symbolset files are not included in this repository.
-
 # Usage
 
 Install dependencies first for npm:
