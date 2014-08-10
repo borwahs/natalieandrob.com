@@ -9,15 +9,6 @@ exports.clientProxy = {
   }
 };
 
-exports.dashboardProxy = {
-  handler: {
-    proxy: {
-      host: Config.dashboard.host,
-      port: Config.dashboard.port
-    }
-  }
-}
-
 exports.clientStatic = {
   handler: {
     directory: {
