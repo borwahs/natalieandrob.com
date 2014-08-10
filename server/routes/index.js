@@ -10,6 +10,9 @@ exports.endpoints = [
   { method: "POST", path: "/subscribers", config: Subscribers.add },
   // { method: "GET", path: "/subscribers", config: Subscribers.list },
 
+  // dashboard
+  { method: "*", path: "/dashboard/{path*}", config: (Config.static.serveStatic ? Static.dashboardStatic : Static.dashboardProxy)},
+
   // static files (either proxies to harp or serves static files directly)
-  { method: "*", path: "/{path*}", config: (Config.static.serveStatic ? Static.static : Static.proxy) }
+  { method: "*", path: "/{path*}", config: (Config.static.serveStatic ? Static.clientStatic : Static.clientProxy) }
 ];

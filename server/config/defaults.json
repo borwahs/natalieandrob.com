@@ -5,9 +5,18 @@
     "host": "0.0.0.0",
     "port": 9000
   },
+  "dashboard": {
+    "host": "0.0.0.0",
+    "port": 9123
+  },
   "static": {
-    "serveStatic": false,
-    "path": "../build"
+    "serveStatic": true,
+    "client" : {
+      "path": "./build"
+    },
+    "dashboard": {
+      "path": "./dashboard"
+    }
   },
   "redis": {
     "host": "127.0.0.1",
