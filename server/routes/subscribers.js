@@ -1,13 +1,20 @@
-var Joi = require("joi");
-var DB = require("../db");
-var Hapi = require("hapi");
-var Util = require("util");
+var Joi = require('joi');
+var DB = require('../db');
+var Hapi = require('hapi');
+var Util = require('util');
+var _ = require('../libs/underscore.1.6.0.min')
 
 exports.list = {
   handler: function(request, reply) {
-    DB.smembers("subscribers", function(err, members) {
+    DB.smembers("subscribers", function(err, subscriberList) {
+
+      var subs = [];
+      _.map(subscriberList, function(subscriber) {
+        subs.push({ email: subscriber });
+      });
+
       reply({
-        subscribers: members
+        subscribers: subs
       });
     })
   }

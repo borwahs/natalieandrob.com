@@ -6,10 +6,13 @@ Dashboard.Subscriber = Ember.Object.extend({
 
 Dashboard.Subscriber.reopenClass({
   all: function() {
-    var subs = [];
-    var s = Dashboard.Subscriber.create({ email: "rob@rob.com" });
-    subs.push(s);
-    return subs;
+    return $.getJSON("/subscribers").then(function(response) {
+      var subs = [];
+      response.subscribers.forEach(function(subscriber) {
+        subs.push( Dashboard.Subscriber.create({ email: subscriber.email }) );
+      });
+      return subs;
+    });
   }
 });
 
