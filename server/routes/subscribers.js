@@ -6,17 +6,21 @@ var _ = require('../libs/underscore.1.6.0.min')
 
 exports.list = {
   handler: function(request, reply) {
-    DB.smembers("subscribers", function(err, subscriberList) {
+    DB.connect(function(err, client) {
+      if (err) {
+        console.log(err);
+      }
 
-      var subs = [];
-      _.map(subscriberList, function(subscriber) {
-        subs.push({ email: subscriber });
-      });
+      client.query('SELECT $1::int AS number', ['1'], function(error, result) {
+        client.end();
 
-      reply({
-        subscribers: subs
+        console.log(result.rows[0].number);
+
+        reply({
+          subscribers: result.rows[0].number
+        });
       });
-    })
+    });
   }
 };
 
@@ -29,15 +33,24 @@ exports.add = {
   handler: function (request, reply) {
     var email = request.payload.email;
     console.log("Subscribe: " + email);
-    DB.sadd("subscribers", email, function(error, result) {
-      if (error) {
-        console.error(Util.format('Error saving [%s] email address.', email), error);
 
-        reply(Hapi.error.internal('Error saving your email address. This has been logged and will be fixed shortly.', error));
-        return;
+    DB.connect(function(err, client) {
+      if (err) {
+        console.log(err);
       }
 
-      reply("OK");
+      client.query('SELECT $1::int AS number', ['1'], function(error, result) {
+        client.end();
+
+        if (error) {
+          console.error(Util.format('Error saving [%s] email address.', email), error);
+
+          reply(Hapi.error.internal('Error saving your email address. This has been logged and will be fixed shortly.', error));
+          return;
+        }
+
+        reply("OK");
+      });
     });
   }
 };

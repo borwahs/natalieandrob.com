@@ -1,6 +1,5 @@
 var Hapi = require("hapi");
 var Joi = require("joi");
-var Redis = require("redis");
 var Config = require("./config");
 var Routes = require("./routes");
 
