@@ -1,3 +1,4 @@
+var pg = require('pg');
 var Joi = require('joi');
 var DB = require('../db');
 var Hapi = require('hapi');
@@ -6,7 +7,7 @@ var _ = require('../libs/underscore.1.6.0.min')
 
 exports.list = {
   handler: function(request, reply) {
-    DB.connect(function(err, client) {
+    pg.connect(DB.connectionString, function(err, client) {
       if (err) {
         console.log(err);
       }
@@ -34,7 +35,7 @@ exports.add = {
     var email = request.payload.email;
     console.log("Subscribe: " + email);
 
-    DB.connect(function(err, client) {
+    pg.connect(DB.connectionString, function(err, client) {
       if (err) {
         console.log(err);
       }

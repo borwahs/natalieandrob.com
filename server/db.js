@@ -4,6 +4,6 @@ var Util = require("util");
 
 var conString = "postgres://rob:@localhost/rob";
 
-var db = new pg.Client(conString);
+var db = { connectionString: conString };
 
 module.exports = db;
