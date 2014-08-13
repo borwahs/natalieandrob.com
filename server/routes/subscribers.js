@@ -5,6 +5,22 @@ var Hapi = require('hapi');
 var Util = require('util');
 var _ = require('../libs/underscore.1.6.0.min')
 
+function createSubscriberResultList (rows) {
+  var subs = [];
+
+  _.each(rows, function(row) {
+    var email = row.email;
+    var id = row.id;
+    var subscribeDate = row.subscribe_date;
+
+    var data = { email: email, id: id, subscribeDate: subscribeDate };
+
+    subs.push(data);
+  });
+
+  return subs;
+}
+
 exports.list = {
   handler: function(request, reply) {
     pg.connect(DB.connectionString, function(err, client) {
@@ -16,22 +32,10 @@ exports.list = {
 
         if (error) {
           console.error('Error listing subscribers.', error);
-
           reply(Hapi.error.internal('Error listing subscribers', error));
         }
 
-        var subs = [];
-
-        _.each(result.rows, function(row) {
-          var email = row.email;
-          var id = row.id;
-          var subscribeDate = row.subscribe_date;
-
-          var data = { email: email, id: id, subscribeDate: subscribeDate };
-
-          subs.push(data);
-        });
-
+        var subs = createSubscriberResultList(result.rows);
         console.log(subs);
 
         client.end();
