@@ -9,6 +9,7 @@ exports.endpoints = [
   // subscribe
   { method: "POST", path: "/subscribers", config: Subscribers.add },
   { method: "GET", path: "/subscribers", config: Subscribers.list },
+  { method: "DELETE", path: "/subscribers/{id}", config: Subscribers.delete },
 
   // dashboard
   { method: "*", path: "/dashboard/{path*}", config: Static.dashboardStatic },

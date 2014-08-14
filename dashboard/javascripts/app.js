@@ -1,17 +1,46 @@
 Dashboard = Ember.Application.create();
 
 Dashboard.Subscriber = Ember.Object.extend({
-  email: null
+  id: null,
+  email: null,
+  subscribeDate: null
+});
+
+Dashboard.Subscriber.DATA = [];
+
+Dashboard.IndexController = Ember.ObjectController.extend({
+  actions: {
+    remove: function( subscriber ) {
+      Dashboard.Subscriber.remove(subscriber);
+    }
+  }
 });
 
 Dashboard.Subscriber.reopenClass({
   all: function() {
     return $.getJSON("/subscribers").then(function(response) {
-      var subs = [];
       response.subscribers.forEach(function(subscriber) {
-        subs.push( Dashboard.Subscriber.create({ email: subscriber.email }) );
+        Dashboard.Subscriber.DATA.addObject(
+          Dashboard.Subscriber.create({
+            id: subscriber.id,
+            email: subscriber.email,
+            subscribeDate: subscriber.subscribeDate
+          })
+        );
       });
-      return subs;
+      return Dashboard.Subscriber.DATA;
+    });
+  },
+  remove: function(subscriber) {
+    $.ajax({
+        url: '/subscribers/' + subscriber.id,
+        type: 'DELETE',
+        success: function (result) {
+          Dashboard.Subscriber.DATA.removeObject(subscriber);
+        },
+        error: function (jqXHR, textStatus, errorThrown ) {
+
+        }
     });
   }
 });

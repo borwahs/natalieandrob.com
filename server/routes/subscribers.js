@@ -7,13 +7,14 @@ var _ = require('../libs/underscore.1.6.0.min')
 
 var SELECT_ALL_SUBSCRIBERS_SQL = 'SELECT * FROM subscribers;';
 var INSERT_NEW_SUBSCRIBER_SQL = 'INSERT INTO subscribers (email, subscribe_date) VALUES ($1, CURRENT_TIMESTAMP) RETURNING id;';
+var DELETE_SUBSCRIBER_BY_ID_SQL = 'DELETE FROM subscribers WHERE id = $1;';
 
 function createSubscriberResultList (rows) {
   var subs = [];
 
   _.each(rows, function(row) {
-    var email = row.email;
     var id = row.id;
+    var email = row.email;
     var subscribeDate = row.subscribe_date;
 
     var data = { email: email, id: id, subscribeDate: subscribeDate };
@@ -22,6 +23,26 @@ function createSubscriberResultList (rows) {
   });
 
   return subs;
+}
+
+var deleteSubscriberRouteHandler = function(request, reply) {
+  pg.connect(DB.connectionString, function(err, client) {
+    if (err) {
+      console.log(err);
+    }
+
+    client.query(DELETE_SUBSCRIBER_BY_ID_SQL, [request.params.id], function(error, result) {
+      if (error) {
+        console.error('Error deleting subscriber', error);
+        reply(Hapi.error.internal('Error deleting subscriber', error));
+        return;
+      }
+
+      client.end();
+
+      reply("OK");
+    });
+  });
 }
 
 var listSubscribersRouteHandler = function(request, reply) {
@@ -34,6 +55,7 @@ var listSubscribersRouteHandler = function(request, reply) {
       if (error) {
         console.error('Error listing subscribers.', error);
         reply(Hapi.error.internal('Error listing subscribers', error));
+        return;
       }
 
       var subs = createSubscriberResultList(result.rows);
@@ -88,4 +110,8 @@ exports.add = {
     }
   },
   handler: addSubscriberRouteHandler
+};
+
+exports.delete = {
+  handler: deleteSubscriberRouteHandler
 };
