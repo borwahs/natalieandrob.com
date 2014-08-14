@@ -12,6 +12,8 @@
        {{#each item in model}}
        <li>{{item.email}}</li>
        <button class="remove" {{action 'remove' item}}>Delete</button>
+       {{else}}
+       <li>No items found.</li>
        {{/each}}
       </ul>
    </script>
