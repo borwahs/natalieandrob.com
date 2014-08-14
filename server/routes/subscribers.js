@@ -5,6 +5,9 @@ var Hapi = require('hapi');
 var Util = require('util');
 var _ = require('../libs/underscore.1.6.0.min')
 
+var SELECT_ALL_SUBSCRIBERS_SQL = 'SELECT * FROM subscribers;';
+var INSERT_NEW_SUBSCRIBER_SQL = 'INSERT INTO subscribers (email, subscribe_date) VALUES ($1, CURRENT_TIMESTAMP) RETURNING id;';
+
 function createSubscriberResultList (rows) {
   var subs = [];
 
@@ -21,31 +24,61 @@ function createSubscriberResultList (rows) {
   return subs;
 }
 
-exports.list = {
-  handler: function(request, reply) {
-    pg.connect(DB.connectionString, function(err, client) {
-      if (err) {
-        console.log(err);
+var listSubscribersRouteHandler = function(request, reply) {
+  pg.connect(DB.connectionString, function(err, client) {
+    if (err) {
+      console.log(err);
+    }
+
+    client.query(SELECT_ALL_SUBSCRIBERS_SQL, function(error, result) {
+      if (error) {
+        console.error('Error listing subscribers.', error);
+        reply(Hapi.error.internal('Error listing subscribers', error));
       }
 
-      client.query('SELECT * FROM subscribers;', function(error, result) {
+      var subs = createSubscriberResultList(result.rows);
+      console.log(subs);
 
-        if (error) {
-          console.error('Error listing subscribers.', error);
-          reply(Hapi.error.internal('Error listing subscribers', error));
-        }
+      client.end();
 
-        var subs = createSubscriberResultList(result.rows);
-        console.log(subs);
-
-        client.end();
-
-        reply({
-          subscribers: subs
-        });
-      });
+      reply( { subscribers: subs } );
     });
-  }
+  });
+}
+
+var addSubscriberRouteHandler = function (request, reply) {
+  var email = request.payload.email;
+  console.log("User requested a Subscribe: " + email);
+
+  pg.connect(DB.connectionString, function(err, client) {
+    if (err) {
+      console.log(err);
+    }
+
+    var data = [];
+    data.push(email);
+
+    client.query(INSERT_NEW_SUBSCRIBER_SQL, data, function(err, result) {
+      if (err) {
+        console.error(Util.format('Error saving [%s] email address.', email), error);
+
+        reply(Hapi.error.internal('Error saving your email address. This has been logged and will be fixed shortly.', error));
+        return;
+      }
+
+      var subscriberID = result.rows[0].id;
+
+      console.log("Subscribe Completed for " + email + ", ID: " + subscriberID);
+
+      client.end();
+
+      reply("OK");
+    });
+  });
+}
+
+exports.list = {
+  handler: listSubscribersRouteHandler
 };
 
 exports.add = {
@@ -54,34 +87,5 @@ exports.add = {
       email: Joi.string().email()
     }
   },
-  handler: function (request, reply) {
-    var email = request.payload.email;
-    console.log("User requested a Subscribe: " + email);
-
-    pg.connect(DB.connectionString, function(err, client) {
-      if (err) {
-        console.log(err);
-      }
-
-      var data = [];
-      data.push(email);
-
-      client.query('INSERT INTO subscribers (email, subscribe_date) VALUES ($1, CURRENT_TIMESTAMP) RETURNING id;', data, function(err, result) {
-        if (err) {
-          console.error(Util.format('Error saving [%s] email address.', email), error);
-
-          reply(Hapi.error.internal('Error saving your email address. This has been logged and will be fixed shortly.', error));
-          return;
-        }
-
-        var subscriberID = result.rows[0].id;
-
-        console.log("Subscribe Completed for " + email + ", ID: " + subscriberID);
-
-        client.end();
-
-        reply("OK");
-      });
-    });
-  }
+  handler: addSubscriberRouteHandler
 };
