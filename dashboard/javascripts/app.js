@@ -92,6 +92,9 @@ Dashboard.SessionsController = Ember.ObjectController.extend({
 
 Dashboard.Subscriber.reopenClass({
   all: function() {
+    // TODO : need to clear out subscriber data (or can we merge)?
+    Dashboard.Subscriber.DATA.clear();
+
     return $.getJSON("/subscribers").then(function(response) {
       response.subscribers.forEach(function(subscriber) {
         Dashboard.Subscriber.DATA.addObject(
