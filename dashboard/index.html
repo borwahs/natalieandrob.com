@@ -24,8 +24,15 @@
       </div>
     </script>
 
-    <script type="text/x-handlebars" data-template-name="login">
-      LOGIN
+    <script type="text/x-handlebars" data-template-name="sessions">
+      Login
+
+      <div>
+        {{input type="text" placeholder="Username" value=username}}
+        {{input type="text" placeholder="Password" value=password}}
+        <button {{action "loginUser" this}}
+        {{bind-attr disabled=disabled}}>Login</button>
+      </div>
     </script>
 
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>

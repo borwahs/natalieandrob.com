@@ -29,6 +29,7 @@ Dashboard.IndexController = Ember.ObjectController.extend({
 });
 
 Dashboard.SessionsController = Ember.ObjectController.extend({
+  content: {}, // this must be set to empty on init
   init: function () {
     this._super();
     // TODO: check for auth_key cookie here
@@ -51,6 +52,13 @@ Dashboard.SessionsController = Ember.ObjectController.extend({
           type: 'POST',
           data: loginData,
           success: function (result) {
+
+            if (result.responseJSON && result.responseJSON.error)
+            {
+              alert('invalid user/pass');
+              return;
+            }
+
             alert('login');
           },
           error: function (jqXHR, textStatus, errorThrown ) {
@@ -110,10 +118,10 @@ Dashboard.Subscriber.reopenClass({
 });
 
 Dashboard.Router.map(function() {
-  this.route("login");
+  this.route("sessions");
 });
 
-Dashboard.LoginRoute = Ember.Route.extend({
+Dashboard.SessionsRoute = Ember.Route.extend({
   model: function () {
   }
 });
@@ -123,7 +131,7 @@ Dashboard.IndexRoute = Ember.Route.extend({
     if (!Ember.isEmpty(this.controllerFor('sessions').get('token'))) {
       this.transitionTo('index');
     } else {
-      this.transitionTo('login');
+      this.transitionTo('sessions');
     }
   },
   model: function() {
