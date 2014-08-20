@@ -6,7 +6,7 @@ var Util = require('util');
 var _ = require('../libs/underscore.1.6.0.min')
 
 var SELECT_ALL_SUBSCRIBERS_SQL = 'SELECT * FROM subscribers;';
-var INSERT_NEW_SUBSCRIBER_SQL = 'INSERT INTO subscribers (email, subscribe_date) VALUES ($1, CURRENT_TIMESTAMP) RETURNING id;';
+var INSERT_NEW_SUBSCRIBER_SQL = 'INSERT INTO subscribers (email, subscribe_date) VALUES ($1, CURRENT_TIMESTAMP) RETURNING id, email, subscribe_date;';
 var DELETE_SUBSCRIBER_BY_ID_SQL = 'DELETE FROM subscribers WHERE id = $1;';
 
 function createSubscriberResultList (rows) {
@@ -80,21 +80,25 @@ var addSubscriberRouteHandler = function (request, reply) {
     var data = [];
     data.push(email);
 
-    client.query(INSERT_NEW_SUBSCRIBER_SQL, data, function(err, result) {
-      if (err) {
+    client.query(INSERT_NEW_SUBSCRIBER_SQL, data, function(error, result) {
+      if (error) {
         console.error(Util.format('Error saving [%s] email address.', email), error);
 
         reply(Hapi.error.internal('Error saving your email address. This has been logged and will be fixed shortly.', error));
         return;
       }
 
-      var subscriberID = result.rows[0].id;
+      var subscriber = {
+        id: result.rows[0].id,
+        email: result.rows[0].email,
+        subscribeDate: result.rows[0].subscribe_date
+      };
 
-      console.log("Subscribe Completed for " + email + ", ID: " + subscriberID);
+      console.log("Subscribe Completed for " + email + ", ID: " + subscriber.id);
 
       client.end();
 
-      reply("OK");
+      reply(subscriber);
     });
   });
 }

@@ -12,6 +12,9 @@ Dashboard.IndexController = Ember.ObjectController.extend({
   actions: {
     remove: function( subscriber ) {
       Dashboard.Subscriber.remove(subscriber);
+    },
+    createSubscriber: function ( eventObject ) {
+      Dashboard.Subscriber.add( { email: eventObject.newEmail });
     }
   }
 });
@@ -29,6 +32,19 @@ Dashboard.Subscriber.reopenClass({
         );
       });
       return Dashboard.Subscriber.DATA;
+    });
+  },
+  add: function(subscriber) {
+    $.ajax({
+        url: '/subscribers',
+        type: 'POST',
+        data: subscriber,
+        success: function (result) {
+          Dashboard.Subscriber.DATA.addObject(result);
+        },
+        error: function (jqXHR, textStatus, errorThrown ) {
+          alert(jqXHR.responseJSON.message);
+        }
     });
   },
   remove: function(subscriber) {
