@@ -1,4 +1,13 @@
-Dashboard = Ember.Application.create();
+Dashboard = Ember.Application.create({
+  // Basic logging, e.g. "Transitioned into 'post'"
+  LOG_TRANSITIONS: true,
+
+  // Extremely detailed logging, highlighting every internal
+  // step made while transitioning into a route, including
+  // `beforeModel`, `model`, and `afterModel` hooks, and
+  // information about redirects and aborted transitions
+  LOG_TRANSITIONS_INTERNAL: true
+});
 
 Dashboard.Subscriber = Ember.Object.extend({
   id: null,
@@ -32,10 +41,9 @@ Dashboard.SessionsController = Ember.ObjectController.extend({
   content: {}, // this must be set to empty on init
   init: function () {
     this._super();
-    // TODO: check for auth_key cookie here
   },
-  token: null, // TODO: get from cookie
-  currentUser: null, // TODO: get from cookie
+  token: $.cookie("authToken"),
+  currentUser: $.cookie("username"),
   reset: function () {
     this.setProperties({
       token: null,
@@ -44,6 +52,9 @@ Dashboard.SessionsController = Ember.ObjectController.extend({
   },
   actions: {
     loginUser: function ( loginData ) {
+
+      var _this = this;
+      var username = loginData.username;
 
       this.reset();
 
@@ -59,18 +70,22 @@ Dashboard.SessionsController = Ember.ObjectController.extend({
               return;
             }
 
-            alert('login');
+            var authToken = result.authToken;
+
+            _this.setProperties({
+              token: authToken,
+              currentUser: username
+            });
+
+            $.cookie("authToken", authToken, { expires : 1 });
+            $.cookie("currentUser", username, { expires : 1 });
+
+            _this.transitionToRoute('index');
           },
           error: function (jqXHR, textStatus, errorThrown ) {
             alert('there was an error....');
           }
       });
-    },
-    logout: function ( data ) {
-
-    },
-    reset: function ()  {
-
     }
   }
 });
@@ -123,6 +138,15 @@ Dashboard.Router.map(function() {
 
 Dashboard.SessionsRoute = Ember.Route.extend({
   model: function () {
+  }
+});
+
+Dashboard.ApplicationRoute = Ember.Route.extend({
+  actions: {
+    logout: function () {
+      this.controllerFor('sessions').reset();
+      this.transitionTo('sessions');
+    }
   }
 });
 

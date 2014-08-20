@@ -30,6 +30,6 @@ exports.login = {
 
     var id = hat();
 
-    reply ({ apiKey: id });
+    reply ({ authToken: id });
   }
 };
