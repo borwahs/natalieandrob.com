@@ -1,3 +1,15 @@
+function mergeByProperty(array1, array2, prop) {
+  _.each(array2, function(array2object) {
+    var array1object = _.find(array1, function(array1object) {
+      return array1object[prop] === array2object[prop];
+    });
+
+    array1object ? _.extend(array1object, array2object) : array1.push(array2object);
+  });
+
+  return array1;
+}
+
 Dashboard = Ember.Application.create({
   // Basic logging, e.g. "Transitioned into 'post'"
   LOG_TRANSITIONS: true,
@@ -25,6 +37,7 @@ Dashboard.User = Ember.Object.extend({
 
 Dashboard.User.DATA = {};
 Dashboard.Subscriber.DATA = [];
+Dashboard.Subscriber.TEMPDATA = [];
 
 Dashboard.IndexController = Ember.ObjectController.extend({
   actions: {
@@ -92,12 +105,9 @@ Dashboard.SessionsController = Ember.ObjectController.extend({
 
 Dashboard.Subscriber.reopenClass({
   all: function() {
-    // TODO : need to clear out subscriber data (or can we merge)?
-    Dashboard.Subscriber.DATA.clear();
-
     return $.getJSON("/subscribers").then(function(response) {
       response.subscribers.forEach(function(subscriber) {
-        Dashboard.Subscriber.DATA.addObject(
+        Dashboard.Subscriber.TEMPDATA.addObject(
           Dashboard.Subscriber.create({
             id: subscriber.id,
             email: subscriber.email,
@@ -105,6 +115,9 @@ Dashboard.Subscriber.reopenClass({
           })
         );
       });
+
+      Dashboard.Subscriber.Data = mergeByProperty(Dashboard.Subscriber.DATA, Dashboard.Subscriber.TEMPDATA, "email");
+
       return Dashboard.Subscriber.DATA;
     });
   },
