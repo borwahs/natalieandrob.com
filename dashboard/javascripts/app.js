@@ -59,22 +59,24 @@ Dashboard.SessionsController = Ember.ObjectController.extend({
   currentUser: $.cookie("username"),
   reset: function () {
     this.setProperties({
+      username: null,
+      password: null,
       token: null,
       currentUser: null
     });
   },
   actions: {
     loginUser: function ( loginData ) {
-
       var _this = this;
-      var username = loginData.username;
+
+      var data = this.getProperties('username', 'password');
 
       this.reset();
 
       $.ajax({
           url: '/sessions/login',
           type: 'POST',
-          data: loginData,
+          data: data,
           success: function (result) {
 
             if (result.responseJSON && result.responseJSON.error)
@@ -83,15 +85,20 @@ Dashboard.SessionsController = Ember.ObjectController.extend({
               return;
             }
 
+            _this.setProperties({
+              username: null,
+              password: null
+            });
+
             var authToken = result.authToken;
 
             _this.setProperties({
               token: authToken,
-              currentUser: username
+              currentUser: data.username
             });
 
             $.cookie("authToken", authToken, { expires : 1 });
-            $.cookie("currentUser", username, { expires : 1 });
+            $.cookie("currentUser", data.username, { expires : 1 });
 
             _this.transitionToRoute('index');
           },
