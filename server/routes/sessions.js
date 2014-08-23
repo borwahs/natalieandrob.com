@@ -6,6 +6,7 @@ var Util = require('util');
 var _ = require('../libs/underscore.1.6.0.min')
 var hat = require('hat');
 
+var SELECT_USER_SQL = 'SELECT * FROM login_user WHERE username = $1;';
 
 exports.login = {
   handler: function ( request, reply ) {
@@ -22,14 +23,39 @@ exports.login = {
       return;
     }
 
-    if ( username !== "rob" || password !== "rob" )
-    {
-      reply( Hapi.error.internal('Invalid username/password combination.') );
-      return;
-    }
+    pg.connect(DB.connectionString, function(err, client) {
+      if (err) {
+        console.log(err);
+      }
 
-    var id = hat();
+      client.query(SELECT_USER_SQL, [username], function(error, result) {
+        if (error) {
+          console.error('Error searching for user', error);
+          reply(Hapi.error.internal('Error searching for user', error));
+          return;
+        }
 
-    reply ({ authToken: id });
+        if (result.rows.length == 0)
+        {
+          reply( Hapi.error.unauthorized('Invalid username/password combination.') );
+          return;
+        }
+
+        var rowUsername = result.rows[0].username;
+        var rowPassword = result.rows[0].password;
+
+        if ( username !== rowUsername || password !== rowPassword )
+        {
+          reply( Hapi.error.unauthorized('Invalid username/password combination.') );
+          return;
+        }
+
+        client.end();
+
+        var id = hat();
+
+        reply ({ authToken: id });
+      });
+    });
   }
 };
