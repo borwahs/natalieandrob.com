@@ -37,7 +37,7 @@ exports.login = {
 
         if (result.rows.length == 0)
         {
-          reply(Hapi.error.notFound("Username/password is invalid"));
+          reply( Hapi.error.unauthorized('Invalid username/password combination.') );
           return;
         }
 
@@ -46,7 +46,7 @@ exports.login = {
 
         if ( username !== rowUsername || password !== rowPassword )
         {
-          reply( Hapi.error.internal('Invalid username/password combination.') );
+          reply( Hapi.error.unauthorized('Invalid username/password combination.') );
           return;
         }
 
