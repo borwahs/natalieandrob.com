@@ -14,8 +14,11 @@
       "path": "./dashboard"
     }
   },
-  "redis": {
+  "postgres": {
     "host": "127.0.0.1",
-    "port": "6379"
+    "port": "5432",
+    "database": "rob",
+    "username": "rob",
+    "password": "rob"
   }
 }
