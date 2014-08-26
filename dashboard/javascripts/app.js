@@ -34,10 +34,20 @@ Dashboard.User = Ember.Object.extend({
   errors: {}
 });
 
+Dashboard.Contact = Ember.Object.extend({
+  first_name:        null,
+  middle_name:       null,
+  last_name:         null,
+  is_child:          null,
+  is_unnamed_guest:  null,
+  create_date:       null
+});
 
 Dashboard.User.DATA = {};
 Dashboard.Subscriber.DATA = [];
 Dashboard.Subscriber.TEMPDATA = [];
+Dashboard.Contact.DATA = [];
+Dashboard.Contact.TEMPDATA = [];
 
 Dashboard.IndexController = Ember.ObjectController.extend({
   actions: {
@@ -47,6 +57,35 @@ Dashboard.IndexController = Ember.ObjectController.extend({
     createSubscriber: function ( eventObject ) {
       Dashboard.Subscriber.add( { email: eventObject.newEmail });
     }
+  }
+});
+
+Dashboard.ContactsController = Ember.ObjectController.extend({
+  content: {},
+  actions: {}
+});
+
+Dashboard.Contact.reopenClass({
+  all: function() {
+    return $.getJSON("/contacts").then(function(response) {
+      response.contacts.forEach(function(contact) {
+        Dashboard.Contact.TEMPDATA.addObject(
+          Dashboard.Contact.create({
+            id: contact.id,
+            first_name: contact.first_name,
+            middle_name: contact.middle_name,
+            last_name: contact.last_name,
+            is_child: contact.is_child,
+            is_unnamed_guest: contact.is_unnamed_guest,
+            create_date: contact.create_date
+          })
+        );
+      });
+
+      Dashboard.Contact.Data = mergeByProperty(Dashboard.Contact.DATA, Dashboard.Contact.TEMPDATA, "id");
+
+      return Dashboard.Contact.DATA;
+    });
   }
 });
 
@@ -149,6 +188,7 @@ Dashboard.Subscriber.reopenClass({
 
 Dashboard.Router.map(function() {
   this.route("sessions");
+  this.route("contacts");
 });
 
 Dashboard.SessionsRoute = Ember.Route.extend({
@@ -162,6 +202,19 @@ Dashboard.ApplicationRoute = Ember.Route.extend({
       this.controllerFor('sessions').reset();
       this.transitionTo('sessions');
     }
+  }
+});
+
+Dashboard.ContactsRoute = Ember.Route.extend({
+  beforeModel: function ( transition ) {
+    if (!Ember.isEmpty(this.controllerFor('sessions').get('token'))) {
+      this.transitionTo('contacts');
+    } else {
+      this.transitionTo('sessions');
+    }
+  },
+  model: function() {
+    return Dashboard.Contact.all();
   }
 });
 

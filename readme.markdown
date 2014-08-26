@@ -22,6 +22,7 @@ Run the database script in your Postgres instance:
 
     $ psql -d {database} -f database/subscribers_schema.sql
     $ psql -d {database} -f database/login_user_schema.sql
+    $ psql -d {database} -f database/rsvp-system-schema.sql
     
 Replace `{database}` with the name of your database in postgres.
 

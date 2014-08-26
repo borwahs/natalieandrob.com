@@ -7,6 +7,20 @@
   <body>
     Dashboard
 
+    <script type="text/x-handlebars" data-template-name="contacts">
+      <ul>
+        {{#each item in model}}
+        <li>{{item.id}} - {{item.first_name}} {{item.middle_name}} {{item.last_name}}</li>
+        {{else}}
+        <li>No items found.</li>
+        {{/each}}
+      </ul>
+
+      <div>
+        <button {{action "logout"}}>Logout</button>
+      </div>
+    </script>
+
     <script type="text/x-handlebars" data-template-name="index">
       <ul>
         {{#each item in model}}
