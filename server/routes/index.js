@@ -14,6 +14,7 @@ exports.endpoints = [
   { method: "DELETE", path: "/subscribers/{id}", config: Subscribers.delete },
 
   // contacts
+  { method: "POST", path: "/contacts", config: Contacts.add },
   { method: "GET", path: "/contacts", config: Contacts.list },
   { method: "DELETE", path: "/contacts/{id}", config: Contacts.delete },
 

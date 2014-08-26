@@ -65,6 +65,16 @@ Dashboard.ContactsController = Ember.ObjectController.extend({
   actions: {
     remove: function( contact ) {
       Dashboard.Contact.remove(contact);
+    },
+    createContact: function ( eventObject ) {
+      var contact = {
+        first_name:        eventObject.first_name,
+        middle_name:       eventObject.middle_name,
+        last_name:         eventObject.last_name,
+        is_child:          eventObject.is_child ? true : false,
+        is_unnamed_guest:  eventObject.is_unnamed_guest ? true : false
+      }
+      Dashboard.Contact.add( contact );
     }
   }
 });
@@ -89,6 +99,19 @@ Dashboard.Contact.reopenClass({
       Dashboard.Contact.Data = mergeByProperty(Dashboard.Contact.DATA, Dashboard.Contact.TEMPDATA, "id");
 
       return Dashboard.Contact.DATA;
+    });
+  },
+  add: function(contact) {
+    $.ajax({
+        url: '/contacts',
+        type: 'POST',
+        data: contact,
+        success: function (result) {
+          Dashboard.Contact.DATA.addObject(result);
+        },
+        error: function (jqXHR, textStatus, errorThrown ) {
+          alert(jqXHR.responseJSON.message);
+        }
     });
   },
   remove: function(contact) {

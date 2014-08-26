@@ -18,6 +18,22 @@
       </ul>
 
       <div>
+        {{input type="text" placeholder="First Name" value=first_name}}
+        <br />
+        {{input type="text" placeholder="Middle Name" value=middle_name}}
+        <br />
+        {{input type="text" placeholder="Last Name" value=last_name}}
+        <br />
+        Is Child: {{input type="checkbox" checked=is_child}}
+        <br />
+        Is Unnamed Guest: {{input type="checkbox" checked=is_unnamed_guest}}
+        <br />
+
+        <button {{action "createContact" this}}
+        {{bind-attr disabled=disabled}}>Add</button>
+      </div>
+
+      <div>
         <button {{action "logout"}}>Logout</button>
       </div>
     </script>
