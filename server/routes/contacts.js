@@ -6,6 +6,7 @@ var Util = require('util');
 var _ = require('../libs/underscore.1.6.0.min')
 
 var SELECT_ALL_CONTACTS_SQL = 'SELECT * FROM rsvp_contact;';
+var DELETE_CONTACT_BY_ID_SQL = 'DELETE FROM rsvp_contact WHERE id = $1;';
 
 var listContactsRouteHandler = function(request, reply) {
   pg.connect(DB.connectionString, function(err, client) {
@@ -27,6 +28,25 @@ var listContactsRouteHandler = function(request, reply) {
   });
 }
 
-exports.list = {
-  handler: listContactsRouteHandler
-};
+var deleteContactRouteHandler = function(request, reply) {
+  pg.connect(DB.connectionString, function(err, client) {
+    if (err) {
+      console.log(err);
+    }
+
+    client.query(DELETE_CONTACT_BY_ID_SQL, [request.params.id], function(error, result) {
+      if (error) {
+        console.error('Error deleting contact', error);
+        reply(Hapi.error.internal('Error deleting contact', error));
+        return;
+      }
+
+      client.end();
+
+      reply("OK");
+    });
+  });
+}
+
+exports.list   = { handler: listContactsRouteHandler };
+exports.delete = { handler: deleteContactRouteHandler };

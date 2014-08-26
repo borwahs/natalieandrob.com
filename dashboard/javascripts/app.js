@@ -62,7 +62,11 @@ Dashboard.IndexController = Ember.ObjectController.extend({
 
 Dashboard.ContactsController = Ember.ObjectController.extend({
   content: {},
-  actions: {}
+  actions: {
+    remove: function( contact ) {
+      Dashboard.Contact.remove(contact);
+    }
+  }
 });
 
 Dashboard.Contact.reopenClass({
@@ -85,6 +89,18 @@ Dashboard.Contact.reopenClass({
       Dashboard.Contact.Data = mergeByProperty(Dashboard.Contact.DATA, Dashboard.Contact.TEMPDATA, "id");
 
       return Dashboard.Contact.DATA;
+    });
+  },
+  remove: function(contact) {
+    $.ajax({
+        url: '/contacts/' + contact.id,
+        type: 'DELETE',
+        success: function (result) {
+          Dashboard.Contact.DATA.removeObject(contact);
+        },
+        error: function (jqXHR, textStatus, errorThrown ) {
+
+        }
     });
   }
 });

@@ -11,6 +11,7 @@
       <ul>
         {{#each item in model}}
         <li>{{item.id}} - {{item.first_name}} {{item.middle_name}} {{item.last_name}}</li>
+        <button class="remove" {{action 'remove' item}}>Delete</button>
         {{else}}
         <li>No items found.</li>
         {{/each}}
