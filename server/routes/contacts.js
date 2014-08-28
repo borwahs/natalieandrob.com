@@ -81,6 +81,32 @@ var addContactRouteHandler = function (request, reply) {
   });
 }
 
-exports.add    = { handler: addContactRouteHandler };
-exports.list   = { handler: listContactsRouteHandler };
-exports.delete = { handler: deleteContactRouteHandler };
+var exportAllContactsRouteHandler = function(request, reply) {
+  pg.connect(DB.connectionString, function(err, client) {
+    if (err) {
+      console.log(err);
+    }
+
+    client.query(SELECT_ALL_CONTACTS_SQL, function(error, result) {
+      if (error) {
+        console.error('Error listing contacts.', error);
+        reply(Hapi.error.internal('Error listing contacts', error));
+        return;
+      }
+
+      var contacts = {
+        numberOfContacts: result.rows.length,
+        contacts: result.rows
+      };
+
+      client.end();
+
+      reply( contacts );
+    });
+  });
+}
+
+exports.add            = { handler: addContactRouteHandler };
+exports.list           = { handler: listContactsRouteHandler };
+exports.delete         = { handler: deleteContactRouteHandler };
+exports.exportContacts = { handler: exportAllContactsRouteHandler };

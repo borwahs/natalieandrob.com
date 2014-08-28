@@ -16,6 +16,7 @@ exports.endpoints = [
   // contacts
   { method: "POST", path: "/contacts", config: Contacts.add },
   { method: "GET", path: "/contacts", config: Contacts.list },
+  { method: "GET", path: "/contacts/export", config: Contacts.exportContacts },
   { method: "DELETE", path: "/contacts/{id}", config: Contacts.delete },
 
   // sessions / login
