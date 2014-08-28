@@ -6,8 +6,6 @@
   "scripts": {
     "clean": "rm -rf ./build",
     "build": "harp compile ./client ./build",
-    "redis-start": "(redis-cli ping || redis-server)",
-    "redis-stop": "redis-cli shutdown",
     "client-server": "harp server ./client",
     "api-server": "node server/server.js",
     "development-server": "npm run client-server & forever --watch --watchDirectory server server/server.js",
@@ -19,8 +17,9 @@
   "dependencies": {
     "hapi": "^5.0.0",
     "joi": "^4.2.1",
-    "redis": "^0.10.2",
     "forever": "^0.11.1",
-    "harp": "^0.12.1"
+    "harp": "^0.12.1",
+    "pg": "~3.4.1",
+    "hat": "0.0.3"
   }
 }

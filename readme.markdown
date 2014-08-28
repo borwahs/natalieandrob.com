@@ -16,6 +16,15 @@ The following is a list of open-source components used:
 
 This site is using SVG icons from [iconmelon](http://iconmelon.com/).
 
+# Database Setup
+
+Run the database script in your Postgres instance:
+
+    $ psql -d {database} -f database/subscribers_schema.sql
+    $ psql -d {database} -f database/login_user_schema.sql
+    
+Replace `{database}` with the name of your database in postgres.
+
 # Usage
 
 Install dependencies first for npm:

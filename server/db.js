@@ -1,11 +1,9 @@
-var Redis = require("redis");
+var pg = require("pg");
 var Config = require("./config");
 var Util = require("util");
 
-var db = Redis.createClient(Config.redis.port, Config.redis.host);
+var conString = Util.format("postgres://%s:%s@%s:%s/%s", Config.postgres.username, Config.postgres.password, Config.postgres.host, Config.postgres.port, Config.postgres.database);
 
-db.on("error", function (error) {
-    console.error(Util.format('Error connecting to redis [host: %s, port: %s].', Config.redis.host, Config.redis.port), error);
-});
+var db = { connectionString: conString };
 
 module.exports = db;

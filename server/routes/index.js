@@ -1,5 +1,6 @@
 var Subscribers = require("./subscribers");
 var Static = require("./static");
+var Sessions = require("./sessions");
 var Config = require("../config");
 
 exports.endpoints = [
@@ -8,8 +9,15 @@ exports.endpoints = [
 
   // subscribe
   { method: "POST", path: "/subscribers", config: Subscribers.add },
-  // { method: "GET", path: "/subscribers", config: Subscribers.list },
+  { method: "GET", path: "/subscribers", config: Subscribers.list },
+  { method: "DELETE", path: "/subscribers/{id}", config: Subscribers.delete },
+
+  // sessions / login
+  { method: "POST", path: "/sessions/login", config: Sessions.login },
+
+  // dashboard
+  { method: "*", path: "/dashboard/{path*}", config: Static.dashboardStatic },
 
   // static files (either proxies to harp or serves static files directly)
-  { method: "*", path: "/{path*}", config: (Config.static.serveStatic ? Static.static : Static.proxy) }
+  { method: "*", path: "/{path*}", config: (Config.static.serveStatic ? Static.clientStatic : Static.clientProxy) }
 ];
