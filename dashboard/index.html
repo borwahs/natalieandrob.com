@@ -7,11 +7,24 @@
   <body>
     Dashboard
 
+    <script type="text/x-handlebars" data-template-name="contact">
+
+      {{id}} - {{first_name}} {{middle_name}} {{last_name}}
+      <button class="remove" {{action 'remove' this}}>Delete</button>
+
+      <div>
+        <button {{action "logout"}}>Logout</button>
+      </div>
+    </script>
+
     <script type="text/x-handlebars" data-template-name="contacts">
       <ul>
-        {{#each item in model}}
-        <li>{{item.id}} - {{item.first_name}} {{item.middle_name}} {{item.last_name}}</li>
-        <button class="remove" {{action 'remove' item}}>Delete</button>
+        {{#each contact in model}}
+        <li>{{item.id}} - {{contact.first_name}} {{contact.middle_name}} {{contact.last_name}}</li>
+        <button class="remove" {{action 'remove' contact}}>Delete</button>
+        {{#link-to "contact" contact}}
+          {{contact.first_name}} {{contact.middle_name}} {{contact.last_name}}
+        {{/link-to}}
         {{else}}
         <li>No items found.</li>
         {{/each}}
@@ -32,6 +45,8 @@
         <button {{action "createContact" this}}
         {{bind-attr disabled=disabled}}>Add</button>
       </div>
+
+      {{outlet}}
 
       <div>
         <button {{action "logout"}}>Logout</button>

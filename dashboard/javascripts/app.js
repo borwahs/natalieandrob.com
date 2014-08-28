@@ -225,11 +225,6 @@ Dashboard.Subscriber.reopenClass({
   }
 });
 
-Dashboard.Router.map(function() {
-  this.route("sessions");
-  this.route("contacts");
-});
-
 Dashboard.SessionsRoute = Ember.Route.extend({
   model: function () {
   }
@@ -255,6 +250,28 @@ Dashboard.ContactsRoute = Ember.Route.extend({
   model: function() {
     return Dashboard.Contact.all();
   }
+});
+
+Dashboard.ContactController = Ember.ObjectController.extend({
+  actions: {
+    remove: function( contact ) {
+      Dashboard.Contact.remove(contact);
+      this.transitionTo('contacts');
+    }
+  }
+});
+
+Dashboard.ContactRoute = Ember.Route.extend({
+  model: function(params) {
+    return Dashboard.Subscriber.DATA.findBy("id", params.contact_id);
+  }
+});
+
+
+Dashboard.Router.map(function() {
+  this.resource("sessions");
+  this.resource("contacts");
+  this.resource('contact', { path:'/contacts/:contact_id' });
 });
 
 Dashboard.IndexRoute = Ember.Route.extend({
