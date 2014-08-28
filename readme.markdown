@@ -18,6 +18,10 @@ This site is using SVG icons from [iconmelon](http://iconmelon.com/).
 
 # Database Setup
 
+First, download Postgres and get it running. Then run the following shell script:
+
+   $ ./database/setup-postgres-db.sh
+
 Run the database script in your Postgres instance:
 
     $ psql -d {database} -f database/subscribers_schema.sql
