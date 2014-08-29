@@ -17,8 +17,8 @@
   "postgres": {
     "host": "127.0.0.1",
     "port": "5432",
-    "database": "rob",
-    "username": "rob",
-    "password": "rob"
+    "database": "rsvp",
+    "username": "rsvp",
+    "password": "2014"
   }
 }
