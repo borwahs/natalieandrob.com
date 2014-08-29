@@ -6,7 +6,7 @@
     "port": 9000
   },
   "static": {
-    "serveStatic": true,
+    "serveStatic": false,
     "client" : {
       "path": "./build"
     },

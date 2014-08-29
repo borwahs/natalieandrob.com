@@ -25,3 +25,7 @@ Icon
 # Node
 node_modules
 npm-debug.log
+
+# ignore compiled ember assets
+/client/dependencies
+/client/rsvp/application.js
