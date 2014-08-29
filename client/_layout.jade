@@ -19,24 +19,28 @@ html(lang="en")
       | You are using a browser that is not supported. Please note that things may not display correctly.
     <![endif]-->
 
-    a#scrollTop.scroll(href="#header")
-      | Up &#8593;
+    if current.path.length < 2
+      a#scrollTop.scroll(href="#header")
+        | Up &#8593;
 
     != partial("partials/_header")
 
-    section.grid.relative#mobile-nav
-      div.unit.whole#mobile-nav-items
-        != partial("partials/_navigation")
-      div#menu-toggle
-        a(href="#")
-          svg#toggle-icon.icon(viewBox="0 0 32 32")
-              use(xlink:href="#menu")
+    if current.path.length < 2
+      section.grid.relative#mobile-nav
+        div.unit.whole#mobile-nav-items
+          != partial("partials/_navigation")
+        div#menu-toggle
+          a(href="#")
+            svg#toggle-icon.icon(viewBox="0 0 32 32")
+                use(xlink:href="#menu")
 
-    section.hero
+    if current.path.length < 2
+      section.hero
 
-    section.grid.container#desktop-nav
-      div.unit.whole
-        != partial("partials/_navigation")
+    if current.path.length < 2
+      section.grid.container#desktop-nav
+        div.unit.whole
+          != partial("partials/_navigation")
 
     section#content
       div.wrap
