@@ -1,6 +1,7 @@
 require("client/javascripts/vendor/jquery.1.11.0.min");
-require("client/javascripts/vendor/ember.1.7.0.min");
 require("client/javascripts/vendor/underscore.1.6.0.min");
+require("client/javascripts/vendor/handlebars.runtime.js");
+require("client/javascripts/vendor/ember.1.7.0.min");
 
 require("client/dependencies/compiled/templates");
 
