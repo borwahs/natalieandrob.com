@@ -1,5 +1,12 @@
 <section class= "grid container">
   <div class="unit whole">
-  RSVP to our wedding here! {{ outlet }}
+    <p>RSVP to our wedding here!</p>
+
+    <form>
+      {{input value=rsvpCode}}
+      <br />
+      <button {{action "submit"}}>Submit</button>
+    </form>
+
   </div>
 </section>
