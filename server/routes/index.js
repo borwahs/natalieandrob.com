@@ -2,6 +2,7 @@ var Subscribers = require("./subscribers");
 var Static = require("./static");
 var Sessions = require("./sessions");
 var Config = require("../config");
+var Reservations = require("./reservations.mock");
 
 exports.endpoints = [
   // just so we can test it is working
@@ -14,6 +15,9 @@ exports.endpoints = [
 
   // sessions / login
   { method: "POST", path: "/sessions/login", config: Sessions.login },
+
+  // reservations
+  { method: "GET", path: "/reservation/{rsvpCode}", config: Reservations.retrieveReservation },
 
   // dashboard
   { method: "*", path: "/dashboard/{path*}", config: Static.dashboardStatic },
