@@ -11,6 +11,7 @@ RSVP = Ember.Application.create({
   rootURL: '/rsvp/'
 });
 
+require("client/rsvp/app/models/models.js");
 require("client/rsvp/app/helpers/helpers.js");
 require("client/rsvp/app/views/views.js");
 require("client/rsvp/app/routes/router.js");
