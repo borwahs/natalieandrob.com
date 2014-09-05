@@ -3,7 +3,20 @@
     <p>Time to RSVP!!!</p>
 
     {{#if model.rsvpCode}}
-      <p>Code: {{model.rsvpCode}}</p>
+      <h1>Code: {{model.rsvpCode}}</h1>
+      <p>Is Attending: {{model.isAttending}}</p>
+      <p>
+        <h4>Attendees:</h4>
+        <p>
+          <ul>
+            {{#each model.contacts}}
+              <li>{{id}} - {{firstName}} {{middleName}} {{lastName}}</li>
+            {{else}}
+              <li>No items found.</li>
+            {{/each}}
+          </ul>
+        </p>
+      </p>
     {{else}}
       <p>There is no reservation with the submitted RSVP code.</p>
     {{/if}}
