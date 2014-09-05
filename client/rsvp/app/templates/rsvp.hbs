@@ -2,6 +2,11 @@
   <div class="unit whole">
     <p>Time to RSVP!!!</p>
 
-    <p>Code: {{rsvpCode}}</p>
-  </div>
+    {{#if model.rsvpCode}}
+      <p>Code: {{model.rsvpCode}}</p>
+    {{else}}
+      <p>There is no reservation with the submitted RSVP code.</p>
+    {{/if}}
+
+      </div>
 </section>
