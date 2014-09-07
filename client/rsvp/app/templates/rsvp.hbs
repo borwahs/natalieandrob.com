@@ -9,6 +9,14 @@
       <p>Is Rehearsal Dinner: {{input type="checkbox" name="isAttendingRehearsalDinner" checked=model.isAttendingRehearsalDinner}}</p>
       {{/if}}
       <p>
+      Number of Wedding Attendees: {{numWeddingAttendees}}
+      </p>
+      {{#if model.isInvitedToRehearsalDinner}}
+      <p>
+      Number of Rehearsal Dinner Attendees: {{numRehearsalDinnerAttendees}}
+      </p>
+      {{/if}}
+      <p>
         <h4>Attendees:</h4>
         <p>
           <table>
@@ -22,9 +30,9 @@
             </tr>
             {{#each contact in model.contacts}}
               <tr>
-                <td>{{input type="checkbox" name="contactIsAttendingBigDay{{contact.id}}" checked=contact.isAttendingBigDay}}</td>
+                <td>{{input type="checkbox" checked=contact.isAttendingBigDay}}</td>
                 {{#if model.isInvitedToRehearsalDinner}}
-                <td>{{input type="checkbox" name="contactIsAttendingRehearsalDinner{{contact.id}}" checked=isAttendingRehearsalDinner}}</td>
+                  <td>{{input type="checkbox" checked=contact.isAttendingRehearsalDinner}}</td>
                 {{/if}}
                 <td>{{contact.id}}</td>
                 <td>{{contact.firstName}} {{contact.middleName}} {{contact.lastName}}</td>
@@ -38,5 +46,5 @@
       <p>There is no reservation with the submitted RSVP code.</p>
     {{/if}}
 
-      </div>
+  </div>
 </section>
