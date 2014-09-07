@@ -36,7 +36,7 @@
                   <td>{{input type="checkbox" disabled=shouldDisableContactRehearsalDinnerCheckboxes checked=contact.isAttendingRehearsalDinner}}</td>
                 {{/if}}
                 <td>{{contact.id}}</td>
-                <td>{{contact.firstName}} {{contact.middleName}} {{contact.lastName}}</td>
+                <td>{{contact.fullName}}</td>
             {{else}}
               <td>No items found.</td>
             {{/each}}

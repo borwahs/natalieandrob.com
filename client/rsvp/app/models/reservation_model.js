@@ -40,7 +40,7 @@ RSVP.Reservation.reopenClass({
         contacts: contacts
       });
 
-      return response.reservation;
+      return reservation;
     });
   },
 });
