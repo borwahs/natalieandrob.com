@@ -8,7 +8,7 @@
     "build": "harp compile ./client ./build",
     "client-server": "harp server ./client",
     "api-server": "node server/server.js",
-    "development-server": "npm run client-server & forever --watch --watchDirectory server server/server.js",
+    "development-server": "npm run client-server & forever --watch --watchDirectory server server/server.js & grunt watch",
     "production-server": "npm run clean && npm run build && (forever stopall ; forever server/server.js)",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,6 +28,7 @@
     "ember-template-compiler": "^1.6.1",
     "grunt-ember-templates": "^0.4.21",
     "grunt-cli": "^0.1.13",
-    "grunt-neuter": "^0.6.0"
+    "grunt-neuter": "^0.6.0",
+    "grunt-contrib-watch": "^0.6.1"
   }
 }

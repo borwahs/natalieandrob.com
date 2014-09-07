@@ -9,7 +9,6 @@ module.exports = function(grunt) {
     },
 
     neuter: {
-
       '<%= build.dir %>/application.js': 'client/rsvp/app/app.js'
     },
     /*
@@ -34,13 +33,25 @@ module.exports = function(grunt) {
         }
       },
       'client/dependencies/compiled/templates.js': ["client/rsvp/app/templates/**/*.hbs"]
+    },
+
+    watch: {
+      application_code: {
+        files: ['client/dependencies/**/*.js', 'client/rsvp/app/**/*.js'],
+        tasks: ['neuter']
+      },
+      handlebars_templates: {
+        files: ['client/rsvp/app/**/*.hbs'],
+        tasks: ['emberTemplates', 'neuter']
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-neuter');
   grunt.loadNpmTasks('grunt-ember-templates');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['emberTemplates', 'neuter']);
+  grunt.registerTask('default', ['emberTemplates', 'neuter', 'watch']);
 
 };
