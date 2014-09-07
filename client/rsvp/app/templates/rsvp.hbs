@@ -28,11 +28,12 @@
               <th>ID</th>
               <th>Name</th>
             </tr>
+
             {{#each contact in model.contacts}}
               <tr>
-                <td>{{input type="checkbox" checked=contact.isAttendingBigDay}}</td>
+                <td>{{input type="checkbox" disabled=shouldDisableContactBigDayCheckboxes checked=contact.isAttendingBigDay}}</td>
                 {{#if model.isInvitedToRehearsalDinner}}
-                  <td>{{input type="checkbox" checked=contact.isAttendingRehearsalDinner}}</td>
+                  <td>{{input type="checkbox" disabled=shouldDisableContactRehearsalDinnerCheckboxes checked=contact.isAttendingRehearsalDinner}}</td>
                 {{/if}}
                 <td>{{contact.id}}</td>
                 <td>{{contact.firstName}} {{contact.middleName}} {{contact.lastName}}</td>
