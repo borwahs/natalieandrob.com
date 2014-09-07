@@ -2,5 +2,5 @@
 require('client/rsvp/app/routes/rsvp_route.js');
 
 RSVP.Router.map(function() {
-  this.resource('rsvp', { path: ':rsvp_code' });
+  this.route('rsvp', { path: '/:rsvp_code' });
 });

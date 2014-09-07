@@ -1,33 +1,31 @@
-RSVP.RsvpController = Ember.Controller.extend({
-  rsvpCode: null,
-
+RSVP.RsvpController = Ember.ObjectController.extend({
   shouldDisableContactBigDayCheckboxes: function() {
-    return !this.get('model.isAttendingBigDay');
-  }.property('model.isAttendingBigDay'),
+    return !this.get('isAttendingBigDay');
+  }.property('isAttendingBigDay'),
 
   shouldDisableContactRehearsalDinnerCheckboxes: function() {
-    return !this.get('model.isAttendingRehearsalDinner');
-  }.property('model.isAttendingRehearsalDinner'),
+    return !this.get('isAttendingRehearsalDinner');
+  }.property('isAttendingRehearsalDinner'),
 
   numWeddingAttendees: function() {
-    if (!this.get('model.isAttendingBigDay'))
+    if (!this.get('isAttendingBigDay'))
     {
       return 0;
     }
 
-    var contacts = this.get('model.contacts');
+    var contacts = this.get('contacts');
     return contacts.filterBy('isAttendingBigDay', true).get('length');
-  }.property('model.contacts.@each.isAttendingBigDay', 'model.isAttendingBigDay'),
+  }.property('contacts.@each.isAttendingBigDay', 'isAttendingBigDay'),
 
   numRehearsalDinnerAttendees: function() {
-    if (!this.get('model.isAttendingRehearsalDinner'))
+    if (!this.get('isAttendingRehearsalDinner'))
     {
       return 0;
     }
 
-    var contacts = this.get('model.contacts');
+    var contacts = this.get('contacts');
     return contacts.filterBy('isAttendingRehearsalDinner', true).get('length');
-  }.property('model.contacts.@each.isAttendingRehearsalDinner', 'model.isAttendingRehearsalDinner'),
+  }.property('contacts.@each.isAttendingRehearsalDinner', 'isAttendingRehearsalDinner'),
 
   actions: {
   }

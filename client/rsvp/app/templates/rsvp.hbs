@@ -1,17 +1,16 @@
 <section class= "grid container">
   <div class="unit whole">
     <p>Time to RSVP!!!</p>
-
-    {{#if model.rsvpCode}}
-      <h1>Code: {{model.rsvpCode}}</h1>
-      <p>Is Attending: {{input type="checkbox" name="isAttendingBigDay" checked=model.isAttendingBigDay}}</p>
-      {{#if model.isInvitedToRehearsalDinner}}
-      <p>Is Rehearsal Dinner: {{input type="checkbox" name="isAttendingRehearsalDinner" checked=model.isAttendingRehearsalDinner}}</p>
+    {{#if rsvpCode}}
+      <h1>Code: {{rsvpCode}}</h1>
+      <p>Is Attending: {{input type="checkbox" name="isAttendingBigDay" checked=isAttendingBigDay}}</p>
+      {{#if isInvitedToRehearsalDinner}}
+      <p>Is Rehearsal Dinner: {{input type="checkbox" name="isAttendingRehearsalDinner" checked=isAttendingRehearsalDinner}}</p>
       {{/if}}
       <p>
       Number of Wedding Attendees: {{numWeddingAttendees}}
       </p>
-      {{#if model.isInvitedToRehearsalDinner}}
+      {{#if isInvitedToRehearsalDinner}}
       <p>
       Number of Rehearsal Dinner Attendees: {{numRehearsalDinnerAttendees}}
       </p>
@@ -22,17 +21,17 @@
           <table>
             <tr>
               <th>Is Attending Big Day?</th>
-              {{#if model.isInvitedToRehearsalDinner}}
+              {{#if isInvitedToRehearsalDinner}}
               <th>Is Attending Rehearsal Dinner?</th>
               {{/if}}
               <th>ID</th>
               <th>Name</th>
             </tr>
 
-            {{#each contact in model.contacts}}
+            {{#each contact in contacts}}
               <tr>
                 <td>{{input type="checkbox" disabled=shouldDisableContactBigDayCheckboxes checked=contact.isAttendingBigDay}}</td>
-                {{#if model.isInvitedToRehearsalDinner}}
+                {{#if isInvitedToRehearsalDinner}}
                   <td>{{input type="checkbox" disabled=shouldDisableContactRehearsalDinnerCheckboxes checked=contact.isAttendingRehearsalDinner}}</td>
                 {{/if}}
                 <td>{{contact.id}}</td>
