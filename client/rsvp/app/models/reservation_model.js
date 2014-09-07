@@ -1,4 +1,4 @@
-RSVP.Reservation = Ember.Object.extend({
+RSVP.Reservation = Ember.Object.extend(RSVP.Jsonable, {
   id: null,
   rsvpCode: null,
   isInvitedToRehearsalDinner: false,

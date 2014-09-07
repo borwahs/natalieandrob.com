@@ -29,19 +29,16 @@ RSVP.RsvpController = Ember.ObjectController.extend({
 
   actions: {
     saveReservation: function(event) {
-
-      var contacts = this.get('model.contacts');
-
-      var reservation = {
-        rsvpCode: this.get('model.rsvpCode'),
-        isAttendingBigDay: this.get('model.isAttendingBigDay'),
-        isAttendingRehearsalDinner: this.get('model.isAttendingRehearsalDinner')
+      var data = {
+        reservation: this.get("model").getJson()
       };
-
+      
+      console.log("data", data);
+      
       $.ajax({
-          url: '/reservation/' + reservation.rsvpCode,
+          url: '/reservation/' + this.get("rsvpCode"),
           type: 'POST',
-          data: { reservation: reservation },
+          data: data,
           success: function (result) {
 
           },

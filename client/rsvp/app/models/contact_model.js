@@ -1,4 +1,4 @@
-RSVP.Contact = Ember.Object.extend({
+RSVP.Contact = Ember.Object.extend(RSVP.Jsonable, {
   id: null,
   firstName: null,
   middleName: null,

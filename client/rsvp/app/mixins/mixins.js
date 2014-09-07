@@ -1,0 +1,1 @@
+require('client/rsvp/app/mixins/jsonable.js');
