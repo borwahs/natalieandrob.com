@@ -20,7 +20,8 @@ RSVP.Reservation.reopenClass({
           firstName: contact.firstName,
           middleName: contact.middleName,
           lastName: contact.lastName,
-          isChild: contact.isChild
+          isChild: contact.isChild,
+          isAttending: contact.isAttending
         });
       });
 

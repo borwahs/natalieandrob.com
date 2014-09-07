@@ -11,14 +11,16 @@ var MOCK_DATA = [
       firstName: "FirstName1",
       middleName: "MiddleName1",
       lastName: "LastName1",
-      isChild: false
+      isChild: false,
+      isAttending: true
     },
     {
       id: 4,
       firstName: "FirstName2",
       middleName: "MiddleName2",
       lastName: "LastName2",
-      isChild: false
+      isChild: false,
+      isAttending: true
     }]
   },
   {
@@ -31,14 +33,16 @@ var MOCK_DATA = [
       firstName: "Some",
       middleName: "Middle",
       lastName: "Name",
-      isChild: false
+      isChild: false,
+      isAttending: false
     },
     {
       id: 13,
       firstName: "Fname",
       middleName: "Mname",
       lastName: "Lname",
-      isChild: true
+      isChild: true,
+      isAttending: false
     }]
   }
 ];

@@ -4,17 +4,25 @@
 
     {{#if model.rsvpCode}}
       <h1>Code: {{model.rsvpCode}}</h1>
-      <p>Is Attending: {{model.isAttending}}</p>
+      <p>Is Attending: {{input type="checkbox" name="isAttending" checked=model.isAttending}}</p>
       <p>
         <h4>Attendees:</h4>
         <p>
-          <ul>
+          <table>
+            <tr>
+              <th>Is Attending?</th>
+              <th>ID</th>
+              <th>Name</th>
+            </tr>
             {{#each model.contacts}}
-              <li>{{id}} - {{firstName}} {{middleName}} {{lastName}}</li>
+              <tr>
+                <td>{{input type="checkbox" name="contactIsAttending" checked=isAttending}}</td>
+                <td>{{id}}</td>
+                <td>{{firstName}} {{middleName}} {{lastName}}</td>
             {{else}}
-              <li>No items found.</li>
+              <td colspan="3">No items found.</td>
             {{/each}}
-          </ul>
+          </table>
         </p>
       </p>
     {{else}}
