@@ -1,7 +1,10 @@
 RSVP.Reservation = Ember.Object.extend({
   id: null,
   rsvpCode: null,
-  isAttending: false,
+  isInvitedToRehearsalDinner: false,
+  isAttendingBigDay: false,
+  isAttendingRehearsalDinner: false,
+
   contacts: []
 });
 
@@ -21,7 +24,8 @@ RSVP.Reservation.reopenClass({
           middleName: contact.middleName,
           lastName: contact.lastName,
           isChild: contact.isChild,
-          isAttending: contact.isAttending
+          isAttendingBigDay: contact.isAttendingBigDay,
+          isAttendingRehearsalDinner: contact.isAttendingRehearsalDinner
         });
       });
 
@@ -29,6 +33,10 @@ RSVP.Reservation.reopenClass({
         id: response.reservation.id,
         isAttending: response.reservation.isAttending,
         rsvpCode: response.reservation.rsvpCode,
+        isInvitedToRehearsalDinner: response.reservation.isInvitedToRehearsalDinner,
+        isAttendingBigDay: response.reservation.isAttendingBigDay,
+        isAttendingRehearsalDinner: response.reservation.isAttendingRehearsalDinner,
+
         contacts: contacts
       });
 

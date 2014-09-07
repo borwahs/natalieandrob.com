@@ -4,7 +4,8 @@ RSVP.Contact = Ember.Object.extend({
   middleName: null,
   lastName: null,
   isChild: false,
-  isAttending: false,
+  isAttendingBigDay: false,
+  isAttendingRehearsalDinner: false,
 
   fullName: function() {
     return this.get('firstName') + ' ' + this.get('middleName') + ' ' + this.get('lastName');

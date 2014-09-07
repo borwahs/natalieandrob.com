@@ -4,7 +4,10 @@ var MOCK_DATA = [
   {
     id: 1,
     rsvpCode: "12345",
-    isAttending: true,
+    isInvitedToRehearsalDinner: true,
+    isAttendingBigDay: true,
+    isAttendingRehearsalDinner: false,
+
     contacts: [
     {
       id: 1,
@@ -12,7 +15,8 @@ var MOCK_DATA = [
       middleName: "MiddleName1",
       lastName: "LastName1",
       isChild: false,
-      isAttending: true
+      isAttendingBigDay: true,
+      isAttendingRehearsalDinner: false,
     },
     {
       id: 4,
@@ -20,13 +24,17 @@ var MOCK_DATA = [
       middleName: "MiddleName2",
       lastName: "LastName2",
       isChild: false,
-      isAttending: true
+      isAttendingBigDay: true,
+      isAttendingRehearsalDinner: false,
     }]
   },
   {
     id: 2,
     rsvpCode: "abcde",
-    isAttending: false,
+    isInvitedToRehearsalDinner: false,
+    isAttendingBigDay: false,
+    isAttendingRehearsalDinner: false,
+
     contacts: [
     {
       id: 6,
@@ -34,7 +42,8 @@ var MOCK_DATA = [
       middleName: "Middle",
       lastName: "Name",
       isChild: false,
-      isAttending: false
+      isAttendingBigDay: false,
+      isAttendingRehearsalDinner: false,
     },
     {
       id: 13,
@@ -42,7 +51,8 @@ var MOCK_DATA = [
       middleName: "Mname",
       lastName: "Lname",
       isChild: true,
-      isAttending: false
+      isAttendingBigDay: false,
+      isAttendingRehearsalDinner: false,
     }]
   }
 ];

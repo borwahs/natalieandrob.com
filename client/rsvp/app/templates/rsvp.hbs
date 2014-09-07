@@ -4,23 +4,32 @@
 
     {{#if model.rsvpCode}}
       <h1>Code: {{model.rsvpCode}}</h1>
-      <p>Is Attending: {{input type="checkbox" name="isAttending" checked=model.isAttending}}</p>
+      <p>Is Attending: {{input type="checkbox" name="isAttendingBigDay" checked=model.isAttendingBigDay}}</p>
+      {{#if model.isInvitedToRehearsalDinner}}
+      <p>Is Rehearsal Dinner: {{input type="checkbox" name="isAttendingRehearsalDinner" checked=model.isAttendingRehearsalDinner}}</p>
+      {{/if}}
       <p>
         <h4>Attendees:</h4>
         <p>
           <table>
             <tr>
-              <th>Is Attending?</th>
+              <th>Is Attending Big Day?</th>
+              {{#if model.isInvitedToRehearsalDinner}}
+              <th>Is Attending Rehearsal Dinner?</th>
+              {{/if}}
               <th>ID</th>
               <th>Name</th>
             </tr>
-            {{#each model.contacts}}
+            {{#each contact in model.contacts}}
               <tr>
-                <td>{{input type="checkbox" name="contactIsAttending" checked=isAttending}}</td>
-                <td>{{id}}</td>
-                <td>{{firstName}} {{middleName}} {{lastName}}</td>
+                <td>{{input type="checkbox" name="contactIsAttendingBigDay{{contact.id}}" checked=contact.isAttendingBigDay}}</td>
+                {{#if model.isInvitedToRehearsalDinner}}
+                <td>{{input type="checkbox" name="contactIsAttendingRehearsalDinner{{contact.id}}" checked=isAttendingRehearsalDinner}}</td>
+                {{/if}}
+                <td>{{contact.id}}</td>
+                <td>{{contact.firstName}} {{contact.middleName}} {{contact.lastName}}</td>
             {{else}}
-              <td colspan="3">No items found.</td>
+              <td>No items found.</td>
             {{/each}}
           </table>
         </p>
