@@ -1,4 +1,5 @@
 var Joi = require('joi');
+var _ = require('../libs/underscore.1.6.0.min');
 
 var MOCK_DATA = [
   {
@@ -64,6 +65,45 @@ exports.retrieveReservation = {
     if (reservation && reservation.length == 1)
     {
       reply({ reservation: reservation[0] });
+    }
+
+    reply({ error: { code: 500, message: "Could not find reservation for given RSVP code" }});
+  }
+}
+
+exports.updateReservation = {
+  handler: function(request, reply) {
+
+    console.log("New request to save reservation: " + request.payload.reservation);
+
+    var requestReservation = request.payload.reservation;
+
+    if (!requestReservation || !requestReservation.rsvpCode)
+    {
+      reply({ error: { code: 500, message: "Could not find reservation for given RSVP code" }});
+    }
+
+    var rsvpCode = requestReservation.rsvpCode;
+
+    var reservation = MOCK_DATA.filter(function(c) { return c.rsvpCode == rsvpCode });
+    if (reservation && reservation.length == 1)
+    {
+      reservation[0].isAttendingBigDay = requestReservation.isAttendingBigDay;
+      reservation[0].isAttendingRehearsalDinner = requestReservation.isAttendingRehearsalDinner;
+
+      _.each(requestReservation.contacts, function(contact)
+      {
+        var serverContact = reservation[0].contacts.filter(function(c) { return c.id == contact.id });
+
+        serverContact.firstName = contact.firstName;
+        serverContact.middleName = contact.middleName;
+        serverContact.lastName = contact.lastName;
+        serverContact.isAttendingBigDay = contact.isAttendingBigDay;
+        serverContact.isAttendingRehearsalDinner = contact.isAttendingRehearsalDinner;
+        serverContact.isChild = contact.isChild;
+      });
+
+      console.log("New Reservation Data: " + reservation[0]);
     }
 
     reply({ error: { code: 500, message: "Could not find reservation for given RSVP code" }});

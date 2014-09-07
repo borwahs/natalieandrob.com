@@ -18,6 +18,7 @@ exports.endpoints = [
 
   // reservations
   { method: "GET", path: "/reservation/{rsvpCode}", config: Reservations.retrieveReservation },
+  { method: "POST", path: "/reservation/{rsvpCode}", config: Reservations.updateReservation },
 
   // dashboard
   { method: "*", path: "/dashboard/{path*}", config: Static.dashboardStatic },
