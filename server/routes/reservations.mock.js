@@ -1,4 +1,5 @@
 var Joi = require('joi');
+var util = require("util");
 var _ = require('../libs/underscore.1.6.0.min');
 
 var MOCK_DATA = [
@@ -88,20 +89,33 @@ exports.updateReservation = {
     var reservation = MOCK_DATA.filter(function(c) { return c.rsvpCode == rsvpCode });
     if (reservation && reservation.length == 1)
     {
-      reservation[0].isAttendingBigDay = requestReservation.isAttendingBigDay;
-      reservation[0].isAttendingRehearsalDinner = requestReservation.isAttendingRehearsalDinner;
+      reservation[0].isAttendingBigDay = requestReservation.isAttendingBigDay === "true" ? true : false;
+      reservation[0].isAttendingRehearsalDinner = requestReservation.isAttendingRehearsalDinner === "true" ? true : false;
+
+      var newContacts = [];
 
       _.each(requestReservation.contacts, function(contact)
       {
-        var serverContact = reservation[0].contacts.filter(function(c) { return c.id == contact.id });
+
+        var contactsList = reservation[0].contacts.filter(function(c) { return c.id == contact.id });
+        if (!contactsList || contactsList.length == 0)
+        {
+          return;
+        }
+
+        var serverContact = _.first(contactsList);
 
         serverContact.firstName = contact.firstName;
         serverContact.middleName = contact.middleName;
         serverContact.lastName = contact.lastName;
-        serverContact.isAttendingBigDay = contact.isAttendingBigDay;
-        serverContact.isAttendingRehearsalDinner = contact.isAttendingRehearsalDinner;
-        serverContact.isChild = contact.isChild;
+        serverContact.isAttendingBigDay = contact.isAttendingBigDay === "true" ? true : false;
+        serverContact.isAttendingRehearsalDinner = contact.isAttendingRehearsalDinner === "true" ? true : false;
+        serverContact.isChild = contact.isChild === "true" ? true : false;
+
+        newContacts.push(serverContact);
       });
+
+      reservation[0].contacts = newContacts;
 
       console.log("New Reservation Data: " + reservation[0]);
     }
