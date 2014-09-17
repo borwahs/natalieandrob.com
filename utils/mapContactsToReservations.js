@@ -51,6 +51,44 @@ function mapContactInfo(addressJSON) {
                                 reservation.addressZipCode
                                 ];
 
+
+    var namesList = reservation.addressContacts.split(",");
+
+    var contacts = _.map(namesList, function(reservationContactName) {
+      var contact = {};
+
+      contact.firstName = null;
+      contact.lastName = null;
+      contact.isInvitedToRehearsalDinner = false;
+      contact.isAttendingBigDay = false;
+      contact.isAttendingRehearsalDinner = false;
+
+      var contactNameSplit = reservationContactName.split(" ");
+
+      if (contactNameSplit.length == 0)
+      {
+        return null;
+      }
+
+      if (contactNameSplit.length == 1 && contactNameSplit[0] === "????")
+      {
+        contact.firstName = "(Fill Out First Name)";
+        contact.lastName = "(Fill Out Last Name)";
+
+        return contact;
+      }
+
+      if (contactNameSplit.length == 2)
+      {
+        contact.firstName = contactNameSplit[0] === "????" ? "(Fill Out First Name)" : contactNameSplit[0];
+        contact.lastName = contactNameSplit[1] === "????" ? "(Fill Out Last Name)" : contactNameSplit[1];
+        return contact
+      }
+
+    });
+
+    reservation.contacts = contacts;
+
     reservation.rsvpCodeSource = reservation.addressArray.join('|');
 
     reservation.rsvpCode = md5(reservation.rsvpCodeSource).substring(0,6);
