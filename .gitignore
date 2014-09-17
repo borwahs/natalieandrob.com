@@ -29,3 +29,7 @@ npm-debug.log
 # ignore compiled ember assets
 /client/dependencies
 /client/rsvp/application.js
+
+#ignore guest list
+guestlist.csv
+guestlist.json

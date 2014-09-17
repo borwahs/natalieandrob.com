@@ -5,16 +5,18 @@ var _ = require('../libs/underscore.1.6.0.min');
 var MOCK_DATA = [
   {
     id: 1,
-    rsvpCode: "12345",
-    isInvitedToRehearsalDinner: true,
-    isAttendingBigDay: true,
-    isAttendingRehearsalDinner: false,
 
     addressLineOne: "12345 Street One",
     addressLineTwo: "Apt 111",
     addressCity: "Some City",
     addressState: "IN",
     addressZipCode: "554433",
+
+    rsvpCode: "d18cb7",
+
+    isInvitedToRehearsalDinner: true,
+    isAttendingBigDay: true,
+    isAttendingRehearsalDinner: false,
 
     contacts: [
     {
