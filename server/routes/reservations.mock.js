@@ -10,6 +10,12 @@ var MOCK_DATA = [
     isAttendingBigDay: true,
     isAttendingRehearsalDinner: false,
 
+    addressLineOne: "12345 Street One",
+    addressLineTwo: "Apt 111",
+    addressCity: "Some City",
+    addressState: "IN",
+    addressZipCode: "554433",
+
     contacts: [
     {
       id: 1,
@@ -36,6 +42,12 @@ var MOCK_DATA = [
     isInvitedToRehearsalDinner: false,
     isAttendingBigDay: false,
     isAttendingRehearsalDinner: false,
+
+    addressLineOne: "1 This Way",
+    addressLineTwo: "",
+    addressCity: "Firstly",
+    addressState: "IN",
+    addressZipCode: "11223",
 
     contacts: [
     {

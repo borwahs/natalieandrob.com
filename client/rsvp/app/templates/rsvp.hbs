@@ -15,6 +15,20 @@
       Number of Rehearsal Dinner Attendees: {{numRehearsalDinnerAttendees}}
       </p>
       {{/if}}
+
+      <p>
+        <h3>Address:</h3>
+        {{addressLineOne}}
+        <br />
+        {{#if addressLineTwo}}
+        {{addressLineTwo}}
+        <br />
+        {{#endif}}
+        {{addressCity}}, {{addressState}}
+        <br />
+        {{addressZipCode}}
+      </p>
+
       <p>
         <h4>Attendees:</h4>
         <p>
