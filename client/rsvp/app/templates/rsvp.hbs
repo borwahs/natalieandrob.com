@@ -18,20 +18,20 @@
 
       <p>
         <h3>Address:</h3>
-        {{addressLineOne}}
+        {{input type="text" value=addressLineOne size="50"}}
         <br />
         {{#if addressLineTwo}}
-        {{addressLineTwo}}
+        {{input type="text" value=addressLineTwo size="50"}}
         <br />
         {{/if}}
-        {{addressCity}}, {{addressState}}
+        {{input type="text" value=addressCity size="50"}},{{input type="text" value=addressState size="4"}}
         <br />
-        {{addressZipCode}}
+        {{input type="text" value=addressZipCode size="6"}}
       </p>
 
 
       <p>
-        Email: {{emailAddress}}
+        Email: {{input type="text" value=emailAddress size="50"}}
       </p>
 
       <p>
@@ -43,8 +43,8 @@
               {{#if isInvitedToRehearsalDinner}}
               <th>Is Attending Rehearsal Dinner?</th>
               {{/if}}
-              <th>ID</th>
-              <th>Name</th>
+              <th>First Name</th>
+              <th>Last Name</th>
             </tr>
 
             {{#each contact in contacts}}
@@ -53,8 +53,8 @@
                 {{#if isInvitedToRehearsalDinner}}
                   <td>{{input type="checkbox" disabled=shouldDisableContactRehearsalDinnerCheckboxes checked=contact.isAttendingRehearsalDinner}}</td>
                 {{/if}}
-                <td>{{contact.id}}</td>
-                <td>{{contact.fullName}}</td>
+                <td>{{input type="text" value=contact.firstName size="50"}}</td>
+                <td>{{input type="text" value=contact.lastName size="50"}}</td>
             {{else}}
               <td>No items found.</td>
             {{/each}}

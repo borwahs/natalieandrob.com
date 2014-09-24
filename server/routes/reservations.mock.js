@@ -92,9 +92,6 @@ exports.retrieveReservation = {
 
 exports.updateReservation = {
   handler: function(request, reply) {
-
-    console.log("New request to save reservation: " + request.payload.reservation);
-
     var requestReservation = request.payload.reservation;
 
     if (!requestReservation || !requestReservation.rsvpCode)
@@ -109,6 +106,16 @@ exports.updateReservation = {
     {
       reservation[0].isAttendingBigDay = requestReservation.isAttendingBigDay === "true" ? true : false;
       reservation[0].isAttendingRehearsalDinner = requestReservation.isAttendingRehearsalDinner === "true" ? true : false;
+
+      reservation[0].emailAddress = requestReservation.emailAddress;
+
+      // handle addresses
+      reservation[0].addressLineOne = requestReservation.addressLineOne;
+      reservation[0].addressLineTwo = requestReservation.addressLineTwo;
+      reservation[0].addressCity = requestReservation.addressCity;
+      reservation[0].addressState = requestReservation.addressState;
+      reservation[0].addressZipCode = requestReservation.addressZipCode;
+
 
       var newContacts = [];
 
@@ -134,8 +141,6 @@ exports.updateReservation = {
       });
 
       reservation[0].contacts = newContacts;
-
-      console.log("New Reservation Data: " + reservation[0]);
     }
 
     reply({ error: { code: 500, message: "Could not find reservation for given RSVP code" }});
