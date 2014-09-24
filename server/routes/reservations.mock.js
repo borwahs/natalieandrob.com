@@ -13,6 +13,7 @@ var MOCK_DATA = [
     addressZipCode: "554433",
 
     rsvpCode: "d18cb7",
+    emailAddress: "test@test.com",
 
     isInvitedToRehearsalDinner: true,
     isAttendingBigDay: true,
@@ -40,7 +41,7 @@ var MOCK_DATA = [
   },
   {
     id: 2,
-    rsvpCode: "abcde",
+
     isInvitedToRehearsalDinner: false,
     isAttendingBigDay: false,
     isAttendingRehearsalDinner: false,
@@ -50,6 +51,9 @@ var MOCK_DATA = [
     addressCity: "Firstly",
     addressState: "IN",
     addressZipCode: "11223",
+
+    rsvpCode: "abcde",
+    emailAddress: "rabcd@rest.com",
 
     contacts: [
     {

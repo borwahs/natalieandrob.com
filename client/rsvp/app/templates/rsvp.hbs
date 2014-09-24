@@ -23,10 +23,15 @@
         {{#if addressLineTwo}}
         {{addressLineTwo}}
         <br />
-        {{#endif}}
+        {{/if}}
         {{addressCity}}, {{addressState}}
         <br />
         {{addressZipCode}}
+      </p>
+
+
+      <p>
+        Email: {{emailAddress}}
       </p>
 
       <p>
@@ -34,7 +39,7 @@
         <p>
           <table>
             <tr>
-              <th>Is Attending Big Day?</th>
+              <th>Attending?</th>
               {{#if isInvitedToRehearsalDinner}}
               <th>Is Attending Rehearsal Dinner?</th>
               {{/if}}
