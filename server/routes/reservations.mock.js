@@ -8,6 +8,8 @@ var MOCK_DATA = [
 
     reservationTitle: "Mr. & Mrs. Robert Shaw",
 
+    rsvpCodeSource: "Title|AddressLineOne|AddressLineTwo|AddressCity|AddressState|AddressZipCode",
+
     addressLineOne: "12345 Street One",
     addressLineTwo: "Apt 111",
     addressCity: "Some City",
@@ -47,6 +49,8 @@ var MOCK_DATA = [
   },
   {
     id: 2,
+
+    rsvpCodeSource: "Title|AddressLineOne|AddressLineTwo|AddressCity|AddressState|AddressZipCode",
 
     isInvitedToRehearsalDinner: false,
     isAttendingBigDay: false,
