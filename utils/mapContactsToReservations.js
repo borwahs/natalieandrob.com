@@ -51,6 +51,13 @@ function mapContactInfo(addressJSON) {
                                 reservation.addressZipCode
                                 ];
 
+    var contactsInvitedToRehearsalDinner = false;
+    if (reservation.makeItAWeekend === "Yes")
+    {
+      reservation.isInvitedToRehearsalDinner = true;
+      contactsInvitedToRehearsalDinner = true;
+    }
+
 
     var namesList = reservation.addressContacts.split(",");
 
@@ -59,7 +66,7 @@ function mapContactInfo(addressJSON) {
 
       contact.firstName = null;
       contact.lastName = null;
-      contact.isInvitedToRehearsalDinner = false;
+      contact.isInvitedToRehearsalDinner = contactsInvitedToRehearsalDinner;
       contact.isAttendingBigDay = false;
       contact.isAttendingRehearsalDinner = false;
 
