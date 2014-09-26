@@ -1,12 +1,19 @@
-<section class= "grid container">
-  <div class="unit whole">
-    <p>RSVP to our wedding here!</p>
+<section class= "grid container rsvp">
+  <div class="unit whole section-header">
+    <h3 class="title">RSVP</h3>
+  </div>
+  <div class="grid">
+    <div class="unit whole">
+      <p>To get started, enter the code found on your invitation (<a href="#">where's my code?</a>)</p>
+    </div>
+  </div>
 
-    <form>
-      {{input value=rsvpCode}}
-      <br /><br />
-      <button {{action "submit"}}>RSVP</button>
-    </form>
-
+  <div class="grid">
+    <div class="unit three-quarters">
+      {{input class="text" placeholder="RSVP Code" value=rsvpCode}}
+    </div>
+    <div class="unit one-quarter">
+      <input class="submit" type="submit" value="RSVP" {{action "submit"}}></input>
+    </div>
   </div>
 </section>
