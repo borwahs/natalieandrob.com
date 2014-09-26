@@ -1,24 +1,20 @@
-CREATE TABLE reservation (
-  id              SERIAL,
-  username        varchar(120) NOT NULL,
-  password        varchar(120) NOT NULL,
-  create_date     TIMESTAMP NOT NULL
+
+CREATE TABLE IF NOT EXISTS reservation (
+  id                              SERIAL,
+  reservationTitle                VARCHAR(255) NOT NULL,
+  addressLineOne                  VARCHAR(500),
+  addressLineTwo                  VARCHAR(500),
+  addressCity                     VARCHAR(255),
+  addressState                    VARCHAR(255),
+  addressZipCode                  VARCHAR(20),
+  rsvpCode                        VARCHAR(6) NOT NULL,
+  emailAddress                    VARCHAR(255),
+  reservationNotes                VARCHAR(2048),
+  dietaryRestrictions             VARCHAR(2048),
+  notesForBrideGroom              VARCHAR(2048),
+  isInvitedToRehearsalDinner      BOOLEAN,
+  isAttendingBigDay               BOOLEAN,
+  isAttendingRehearsalDinner      BOOLEAN,
+  create_date                     TIMESTAMP NOT NULL,
+  modified_date                   TIMESTAMP NOT NULL
 );
-
-    --reservationTitle: "Mr. Robert & Ms. Natalie Merz",
-    --addressLineOne: "12345 Street One",
-    --addressLineTwo: "Apt 111",
-    --addressCity: "Some City",
-    --addressState: "IN",
-    --addressZipCode: "554433",
-
-    --rsvpCode: "d18cb7",
-    --emailAddress: "test@test.com",
-
-    --reservationNotes: "",
-    --dietaryRestrictions: "",
-    --notesForBrideGroom: "",
-
-    --isInvitedToRehearsalDinner: true,
-    --isAttendingBigDay: true,
-    --isAttendingRehearsalDinner: false,
