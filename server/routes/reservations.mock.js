@@ -15,6 +15,10 @@ var MOCK_DATA = [
     rsvpCode: "d18cb7",
     emailAddress: "test@test.com",
 
+    reservationNotes: "",
+    dietaryRestrictions: "",
+    notesForBrideGroom: "",
+
     isInvitedToRehearsalDinner: true,
     isAttendingBigDay: true,
     isAttendingRehearsalDinner: false,
@@ -51,6 +55,10 @@ var MOCK_DATA = [
     addressCity: "Firstly",
     addressState: "IN",
     addressZipCode: "11223",
+
+    reservationNotes: "",
+    dietaryRestrictions: "",
+    notesForBrideGroom: "",
 
     rsvpCode: "abcde",
     emailAddress: "rabcd@rest.com",
@@ -108,6 +116,10 @@ exports.updateReservation = {
       reservation[0].isAttendingRehearsalDinner = requestReservation.isAttendingRehearsalDinner === "true" ? true : false;
 
       reservation[0].emailAddress = requestReservation.emailAddress;
+
+      reservation[0].reservationNotes = requestReservation.reservationNotes;
+      reservation[0].dietaryRestrictions = requestReservation.dietaryRestrictions;
+      reservation[0].notesForBrideGroom = requestReservation.notesForBrideGroom;
 
       // handle addresses
       reservation[0].addressLineOne = requestReservation.addressLineOne;

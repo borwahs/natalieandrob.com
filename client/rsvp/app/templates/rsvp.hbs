@@ -3,6 +3,11 @@
     <p>Time to RSVP!!!</p>
     {{#if rsvpCode}}
       <h1>Code: {{rsvpCode}}</h1>
+
+      <p>
+        {{reservationNotes}}
+      </p>
+
       <p>Is Attending: {{input type="checkbox" name="isAttendingBigDay" checked=isAttendingBigDay}}</p>
       {{#if isInvitedToRehearsalDinner}}
       <p>Is Rehearsal Dinner: {{input type="checkbox" name="isAttendingRehearsalDinner" checked=isAttendingRehearsalDinner}}</p>
@@ -29,6 +34,13 @@
         {{input type="text" value=addressZipCode size="6"}}
       </p>
 
+      <p>
+        Dietary Restrictions: {{input type="textarea" value=dietaryRestrictions size="50"}}
+      </p>
+
+      <p>
+        Notes for Bride & Groom: {{input type="textarea" value=notesForBrideGroom size="50"}}
+      </p>
 
       <p>
         Email: {{input type="text" value=emailAddress size="50"}}
