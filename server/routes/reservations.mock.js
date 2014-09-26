@@ -6,6 +6,8 @@ var MOCK_DATA = [
   {
     id: 1,
 
+    reservationTitle: "Mr. & Mrs. Robert Shaw",
+
     addressLineOne: "12345 Street One",
     addressLineTwo: "Apt 111",
     addressCity: "Some City",
@@ -49,6 +51,8 @@ var MOCK_DATA = [
     isInvitedToRehearsalDinner: false,
     isAttendingBigDay: false,
     isAttendingRehearsalDinner: false,
+
+    reservationTitle: "Mr. & Mrs. Robert Shaw",
 
     addressLineOne: "1 This Way",
     addressLineTwo: "",
