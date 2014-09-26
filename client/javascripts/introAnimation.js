@@ -13,7 +13,7 @@ function wait(millis)
   };
 }
 
-function initHeartAnimation()
+function initHeartAnimation(cb)
 {
   var heartAnimationContainer = $("#rb-heart-container");
 
@@ -22,6 +22,8 @@ function initHeartAnimation()
     if (heartAnimationContainer) {
       heartAnimationContainer.remove();
     }
+    
+    cb();
     return;
   }
 
@@ -32,7 +34,10 @@ function initHeartAnimation()
   var outerHeartEl = $("#outer-heart");
 
   // Nothing to do if the heart doesn't exist
-  if (outerHeartEl.length <= 0) { return; }
+  if (outerHeartEl.length <= 0) {
+    cb();
+    return;
+  }
 
   // hide the elements when document is ready so
   // it does not need to be done on the css elements
@@ -54,7 +59,8 @@ function initHeartAnimation()
   .then(function() { heroClassEls.fadeIn(1000); })
   .then(function() { containerEls.fadeIn(1000); })
   .then(function() { setPlayedAnimationCookie(true); })
-  .then(function() { heartAnimationContainer.remove(); });
+  .then(function() { heartAnimationContainer.remove(); })
+  .then(cb);
 }
 
 function animateSVG(path)
