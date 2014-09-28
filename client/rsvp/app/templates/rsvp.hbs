@@ -1,87 +1,101 @@
-<section class= "grid container">
-  <div class="unit whole">
-    <p>Time to RSVP!!!</p>
+<section class= "grid container rsvp">
+  <div class="unit whole section-header">
+    <h3 class="title">RSVP</h3>
+  </div>
     {{#if rsvpCode}}
-      <h1>Code: {{rsvpCode}}</h1>
+      <div class="grid">
+        <div class="unit whole">
+          <h1>Code: {{rsvpCode}}</h1>
 
-      <p>Dear <b>{{reservationTitle}}</b></p>
+          <p>Dear <b>{{reservationTitle}}</b></p>
 
-      <p>
-        {{reservationNotes}}
-      </p>
+          <p>
+            {{reservationNotes}}
+          </p>
 
-      <p>Is Attending: {{input type="checkbox" name="isAttendingBigDay" checked=isAttendingBigDay}}</p>
-      {{#if isInvitedToRehearsalDinner}}
-      <p>Is Rehearsal Dinner: {{input type="checkbox" name="isAttendingRehearsalDinner" checked=isAttendingRehearsalDinner}}</p>
-      {{/if}}
-      <p>
-      Number of Wedding Attendees: {{numWeddingAttendees}}
-      </p>
-      {{#if isInvitedToRehearsalDinner}}
-      <p>
-      Number of Rehearsal Dinner Attendees: {{numRehearsalDinnerAttendees}}
-      </p>
-      {{/if}}
+          <p>Is Attending: {{input type="checkbox" name="isAttendingBigDay" checked=isAttendingBigDay}}</p>
+          {{#if isInvitedToRehearsalDinner}}
+          <p>Is Rehearsal Dinner: {{input type="checkbox" name="isAttendingRehearsalDinner" checked=isAttendingRehearsalDinner}}</p>
+          {{/if}}
+          <p>
+          Number of Wedding Attendees: {{numWeddingAttendees}}
+          </p>
+          {{#if isInvitedToRehearsalDinner}}
+          <p>
+          Number of Rehearsal Dinner Attendees: {{numRehearsalDinnerAttendees}}
+          </p>
+          {{/if}}
 
-      <p>
-        <h3>Address:</h3>
-        {{input type="text" value=addressLineOne size="50"}}
-        <br />
-        {{#if addressLineTwo}}
-        {{input type="text" value=addressLineTwo size="50"}}
-        <br />
-        {{/if}}
-        {{input type="text" value=addressCity size="50"}},{{input type="text" value=addressState size="4"}}
-        <br />
-        {{input type="text" value=addressZipCode size="6"}}
-      </p>
+          <p>
+            <h3>Address:</h3>
+            {{input type="text" value=addressLineOne size="50"}}
+            <br />
+            {{#if addressLineTwo}}
+            {{input type="text" value=addressLineTwo size="50"}}
+            <br />
+            {{/if}}
+            {{input type="text" value=addressCity size="50"}},{{input type="text" value=addressState size="4"}}
+            <br />
+            {{input type="text" value=addressZipCode size="6"}}
+          </p>
 
-      <p>
-        Dietary Restrictions: {{input type="textarea" value=dietaryRestrictions size="50"}}
-      </p>
+          <p>
+            Dietary Restrictions: {{input type="textarea" value=dietaryRestrictions size="50"}}
+          </p>
 
-      <p>
-        Notes for Bride & Groom: {{input type="textarea" value=notesForBrideGroom size="50"}}
-      </p>
+          <p>
+            Notes for Bride & Groom: {{input type="textarea" value=notesForBrideGroom size="50"}}
+          </p>
 
-      <p>
-        Email: {{input type="text" value=emailAddress size="50"}}
-      </p>
+          <p>
+            Email: {{input type="text" value=emailAddress size="50"}}
+          </p>
 
-      <p>
-        <h4>Attendees:</h4>
-        <p>
-          <table>
-            <tr>
-              <th>Attending?</th>
-              {{#if isInvitedToRehearsalDinner}}
-              <th>Is Attending Rehearsal Dinner?</th>
-              {{/if}}
-              <th>First Name</th>
-              <th>Last Name</th>
-            </tr>
+          <p>
+            <h4>Attendees:</h4>
+            <p>
+              <table>
+                <tr>
+                  <th>Attending?</th>
+                  {{#if isInvitedToRehearsalDinner}}
+                  <th>Is Attending Rehearsal Dinner?</th>
+                  {{/if}}
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                </tr>
 
-            {{#each contact in contacts}}
-              <tr>
-                <td>{{input type="checkbox" disabled=shouldDisableContactBigDayCheckboxes checked=contact.isAttendingBigDay}}</td>
-                {{#if isInvitedToRehearsalDinner}}
-                  <td>{{input type="checkbox" disabled=shouldDisableContactRehearsalDinnerCheckboxes checked=contact.isAttendingRehearsalDinner}}</td>
-                {{/if}}
-                <td>{{input type="text" value=contact.firstName size="50"}}</td>
-                <td>{{input type="text" value=contact.lastName size="50"}}</td>
-            {{else}}
-              <td>No items found.</td>
-            {{/each}}
-          </table>
-        </p>
-      </p>
+                {{#each contact in contacts}}
+                  <tr>
+                    <td>{{input type="checkbox" disabled=shouldDisableContactBigDayCheckboxes checked=contact.isAttendingBigDay}}</td>
+                    {{#if isInvitedToRehearsalDinner}}
+                      <td>{{input type="checkbox" disabled=shouldDisableContactRehearsalDinnerCheckboxes checked=contact.isAttendingRehearsalDinner}}</td>
+                    {{/if}}
+                    <td>{{input type="text" value=contact.firstName size="50"}}</td>
+                    <td>{{input type="text" value=contact.lastName size="50"}}</td>
+                {{else}}
+                  <td>No items found.</td>
+                {{/each}}
+              </table>
+            </p>
+          </p>
 
-      <p>
-      <button {{action "saveReservation"}}>Save</button>
-      </p>
+          <p>
+            <button {{action "saveReservation"}}>Save</button>
+          </p>
+        </div>
+      </div>
     {{else}}
-      <p>There is no reservation with the submitted RSVP code.</p>
+      <div class="grid">
+        <div class="unit whole">
+          <p class="error">Uh-oh! The reservation code does not match anything we have :(</p>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="unit whole">
+          <!-- TODO: Fix this email address -->
+          <p>{{#link-to "index"}}Try again{{/link-to}} or <a href="mailto:rob@rob.com">email us</a> about this issue.</p>
+        </div>
+      </div>
     {{/if}}
-
   </div>
 </section>
