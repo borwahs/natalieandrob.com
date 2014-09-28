@@ -11,6 +11,10 @@ var DB = require('../server/db');
 var fileName = process.argv[2];
 
 
+if (!fileName || fileName.length == 0 || fileName === "") {
+  fileName = path.join(__dirname, '../database/sample-reservation-data.json');
+}
+
 fs.readFile(fileName, function (err, data) {
   if (err) {
     return console.log(err);
