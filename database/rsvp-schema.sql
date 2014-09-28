@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS reservation (
   is_attending_big_day               BOOLEAN,
   is_attending_rehearsal_dinner      BOOLEAN,
   create_date                     TIMESTAMP NOT NULL,
-  modified_date                   TIMESTAMP NOT NULL
+  modified_date                   TIMESTAMP NOT NULL,
+  PRIMARY KEY(id, rsvp_code)
 );
 
 CREATE TABLE IF NOT EXISTS contact (
