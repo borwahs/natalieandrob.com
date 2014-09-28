@@ -25,12 +25,10 @@ First, download Postgres and get it running. Then run the following shell script
 
    $ ./database/setup-postgres-db.sh
 
-Run the database script in your Postgres instance:
+Insert sample data (or data that matches the sample data found under database/ folder). It accepts a filepath as the first parameter. Otherwise, it defaults to the sample data.
 
-    $ psql -d {database} -f database/subscribers_schema.sql
-    $ psql -d {database} -f database/login_user_schema.sql
-    
-Replace `{database}` with the name of your database in postgres.
+    $ node utils/insert-rsvp-data.js
+
 
 # Usage
 
