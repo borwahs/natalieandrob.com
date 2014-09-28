@@ -93,12 +93,54 @@ var MOCK_DATA = [
 ];
 
 var GET_RESERVATION_SQL = "SELECT * FROM reservation r WHERE r.rsvp_code = $1";
-var GET_CONTACTS_FOR_RESERVATION_SQL = "SELECT * FROM contact c WHERE c.reservation_id = $1;"
+var GET_CONTACTS_FOR_RESERVATION_SQL = "SELECT * FROM contact c WHERE c.reservation_id = $1"
+
+var INSERT_NEW_CONTACT_SQL = 'INSERT INTO contact (reservation_id, first_name, middle_name, last_name, '
+    + ' is_child, is_attending_big_day, is_attending_rehearsal_dinner )'
+    + ' VALUES '
+    + ' ($1, $2, $3, $4, $5, $6, $7'
+    + ' ) RETURNING id';
+
+var INSERT_NEW_RESERVATION_SQL = 'INSERT INTO reservation (reservation_Title, rsvp_Code_Source, '
+    + ' address_Line_One, address_Line_Two, '
+    + 'address_City, address_State, address_Zip_Code, rsvp_Code, email_Address, reservation_Notes, '
+    + 'dietary_Restrictions, notes_For_Bride_Groom, is_Invited_To_Rehearsal_Dinner, is_Attending_Big_Day, is_Attending_Rehearsal_Dinner '
+    + ', create_date, modified_date) '
+    + ' VALUES '
+    + ' ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, '
+    + ' CURRENT_TIMESTAMP, CURRENT_TIMESTAMP'
+    + ' ) RETURNING id';
+
+var UPDATE_RESERVATION_SQL = 'UPDATE reservation                        \
+                              SET                                       \
+                                  address_line_one = $1,                \
+                                  address_line_two = $2,                \
+                                  address_city = $3,                    \
+                                  address_state = $4,                   \
+                                  address_zip_code = $5,                \
+                                  email_address = $6,                   \
+                                  reservation_notes = $7,               \
+                                  dietary_restrictions = $8,            \
+                                  notes_for_bride_groom = $9,           \
+                                  is_attending_big_day = $10,           \
+                                  is_attending_rehearsal_dinner = $11   \
+                              WHERE id = $12                            \
+                            ';
+
+var UPDATE_CONTACT_SQL = 'UPDATE contact                          \
+                          SET                                     \
+                              first_name = $1,                    \
+                              middle_name = $2,                   \
+                              last_name = $3,                     \
+                              is_attending_big_day = $4,          \
+                              is_attending_rehearsal_dinner = $5  \
+                          WHERE id = $6                           \
+                        ';
+
 
 exports.retrieveReservation = {
   handler: function(request, reply) {
-
-      //var reservation = MOCK_DATA.filter(function(c) { return c.rsvpCode == request.params.rsvpCode });
+    //var reservation = MOCK_DATA.filter(function(c) { return c.rsvpCode == request.params.rsvpCode });
     pg.connect(DB.connectionString, function(err, client) {
       if (err) {
         console.log(err);
@@ -179,52 +221,90 @@ exports.updateReservation = {
 
     var rsvpCode = requestReservation.rsvpCode;
 
-    var reservation = MOCK_DATA.filter(function(c) { return c.rsvpCode == rsvpCode });
-    if (reservation && reservation.length == 1)
-    {
-      reservation[0].isAttendingBigDay = requestReservation.isAttendingBigDay === "true" ? true : false;
-      reservation[0].isAttendingRehearsalDinner = requestReservation.isAttendingRehearsalDinner === "true" ? true : false;
+    pg.connect(DB.connectionString, function(err, client) {
+      if (err) {
+        console.log(err);
+      }
 
-      reservation[0].emailAddress = requestReservation.emailAddress;
-
-      reservation[0].reservationNotes = requestReservation.reservationNotes;
-      reservation[0].dietaryRestrictions = requestReservation.dietaryRestrictions;
-      reservation[0].notesForBrideGroom = requestReservation.notesForBrideGroom;
-
-      // handle addresses
-      reservation[0].addressLineOne = requestReservation.addressLineOne;
-      reservation[0].addressLineTwo = requestReservation.addressLineTwo;
-      reservation[0].addressCity = requestReservation.addressCity;
-      reservation[0].addressState = requestReservation.addressState;
-      reservation[0].addressZipCode = requestReservation.addressZipCode;
-
-
-      var newContacts = [];
-
-      _.each(requestReservation.contacts, function(contact)
-      {
-
-        var contactsList = reservation[0].contacts.filter(function(c) { return c.id == contact.id });
-        if (!contactsList || contactsList.length == 0)
-        {
+      client.query(GET_RESERVATION_SQL, [rsvpCode], function(error, results) {
+        if (error) {
+          console.error('Error getting reservation.', error);
+          reply(Hapi.error.internal('Error getting reservation', error));
           return;
         }
 
-        var serverContact = _.first(contactsList);
+        if (results.rows.length == 0)
+        {
+          reply({ error: { code: 500, message: "Could not find reservation for given RSVP code" }});
+          return;
+        }
 
-        serverContact.firstName = contact.firstName;
-        serverContact.middleName = contact.middleName;
-        serverContact.lastName = contact.lastName;
-        serverContact.isAttendingBigDay = contact.isAttendingBigDay === "true" ? true : false;
-        serverContact.isAttendingRehearsalDinner = contact.isAttendingRehearsalDinner === "true" ? true : false;
-        serverContact.isChild = contact.isChild === "true" ? true : false;
+        var reservationRow = results.rows[0];
 
-        newContacts.push(serverContact);
+        var reservationID = reservationRow.id;
+
+        var isAttendingBigDay = requestReservation.isAttendingBigDay === "true" ? true : false;
+        var isAttendingRehearsalDinner = requestReservation.isAttendingRehearsalDinner === "true" ? true : false;
+
+        var emailAddress = requestReservation.emailAddress;
+
+        var reservationNotes = requestReservation.reservationNotes;
+        var dietaryRestrictions = requestReservation.dietaryRestrictions;
+        var notesForBrideGroom = requestReservation.notesForBrideGroom;
+
+        // handle addresses
+        var addressLineOne = requestReservation.addressLineOne;
+        var addressLineTwo = requestReservation.addressLineTwo;
+        var addressCity = requestReservation.addressCity;
+        var addressState = requestReservation.addressState;
+        var addressZipCode = requestReservation.addressZipCode;
+
+
+        var reservationArray = [addressLineOne, addressLineTwo, addressCity, addressState, addressZipCode,
+                                emailAddress, reservationNotes, dietaryRestrictions, notesForBrideGroom,
+                                isAttendingBigDay, isAttendingRehearsalDinner, reservationID];
+
+        client.query(UPDATE_RESERVATION_SQL, reservationArray, function(reservationError, reservationResults) {
+          if (reservationError) {
+            console.error('Error getting reservation.', reservationError);
+            reply(Hapi.error.internal('Error getting reservation', reservationError));
+            return;
+          }
+        });
+
+        console.log("Number of Contacts to Update: " + requestReservation.contacts.length);
+
+        var newContacts = [];
+
+        _.each(requestReservation.contacts, function(contact)
+        {
+
+          var newContact = [];
+
+          newContact.push(contact.firstName);
+          newContact.push(contact.middleName);
+          newContact.push(contact.lastName);
+          newContact.push(contact.isAttendingBigDay === "true" ? true : false);
+          newContact.push(contact.isAttendingRehearsalDinner === "true" ? true : false);
+          newContact.push(contact.id);
+
+          newContacts.push(newContact);
+        });
+
+        _.each(newContacts, function(contact)
+        {
+          client.query(UPDATE_CONTACT_SQL, contact, function(updateContactError, updateContactResults) {
+            if (updateContactError) {
+              console.error('Error getting reservation.', updateContactError);
+              reply(Hapi.error.internal('Error getting reservation', updateContactError));
+              return;
+            }
+
+
+            reply("OK");
+          });
+        });
       });
-
-      reservation[0].contacts = newContacts;
-    }
-
-    reply({ error: { code: 500, message: "Could not find reservation for given RSVP code" }});
+    });
   }
 }
