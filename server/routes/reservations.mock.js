@@ -52,7 +52,7 @@ var MOCK_DATA = [
     isAttendingBigDay: false,
     isAttendingRehearsalDinner: false,
 
-    reservationTitle: "Mr. & Mrs. Robert Shaw",
+    reservationTitle: "Mr. & Mrs. Natalie Merz",
 
     addressLineOne: "1 This Way",
     addressLineTwo: "",
