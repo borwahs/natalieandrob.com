@@ -2,7 +2,7 @@ var Subscribers = require("./subscribers");
 var Static = require("./static");
 var Sessions = require("./sessions");
 var Config = require("../config");
-var Reservations = require("./reservations.mock");
+var Reservations = require("./reservations");
 
 exports.endpoints = [
   // just so we can test it is working

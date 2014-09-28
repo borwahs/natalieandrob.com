@@ -1,6 +1,9 @@
+var pg = require('pg');
 var Joi = require('joi');
-var util = require("util");
-var _ = require('../libs/underscore.1.6.0.min');
+var DB = require('../db');
+var Hapi = require('hapi');
+var Util = require('util');
+var _ = require('../libs/underscore.1.6.0.min')
 
 var MOCK_DATA = [
   {
@@ -89,17 +92,80 @@ var MOCK_DATA = [
   }
 ];
 
+var GET_RESERVATION_SQL = "SELECT * FROM reservation r WHERE r.rsvp_code = $1";
+var GET_CONTACTS_FOR_RESERVATION_SQL = "SELECT * FROM contact c WHERE c.reservation_id = $1;"
+
 exports.retrieveReservation = {
   handler: function(request, reply) {
 
-    var reservation = MOCK_DATA.filter(function(c) { return c.rsvpCode == request.params.rsvpCode });
-    if (reservation && reservation.length == 1)
-    {
-      reply({ reservation: reservation[0] });
-    }
+      //var reservation = MOCK_DATA.filter(function(c) { return c.rsvpCode == request.params.rsvpCode });
+    pg.connect(DB.connectionString, function(err, client) {
+      if (err) {
+        console.log(err);
+      }
 
-    reply({ error: { code: 500, message: "Could not find reservation for given RSVP code" }});
+
+      client.query(GET_RESERVATION_SQL, [request.params.rsvpCode], function(error, results) {
+        if (error) {
+          console.error('Error getting reservation.', error);
+          reply(Hapi.error.internal('Error getting reservation', error));
+          return;
+        }
+
+        if (results.rows.length == 0)
+        {
+          reply({ error: { code: 500, message: "Could not find reservation for given RSVP code" }});
+          return;
+        }
+
+        var reservationID = results.rows[0].id;
+
+        var reservation = {};
+
+        reservation.id = results.rows[0].id;
+        reservation.reservationTitle = results.rows[0].reservation_title;
+        reservation.addressLineOne = results.rows[0].address_line_one;
+        reservation.addressLineTwo = results.rows[0].address_line_two;
+        reservation.addressCity = results.rows[0].address_city;
+        reservation.addressState = results.rows[0].address_state;
+        reservation.addressZipCode = results.rows[0].address_zip_code;
+        reservation.rsvpCode = results.rows[0].rsvp_code;
+        reservation.emailAddress = results.rows[0].email_address;
+        reservation.reservationNotes = results.rows[0].reservation_notes;
+
+        reservation.isInvitedToRehearsalDinner = results.rows[0].is_invited_to_rehearsal_dinner;
+        reservation.isAttendingBigDay = results.rows[0].is_attending_big_day;
+        reservation.isAttendingRehearsalDinner = results.rows[0].is_attending_rehearsal_dinner;
+        reservation.dietaryRestrictions = results.rows[0].dietary_restrictions;
+        reservation.notesForBrideGroom = results.rows[0].notes_for_bride_groom;
+
+
+        client.query(GET_CONTACTS_FOR_RESERVATION_SQL, [reservationID], function(error, contactResults) {
+
+          var contacts = [];
+
+          _.each(contactResults.rows, function(row) {
+            var contact = {};
+            contact.id = row.id;
+            contact.firstName = row.first_name;
+            contact.middleName = row.middle_name;
+            contact.lastName = row.last_name;
+            contact.isAttendingBigDay = row.is_attending_big_day;
+            contact.isAttendingRehearsalDinner = row.is_attending_rehearsal_dinner;
+            contact.isChild = row.is_child;
+
+            contacts.push(contact);
+          });
+
+          reservation.contacts = contacts;
+
+          reply({ reservation: reservation });
+        });
+
+      });
+   });
   }
+
 }
 
 exports.updateReservation = {
