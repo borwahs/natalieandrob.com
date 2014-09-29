@@ -138,16 +138,38 @@ var UPDATE_CONTACT_SQL = 'UPDATE contact                          \
                         ';
 
 
+// the letter O ("Oh") should be a 0
+function normalizeRSVPCode(rsvpCode) {
+  return rsvpCode.toLowerCase().replace(/o/gi, "0");
+}
+
+var VALID_RSVP_CODE_REGEX_PATTERN = /^([a-fA-F0-9]{6})$/ig;
+
+function isValidRSVPCode(rsvpCode) {
+  if (rsvpCode === undefined) {
+    return false;
+  }
+
+  return VALID_RSVP_CODE_REGEX_PATTERN.test(rsvpCode);
+}
+
 exports.retrieveReservation = {
   handler: function(request, reply) {
-    //var reservation = MOCK_DATA.filter(function(c) { return c.rsvpCode == request.params.rsvpCode });
+
+    var normalizedRSVPCode = normalizeRSVPCode(request.params.rsvpCode);
+
+    if (!isValidRSVPCode(normalizedRSVPCode)) {
+      console.log("Code Entered (errored): " + normalizedRSVPCode);
+      reply({ error: { code: 500, message: "The RSVP Code entered is not valid. It must be 6 characters and only contains letters A through F, 0 (zero) through 9 (nine)." }});
+    }
+
     pg.connect(DB.connectionString, function(err, client) {
       if (err) {
         console.log(err);
       }
 
 
-      client.query(GET_RESERVATION_SQL, [request.params.rsvpCode], function(error, results) {
+      client.query(GET_RESERVATION_SQL, [normalizedRSVPCode], function(error, results) {
         if (error) {
           console.error('Error getting reservation.', error);
           reply(Hapi.error.internal('Error getting reservation', error));
