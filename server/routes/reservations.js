@@ -243,20 +243,26 @@ exports.updateReservation = {
 
     var rsvpCode = requestReservation.rsvpCode;
 
+    var normalizedRSVPCode = normalizeRSVPCode(rsvpCode);
+
+    if (!isValidRSVPCode(normalizedRSVPCode)) {
+      console.log("Code Entered (errored): " + normalizedRSVPCode);
+      reply({ error: { code: 500, message: "The RSVP Code entered is not valid. It must be 6 characters and only contains letters A through F, 0 (zero) through 9 (nine)." }});
+    }
+
     pg.connect(DB.connectionString, function(err, client) {
       if (err) {
         console.log(err);
       }
 
-      client.query(GET_RESERVATION_SQL, [rsvpCode], function(error, results) {
+      client.query(GET_RESERVATION_SQL, [normalizedRSVPCode], function(error, results) {
         if (error) {
           console.error('Error getting reservation.', error);
           reply(Hapi.error.internal('Error getting reservation', error));
           return;
         }
 
-        if (results.rows.length == 0)
-        {
+        if (results.rows.length == 0) {
           reply({ error: { code: 500, message: "Could not find reservation for given RSVP code" }});
           return;
         }
