@@ -5,13 +5,8 @@
     {{#if rsvpCode}}
       <div class="grid">
         <div class="unit whole">
-          <h1>Code: {{rsvpCode}}</h1>
-
           <p>Dear <b>{{reservationTitle}}</b></p>
-
-          <p>
-            {{reservationNotes}}
-          </p>
+          <p>{{reservationNotes}}</p>
 
           <p>Is Attending: {{input type="checkbox" name="isAttendingBigDay" checked=isAttendingBigDay}}</p>
           {{#if isInvitedToRehearsalDinner}}
