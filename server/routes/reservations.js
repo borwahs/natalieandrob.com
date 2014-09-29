@@ -137,20 +137,22 @@ var UPDATE_CONTACT_SQL = 'UPDATE contact                          \
                           WHERE id = $6                           \
                         ';
 
+var VALID_RSVP_CODE_REGEX_PATTERN = /^([a-fA-F0-9]{6})$/ig;
 
 // the letter O ("Oh") should be a 0
 function normalizeRSVPCode(rsvpCode) {
-  return rsvpCode.toLowerCase().replace(/o/gi, "0");
+  if (rsvpCode) {
+    return rsvpCode.toLowerCase().replace(/o/gi, "0");
+  }
+  return false;
 }
 
-var VALID_RSVP_CODE_REGEX_PATTERN = /^([a-fA-F0-9]{6})$/ig;
-
 function isValidRSVPCode(rsvpCode) {
-  if (rsvpCode === undefined) {
-    return false;
+  if (rsvpCode) {
+    return VALID_RSVP_CODE_REGEX_PATTERN.test(rsvpCode);
   }
 
-  return VALID_RSVP_CODE_REGEX_PATTERN.test(rsvpCode);
+  return false;
 }
 
 exports.retrieveReservation = {
