@@ -72,23 +72,20 @@ function mapContactInfo(addressJSON) {
 
       var contactNameSplit = reservationContactName.split(" ");
 
-      if (contactNameSplit.length == 0)
-      {
+      if (contactNameSplit.length == 0) {
         return null;
       }
 
-      if (contactNameSplit.length == 1 && contactNameSplit[0] === "????")
-      {
-        contact.firstName = "(Fill Out First Name)";
-        contact.lastName = "(Fill Out Last Name)";
+      if (contactNameSplit.length == 1 && contactNameSplit[0] === "????") {
+        contact.firstName = "";
+        contact.lastName = "";
 
         return contact;
       }
 
-      if (contactNameSplit.length == 2)
-      {
-        contact.firstName = contactNameSplit[0] === "????" ? "(Fill Out First Name)" : contactNameSplit[0];
-        contact.lastName = contactNameSplit[1] === "????" ? "(Fill Out Last Name)" : contactNameSplit[1];
+      if (contactNameSplit.length == 2) {
+        contact.firstName = contactNameSplit[0] === "????" ? "" : contactNameSplit[0];
+        contact.lastName = contactNameSplit[1] === "????" ? "" : contactNameSplit[1];
         return contact
       }
 
@@ -104,8 +101,6 @@ function mapContactInfo(addressJSON) {
 
     return reservation;
   });
-
-  console.log( rsvpCodes );
 
   return reservations;
 }
