@@ -22,10 +22,10 @@ CREATE TABLE IF NOT EXISTS reservation (
 
 CREATE TABLE IF NOT EXISTS contact (
   id                            SERIAL,
-  reservation_id                INT,
-  first_name                    VARCHAR(255) NOT NULL,
+  reservation_id                INT NOT NULL,
+  first_name                    VARCHAR(255),
   middle_name                   VARCHAR(255),
-  last_name                     VARCHAR(255) NOT NULL,
+  last_name                     VARCHAR(255),
   is_child                      BOOLEAN,
   is_attending_big_day          BOOLEAN,
   is_attending_rehearsal_dinner BOOLEAN
