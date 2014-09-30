@@ -111,6 +111,9 @@ var INSERT_NEW_RESERVATION_SQL = 'INSERT INTO reservation (reservation_Title, rs
 function handleError(err, reply) {
   var message = (err && err.message) || (err || "An unknown error occurred");
   console.error(err, message);
+  if (err.stack) {
+    console.error(err.stack);
+  }
   reply(Hapi.error.internal(err));
 }
 
@@ -119,7 +122,6 @@ exports.retrieveReservation = {
     //var reservation = MOCK_DATA.filter(function(c) { return c.rsvpCode == request.params.rsvpCode });
     DB.reservation.get(request.params.rsvpCode)
       .then(function(reservation) {
-        console.log("GOT RESERVATION", reservation);
         reply({reservation: reservation});
       })
       .catch(function(err) {
@@ -143,7 +145,6 @@ exports.updateReservation = {
         return DB.reservation.update(requestReservation);
       })
       .then(function(reservation) {
-        console.log("FINISHED", reservation);
         reply({ message: "OK" });
       })
       .catch(function(err) {
