@@ -24,7 +24,7 @@ var RESERVATION_JSON_TO_DB_SCHEMA_MAP = {
 
 
 var db = {
-  connect: function(connectionString, promiseReturningFunc) {    
+  connect: function(connectionString, promiseReturningFunc) {
     var promise = new RSVP.Promise(function(resolve, reject) {
       pg.connect(connectionString, function(err, client, done) {
         promiseReturningFunc(client)
@@ -32,7 +32,7 @@ var db = {
           .finally(done); // This closes the connection and returns it to the pool
       });
     });
-    
+
     return promise;
   },
 
@@ -139,10 +139,11 @@ db.reservation = {
         reservation.reservationNotes,
         reservation.dietaryRestrictions,
         reservation.notesForBrideGroom,
-        (reservation.isAttendingBigDay === "true" ? 1 : 0),
-        (reservation.isAttendingRehearsalDinner === "true" ? 1 : 0),
+        reservation.isAttendingBigDay,
+        reservation.isAttendingRehearsalDinner,
         reservation.id
       ];
+
       return db.executeQuery(client, UPDATE_RESERVATION_SQL, reservationUpdateParams)
                 .then(function() {
                   return reservation.contacts.map(function(contact) {
@@ -150,8 +151,8 @@ db.reservation = {
                       contact.firstName,
                       contact.middleName,
                       contact.lastName,
-                      (contact.isAttendingBigDay === "true" ? 1 : 0),
-                      (contact.isAttendingRehearsalDinner === "true" ? 1 : 0),
+                      contact.isAttendingBigDay,
+                      contact.isAttendingRehearsalDinner,
                       contact.id
                     ];
                   });
