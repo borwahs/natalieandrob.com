@@ -37,6 +37,7 @@ RSVP.RsvpController = Ember.ObjectController.extend({
 RSVP.RsvpBaseController = Ember.ObjectController.extend({
   nextRoute: "",
   previousRoute: "",
+  currentRoute: "",
 
   userIsAttendingEvent: function() {
     return this.get('isAttendingBigDay') == 1;
@@ -45,7 +46,11 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
   actions: {
     next: function() {
       RSVP.CurrentRsvp.save();
-      this.transitionToRoute(this.get("nextRoute"), this.get("rsvpCode"));
+
+      var currentRoute = this.get('currentRoute');
+      this.transitionToRoute(this.get("nextRoute"), this.get("rsvpCode")).then(function(route) {
+        route.controller.set('previousRoute', currentRoute);
+      });
     },
 
     previous: function() {
@@ -56,6 +61,9 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
 });
 
 RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
+
+  currentRoute: "rsvp-attendance",
+
   hasAttendingStateBeenSelected: function() {
     return this.get('isAttendingBigDay') != -1;
   }.property('isAttendingBigDay'),
@@ -107,14 +115,17 @@ RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
 
 RSVP.RsvpAttendeesController = RSVP.RsvpBaseController.extend({
   previousRoute: "rsvp-attendance",
+  currentRoute: "rsvp-attendees",
   nextRoute: "rsvp-notes"
 });
 
 RSVP.RsvpNotesController = RSVP.RsvpBaseController.extend({
   previousRoute: "rsvp-attendees",
+  currentRoute: "rsvp-notes",
   nextRoute: "rsvp-wrap-up"
 });
 
 RSVP.RsvpWrapUpController = RSVP.RsvpBaseController.extend({
-  previousRoute: "rsvp-notes"
+  previousRoute: "rsvp-notes",
+  currentRoute: "rsvp-wrap-up",
 });
