@@ -8,7 +8,7 @@ var DEFAULT_CONNECTION_STRING = Util.format("postgres://%s:%s@%s:%s/%s", Config.
 var db = {
   connect: function(connectionString) {
     connectionString = connectionString || DEFAULT_CONNECTION_STRING;
-    
+
     var promise = new RSVP.Promise(function(resolve, reject) {
       pg.connect(connectionString, function(err, client) {
         if (err) {
@@ -18,10 +18,10 @@ var db = {
         }
       });
     });
-    
+
     return promise;
   },
-  
+
   executeQuery: function(client, sql, params) {
     var promise = new RSVP.Promise(function(resolve, reject) {
       client.query(sql, params, function(err, results) {
@@ -32,9 +32,11 @@ var db = {
         }
       });
     });
-    
+
     return promise;
-  }
+  },
+
+   connectionString: DEFAULT_CONNECTION_STRING
 };
 
 var GET_RESERVATION_SQL = "SELECT * FROM reservation r WHERE r.rsvp_code = $1";
@@ -74,10 +76,10 @@ db.reservation = {
         if (results.rows.length === 0) {
           throw new Error("Could not find reservation for given RSVP code: " + code);
         }
-        
+
         return results;
       })
-      .then(function(results) {        
+      .then(function(results) {
         var map = {
           id: "id",
           reservationTitle: "reservation_title",
@@ -95,15 +97,15 @@ db.reservation = {
           dietaryRestrictions: "dietary_restrictions",
           notesForBrideGroom: "notes_for_bride_groom"
         };
-        
+
         var row = results.rows[0];
-        
+
         var reservation = {};
-        
+
         Object.keys(map).forEach(function(key) {
           reservation[key] = row[map[key]];
         });
-        
+
         return reservation;
       })
       .then(function(reservation) {
@@ -122,10 +124,10 @@ db.reservation = {
                 isAttendingRehearsalDinner: row.is_attending_rehearsal_dinner,
                 isChild: row.is_child,
               };
-              
+
               return contact;
             });
-            
+
             return contacts;
           })
           .then(function(contacts) {
@@ -134,7 +136,7 @@ db.reservation = {
           });
         });
   },
-  
+
   update: function(reservation) {
     var params = [
       reservation.addressLineOne,
@@ -146,11 +148,11 @@ db.reservation = {
       reservation.reservationNotes,
       reservation.dietaryRestrictions,
       reservation.notesForBrideGroom,
-      (reservation.isAttendingBigDay === "true"),
-      (reservation.isAttendingRehearsalDinner === "true"),
+      (reservation.isAttendingBigDay === "true" ? 1 : 0),
+      (reservation.isAttendingRehearsalDinner === "true" ? 1 : 0),
       reservation.id
     ];
-    
+
     return db.connect()
       .then(function(client) {
         return db.executeQuery(client, UPDATE_RESERVATION_SQL, params)
@@ -162,8 +164,8 @@ db.reservation = {
             contact.firstName,
             contact.middleName,
             contact.lastName,
-            (contact.isAttendingBigDay === "true"),
-            (contact.isAttendingRehearsalDinner === "true"),
+            (contact.isAttendingBigDay === "true" ? 1 : 0),
+            (contact.isAttendingRehearsalDinner === "true" ? 1 : 0),
             contact.id
           ];
         });

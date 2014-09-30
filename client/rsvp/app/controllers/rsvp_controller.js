@@ -52,35 +52,51 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
 });
 
 RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
+  hasAttendingStateBeenSelected: function() {
+    return this.get('isAttendingBigDay') != -1;
+  }.property('isAttendingBigDay'),
+
+  disableNextRouteButton: function() {
+    return !this.get('hasAttendingStateBeenSelected');
+  }.property('isAttendingBigDay'),
+
+  nextButtonCSSClasses: function() {
+    if (this.get('disableNextRouteButton')) {
+      return "submit disabled";
+    }
+
+    return "submit";
+  }.property('disableNextRouteButton'),
+
   nextRoute: function() {
-    if (!this.get('isAttendingBigDay')) {
+    if (this.get('isAttendingBigDay') != 1) {
       return "rsvp-wrap-up";
     }
 
     return "rsvp-attendees";
-  }.property('isAttendingBigDay'),
+  }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
 
-  isAttendingSelected: function() {
-    return this.get('isAttendingBigDay');
-  }.property('isAttendingBigDay'),
+  attendingButtonCSSClass: function() {
+    return this.get('isAttendingBigDay') == 1 ? "attendButton selected" : "attendButton";
+  }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
 
-  isNotAttendingSelected: function() {
-    return !this.get('isAttendingBigDay');
-  }.property('isAttendingBigDay'),
+  notAttendingButtonCSSClass: function() {
+    return this.get('isAttendingBigDay') == 0 ? "attendButton selected" : "attendButton";
+  }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
 
   nextButtonText: function() {
-    if (!this.get('isAttendingBigDay')) {
+    if (this.get('isAttendingBigDay') == 1 ? true : false) {
       return "Review & Submit";
     }
     return "Next Step";
-  }.property('isAttendingBigDay'),
+  }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
 
   actions: {
     attending: function() {
-      this.set('isAttendingBigDay', true);
+      this.set('isAttendingBigDay', 1);
     },
     notAttending: function() {
-      this.set('isAttendingBigDay', false);
+      this.set('isAttendingBigDay', 0);
     }
   }
 });

@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS reservation (
   dietary_restrictions            VARCHAR(2048),
   notes_for_bride_groom           VARCHAR(2048),
   is_invited_to_rehearsal_dinner  BOOLEAN,
-  is_attending_big_day            BOOLEAN,
-  is_attending_rehearsal_dinner   BOOLEAN,
+  is_attending_big_day            INT NOT NULL,
+  is_attending_rehearsal_dinner   INT NOT NULL,
   create_date                     TIMESTAMP NOT NULL,
   modified_date                   TIMESTAMP NOT NULL,
   PRIMARY KEY(id, rsvp_code)
@@ -27,6 +27,6 @@ CREATE TABLE IF NOT EXISTS contact (
   middle_name                   VARCHAR(255),
   last_name                     VARCHAR(255),
   is_child                      BOOLEAN,
-  is_attending_big_day          BOOLEAN,
-  is_attending_rehearsal_dinner BOOLEAN
+  is_attending_big_day          INT NOT NULL,
+  is_attending_rehearsal_dinner INT NOT NULL
 );

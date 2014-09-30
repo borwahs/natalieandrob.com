@@ -7,8 +7,8 @@ RSVP.Reservation = Ember.Object.extend(RSVP.Jsonable, {
   emailAddress: null,
 
   isInvitedToRehearsalDinner: false,
-  isAttendingBigDay: false,
-  isAttendingRehearsalDinner: false,
+  isAttendingBigDay: 0, // -1 = not set, 0 = no, 1 = yes
+  isAttendingRehearsalDinner: 0, // -1 = not set, 0 = no, 1 = yes
 
   reservationNotes: null,
   dietaryRestrictions: null,
@@ -21,7 +21,7 @@ RSVP.Reservation = Ember.Object.extend(RSVP.Jsonable, {
   addressZipCode: null,
 
   contacts: [],
-  
+
   save: function() {
     var data = {
       reservation: this.getJson()

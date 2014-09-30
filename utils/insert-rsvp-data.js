@@ -76,6 +76,7 @@ var INSERT_NEW_RESERVATION_SQL = 'INSERT INTO reservation (reservation_Title, rs
 function InsertReservationDataRow(reservation, contacts) {
 
   pg.connect(DB.connectionString, function(err, client) {
+
     if (err) {
       console.log(err);
       return -1;

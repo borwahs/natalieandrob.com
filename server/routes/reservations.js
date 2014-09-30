@@ -24,8 +24,8 @@ var MOCK_DATA = [
     notesForBrideGroom: "",
 
     isInvitedToRehearsalDinner: true,
-    isAttendingBigDay: true,
-    isAttendingRehearsalDinner: false,
+    isAttendingBigDay: 1,
+    isAttendingRehearsalDinner: 0,
 
     contacts: [
     {
@@ -34,8 +34,8 @@ var MOCK_DATA = [
       middleName: "MiddleName1",
       lastName: "LastName1",
       isChild: false,
-      isAttendingBigDay: true,
-      isAttendingRehearsalDinner: false,
+      isAttendingBigDay: 1,
+      isAttendingRehearsalDinner: 0,
     },
     {
       id: 4,
@@ -43,16 +43,16 @@ var MOCK_DATA = [
       middleName: "MiddleName2",
       lastName: "LastName2",
       isChild: false,
-      isAttendingBigDay: true,
-      isAttendingRehearsalDinner: false,
+      isAttendingBigDay: 1,
+      isAttendingRehearsalDinner: 0,
     }]
   },
   {
     id: 2,
 
     isInvitedToRehearsalDinner: false,
-    isAttendingBigDay: false,
-    isAttendingRehearsalDinner: false,
+    isAttendingBigDay: -1,
+    isAttendingRehearsalDinner: -1,
 
     reservationTitle: "Mr. & Mrs. Natalie Merz",
 
@@ -76,8 +76,8 @@ var MOCK_DATA = [
       middleName: "Middle",
       lastName: "Name",
       isChild: false,
-      isAttendingBigDay: false,
-      isAttendingRehearsalDinner: false,
+      isAttendingBigDay: -1,
+      isAttendingRehearsalDinner: -1,
     },
     {
       id: 13,
@@ -85,8 +85,8 @@ var MOCK_DATA = [
       middleName: "Mname",
       lastName: "Lname",
       isChild: true,
-      isAttendingBigDay: false,
-      isAttendingRehearsalDinner: false,
+      isAttendingBigDay: -1,
+      isAttendingRehearsalDinner: -1,
     }]
   }
 ];

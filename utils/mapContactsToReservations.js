@@ -40,8 +40,8 @@ function mapContactInfo(addressJSON) {
 
     reservation.id = i++;
     reservation.isInvitedToRehearsalDinner = false;
-    reservation.isAttendingBigDay = false;
-    reservation.isAttendingRehearsalDinner = false;
+    reservation.isAttendingBigDay = -1;
+    reservation.isAttendingRehearsalDinner = -1;
 
     reservation.addressArray = [reservation.addressTitle,
                                 reservation.addressLineOne,
@@ -67,8 +67,8 @@ function mapContactInfo(addressJSON) {
       contact.firstName = null;
       contact.lastName = null;
       contact.isInvitedToRehearsalDinner = contactsInvitedToRehearsalDinner;
-      contact.isAttendingBigDay = false;
-      contact.isAttendingRehearsalDinner = false;
+      contact.isAttendingBigDay = -1;
+      contact.isAttendingRehearsalDinner = -1;
 
       var contactNameSplit = reservationContactName.split(" ");
 

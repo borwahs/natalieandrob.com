@@ -13,32 +13,32 @@
         "dietaryRestrictions": "",
         "notesForBrideGroom": "",
         "isInvitedToRehearsalDinner": true,
-        "isAttendingBigDay": true,
-        "isAttendingRehearsalDinner": false,
+        "isAttendingBigDay": 1,
+        "isAttendingRehearsalDinner": 0,
         "contacts": [
             {
                 "firstName": "FirstName1",
                 "middleName": "MiddleName1",
                 "lastName": "LastName1",
                 "isChild": false,
-                "isAttendingBigDay": true,
-                "isAttendingRehearsalDinner": false
+                "isAttendingBigDay": 1,
+                "isAttendingRehearsalDinner": 0
             },
             {
                 "firstName": "FirstName2",
                 "middleName": "MiddleName2",
                 "lastName": "LastName2",
                 "isChild": false,
-                "isAttendingBigDay": true,
-                "isAttendingRehearsalDinner": false
+                "isAttendingBigDay": 1,
+                "isAttendingRehearsalDinner": 0
             }
         ]
     },
     {
         "rsvpCodeSource": "test|test|test",
         "isInvitedToRehearsalDinner": false,
-        "isAttendingBigDay": false,
-        "isAttendingRehearsalDinner": false,
+        "isAttendingBigDay": -1,
+        "isAttendingRehearsalDinner": -1,
         "reservationTitle": "Mr. & Mrs. Natalie Merz",
         "addressLineOne": "1 This Way",
         "addressLineTwo": "",
@@ -56,16 +56,16 @@
                 "middleName": "Middle",
                 "lastName": "Name",
                 "isChild": false,
-                "isAttendingBigDay": false,
-                "isAttendingRehearsalDinner": false
+                "isAttendingBigDay": -1,
+                "isAttendingRehearsalDinner": -1
             },
             {
                 "firstName": "Fname",
                 "middleName": "Mname",
                 "lastName": "Lname",
                 "isChild": true,
-                "isAttendingBigDay": false,
-                "isAttendingRehearsalDinner": false
+                "isAttendingBigDay": -1,
+                "isAttendingRehearsalDinner": -1
             }
         ]
     }
