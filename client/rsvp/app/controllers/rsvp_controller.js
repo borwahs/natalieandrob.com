@@ -85,7 +85,7 @@ RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
   }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
 
   nextButtonText: function() {
-    if (this.get('isAttendingBigDay') == 1 ? true : false) {
+    if (this.get('isAttendingBigDay') == 0 ? true : false) {
       return "Review & Submit";
     }
     return "Next Step";
