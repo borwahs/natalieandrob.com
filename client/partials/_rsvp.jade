@@ -1,9 +1,12 @@
-div.background
+if showRsvpBanner
+  div.browser-warning.container
+    section.wrap.grid
+      div.unit.whole
+        div
+          a(href="/rsvp/") It is time to RSVP! Get started now &rarr;
 
-div.foreground
-  h3 It's time to RSVP!
-  form(action="rsvp/", method="GET")
-    input.submit(type="submit", value="RSVP")
-  
-  p.dismiss
-    a#dismiss-rsvp(href="#no-rsvp") Not right now
+if showRsvpNotReadyBanner
+  div.browser-warning.container
+    section.wrap.grid
+      div.unit.whole
+        | The RSVP system is almost complete. Please check back on October 1st to RSVP! Thanks for your patience.
