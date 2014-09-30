@@ -35,7 +35,6 @@ RSVP.Reservation = Ember.Object.extend(RSVP.Jsonable, {
 
         },
         error: function (response, textStatus, errorThrown) {
-          alert(response.responseJSON.message);
         }
     });
   }
