@@ -1,8 +1,12 @@
-div.browser-warning.container
+if showRsvpBanner
+  div.browser-warning.container
     section.wrap.grid
       div.unit.whole
-        if rsvp.active
-          div
-            a(href="/rsvp/") It is time to RSVP! Get started now &rarr;
-        else
-          | The RSVP system is almost complete. Please check back on October 1st to RSVP! Thanks for your patience.
+        div
+          a(href="/rsvp/") It is time to RSVP! Get started now &rarr;
+
+if showRsvpNotReadyBanner
+  div.browser-warning.container
+    section.wrap.grid
+      div.unit.whole
+        | The RSVP system is almost complete. Please check back on October 1st to RSVP! Thanks for your patience.

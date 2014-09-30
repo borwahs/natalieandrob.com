@@ -1,7 +1,6 @@
 {
   "globals": {
-    "rsvp": {
-      "active": true
-    }
+    "showRsvpBanner": true,
+    "showRsvpNotReadyBanner": false
   }
 }
