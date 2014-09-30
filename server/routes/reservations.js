@@ -147,23 +147,10 @@ function normalizeRSVPCode(rsvpCode) {
   return false;
 }
 
-function isValidRSVPCode(rsvpCode) {
-  if (rsvpCode) {
-    return VALID_RSVP_CODE_REGEX_PATTERN.test(rsvpCode);
-  }
-
-  return false;
-}
-
 exports.retrieveReservation = {
   handler: function(request, reply) {
 
     var normalizedRSVPCode = normalizeRSVPCode(request.params.rsvpCode);
-
-    if (!isValidRSVPCode(normalizedRSVPCode)) {
-      console.log("Code Entered (errored): " + normalizedRSVPCode);
-      reply({ error: { code: 500, message: "The RSVP Code entered is not valid. It must be 6 characters and only contains letters A through F, 0 (zero) through 9 (nine)." }});
-    }
 
     pg.connect(DB.connectionString, function(err, client) {
       if (err) {
@@ -246,11 +233,6 @@ exports.updateReservation = {
     var rsvpCode = requestReservation.rsvpCode;
 
     var normalizedRSVPCode = normalizeRSVPCode(rsvpCode);
-
-    if (!isValidRSVPCode(normalizedRSVPCode)) {
-      console.log("Code Entered (errored): " + normalizedRSVPCode);
-      reply({ error: { code: 500, message: "The RSVP Code entered is not valid. It must be 6 characters and only contains letters A through F, 0 (zero) through 9 (nine)." }});
-    }
 
     pg.connect(DB.connectionString, function(err, client) {
       if (err) {
