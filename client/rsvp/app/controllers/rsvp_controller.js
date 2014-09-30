@@ -1,5 +1,4 @@
-RSVP.RsvpController = Ember.ObjectController.extend(RSVP.Cookies, {
-
+RSVP.RsvpController = Ember.ObjectController.extend({
   shouldDisableContactBigDayCheckboxes: function() {
     return !this.get('isAttendingBigDay');
   }.property('isAttendingBigDay'),
@@ -30,23 +29,7 @@ RSVP.RsvpController = Ember.ObjectController.extend(RSVP.Cookies, {
 
   actions: {
     saveReservation: function(event) {
-      var data = {
-        reservation: this.get("model").getJson()
-      };
-
-      var that = this;
-
-      $.ajax({
-          url: '/reservation/' + this.get("rsvpCode"),
-          type: 'POST',
-          data: data,
-          success: function (result) {
-            that.createCookie('hasRSVPed', true);
-          },
-          error: function (response, textStatus, errorThrown) {
-
-          }
-      });
+      this.get("model").save();
     }
   }
 });
@@ -57,10 +40,12 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
   
   actions: {
     next: function() {
+      RSVP.CurrentRsvp.save();
       this.transitionToRoute(this.get("nextRoute"), this.get("rsvpCode"));
     },
     
     previous: function() {
+      RSVP.CurrentRsvp.save();
       this.transitionToRoute(this.get("previousRoute"), this.get("rsvpCode"));
     }
   }
