@@ -22,7 +22,8 @@
     "pg": "~3.4.1",
     "hat": "0.0.3",
     "MD5": "^1.2.1",
-    "babyparse": "^0.2.1"
+    "babyparse": "^0.2.1",
+    "nodemailer": "^1.3.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

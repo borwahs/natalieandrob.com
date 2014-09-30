@@ -3,7 +3,9 @@ var Joi = require('joi');
 var DB = require('../db');
 var Hapi = require('hapi');
 var Util = require('util');
-var _ = require('../libs/underscore.1.6.0.min')
+var Config = require("../config");
+var _ = require('../libs/underscore.1.6.0.min');
+var nodemailer = require('nodemailer');
 
 var MOCK_DATA = [
   {
@@ -139,6 +141,16 @@ var UPDATE_CONTACT_SQL = 'UPDATE contact                          \
 
 var VALID_RSVP_CODE_REGEX_PATTERN = /^([a-fA-F0-9]{6})$/ig;
 
+
+var transporter = nodemailer.createTransport({
+    service: Config.mail.provider,
+    auth: {
+        user: Config.mail.providerUserName,
+        pass: Config.mail.providerPassword
+    }
+});
+
+
 // the letter O ("Oh") should be a 0
 function normalizeRSVPCode(rsvpCode) {
   if (rsvpCode) {
@@ -251,6 +263,8 @@ exports.updateReservation = {
           return;
         }
 
+        sendEmailWithDetails(rsvpCode, requestReservation);
+
         var reservationRow = results.rows[0];
 
         var reservationID = reservationRow.id;
@@ -319,4 +333,13 @@ exports.updateReservation = {
       });
     });
   }
+}
+
+function sendEmailWithDetails(rsvpCode, reservationData) {
+  transporter.sendMail({
+      from: Config.mail.fromAddress,
+      to: Config.mail.toAddress,
+      subject: Util.format('Reservation Saved - %s : RSVP Code [%s]', reservationData.reservationTitle, rsvpCode),
+      text: JSON.stringify(reservationData, undefined, 2)
+  });
 }
