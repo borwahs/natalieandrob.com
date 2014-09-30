@@ -43,27 +43,25 @@ RSVP.CurrentRsvp = RSVP.WorkingRsvpController.create();
 
 RSVP.RsvpRoute = Ember.Route.extend({
   model: function(params) {
-    console.log("LOADING MODEL");
+    console.log("LOADING MODEL", params);
     return RSVP.Reservation.getReservation(params.rsvp_code).then(function(model) {
       console.log("GOT MODEL FROM SERVER");
       RSVP.CurrentRsvp.set("workingRsvp", model);
       console.log("SET MODEL ON CLIENTp");
       return model;
     });
-  },
-
-  afterModel: function(model, transition, queryParams) {
-    this.transitionTo("rsvp-attendance", model.get("rsvpCode"));
   }
 });
 
-RSVP.RsvpBaseRoute = RSVP.RsvpRoute.extend({
+RSVP.RsvpIndexRoute = Ember.Route.extend({
+  beforeModel: function() {
+    this.transitionTo("rsvp.attendance");
+  }
+});
+
+RSVP.RsvpBaseRoute = Ember.Route.extend({
   model: function(params) {
     var rsvp = RSVP.CurrentRsvp.get("workingRsvp");
-    // If we don't have a cached version, or if it doesn't match the current route, load it from the server
-    if (!rsvp || !rsvp.get("rsvpCode") || rsvp.get("rsvpCode") !== params.rsvp_code) {
-      return this._super(params);
-    }
 
     return rsvp;
   },

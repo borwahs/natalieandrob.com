@@ -37,6 +37,13 @@ RSVP.RsvpController = Ember.ObjectController.extend({
 RSVP.RsvpBaseController = Ember.ObjectController.extend({
   nextRoute: "",
   previousRoute: "",
+  title: "BASE SHOULD NOT SHOW",
+  needs: "rsvp",
+  rsvp: Ember.computed.alias("controllers.rsvp"),
+  
+  bubbleUpTitle: function() {
+    this.set(("rsvp.title"), this.get("title"));
+  }.on("init"),
 
   actions: {
     next: function() {
@@ -52,6 +59,8 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
 });
 
 RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
+  title: "RSVP",
+  
   hasAttendingStateBeenSelected: function() {
     return this.get('isAttendingBigDay') != -1;
   }.property('isAttendingBigDay'),
@@ -70,10 +79,10 @@ RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
 
   nextRoute: function() {
     if (this.get('isAttendingBigDay') != 1) {
-      return "rsvp-wrap-up";
+      return "rsvp.wrap-up";
     }
 
-    return "rsvp-attendees";
+    return "rsvp.attendees";
   }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
 
   attendingButtonCSSClass: function() {
@@ -102,15 +111,18 @@ RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
 });
 
 RSVP.RsvpAttendeesController = RSVP.RsvpBaseController.extend({
-  previousRoute: "rsvp-attendance",
-  nextRoute: "rsvp-notes"
+  title: "RSVP Attendees",
+  previousRoute: "rsvp.attendance",
+  nextRoute: "rsvp.notes"
 });
 
 RSVP.RsvpNotesController = RSVP.RsvpBaseController.extend({
-  previousRoute: "rsvp-attendees",
-  nextRoute: "rsvp-wrap-up"
+  title: "Notes",
+  previousRoute: "rsvp.attendees",
+  nextRoute: "rsvp.wrap-up"
 });
 
 RSVP.RsvpWrapUpController = RSVP.RsvpBaseController.extend({
-  previousRoute: "rsvp-notes"
+  title: "Wrap-Up",
+  previousRoute: "rsvp.notes"
 });
