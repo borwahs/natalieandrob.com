@@ -1,8 +1,18 @@
-<section class= "grid container rsvp">
+<section class="grid container rsvp">
   <div class="unit whole section-header">
     <h3 class="title">RSVP Attendance</h3>
   </div>
-  <div class="unit whole">
-    <input class="submit" type="submit" value="Next" {{action "next"}}></input>
+  <div class="grid">
+    <div class="unit half">
+      <input class="submit" type="submit" value="No, I Can Not Attend"></input>
+    </div>
+    <div class="unit half">
+      <input class="submit" type="submit" value="Yes, I Am Attending"></input>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="unit whole">
+      <input class="submit" type="submit" value="Next" {{action "next"}}></input>
+    </div>
   </div>
 </section>
