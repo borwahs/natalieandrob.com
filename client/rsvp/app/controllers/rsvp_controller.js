@@ -38,6 +38,10 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
   nextRoute: "",
   previousRoute: "",
 
+  userIsAttendingEvent: function() {
+    return this.get('isAttendingBigDay') == 1;
+  }.property('isAttendingBigDay'),
+
   actions: {
     next: function() {
       RSVP.CurrentRsvp.save();

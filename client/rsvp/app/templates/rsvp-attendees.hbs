@@ -2,13 +2,22 @@
   <div class="unit whole section-header">
     <h3 class="title">RSVP Attendees</h3>
   </div>
-  {{#each contacts itemController="contact"}}
+
+  {{#if userIsAttendingEvent}}
+    {{#each contacts itemController="contact"}}
+      <div class="grid">
+        <div class="unit one-third"><input type="button" {{bind-attr value="isAttendingButtonText"}} {{action "setIsAttendingValue"}} /></div>
+        <div class="unit one-third">{{input type="text" value=firstName size="25"}}</div>
+        <div class="unit one-third">{{input type="text" value=lastName size="25"}}</div>
+      </div>
+    {{/each}}
+  {{else}}
     <div class="grid">
-      <div class="unit one-third"><input type="button" {{bind-attr value="isAttendingButtonText"}} {{action "setIsAttendingValue"}} /></div>
-      <div class="unit one-third">{{input type="text" value=firstName size="25"}}</div>
-      <div class="unit one-third">{{input type="text" value=lastName size="25"}}</div>
+      <div class="unit whole">
+        You are not selected to attend the event. Please go to the Attendance screen to change your reservation.
+      </div>
     </div>
-  {{/each}}
+  {{/if}}
   <div class="grid">
     <div class="unit whole">
       <input class="submit" type="submit" value="Back" {{action "previous"}}></input>
