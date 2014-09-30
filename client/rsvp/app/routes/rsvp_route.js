@@ -61,12 +61,16 @@ RSVP.RsvpIndexRoute = Ember.Route.extend({
 
 RSVP.RsvpBaseRoute = Ember.Route.extend({
   model: function(params) {
+    // TODO: This isn't really needed. Already have access to this
     var rsvp = RSVP.CurrentRsvp.get("workingRsvp");
 
     return rsvp;
   },
-
-  afterModel: function() { }
+  
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    controller.bubbleUpTitle();
+  }
 });
 
 RSVP.RsvpAttendanceRoute = RSVP.RsvpBaseRoute.extend();
