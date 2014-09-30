@@ -13,7 +13,7 @@ function wait(millis)
   };
 }
 
-function initHeartAnimation(cb)
+function initHeartAnimation()
 {
   var heartAnimationContainer = $("#rb-heart-container");
 
@@ -22,8 +22,6 @@ function initHeartAnimation(cb)
     if (heartAnimationContainer) {
       heartAnimationContainer.remove();
     }
-    
-    cb();
     return;
   }
 
@@ -35,7 +33,6 @@ function initHeartAnimation(cb)
 
   // Nothing to do if the heart doesn't exist
   if (outerHeartEl.length <= 0) {
-    cb();
     return;
   }
 
@@ -59,8 +56,7 @@ function initHeartAnimation(cb)
   .then(function() { heroClassEls.fadeIn(1000); })
   .then(function() { containerEls.fadeIn(1000); })
   .then(function() { setPlayedAnimationCookie(true); })
-  .then(function() { heartAnimationContainer.remove(); })
-  .then(cb);
+  .then(function() { heartAnimationContainer.remove(); });
 }
 
 function animateSVG(path)

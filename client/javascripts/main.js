@@ -1,5 +1,5 @@
 $(function() {
-  initHeartAnimation(showRsvp);
+  initHeartAnimation();
   initSubscribeForm();
   initNavigation();
 });
