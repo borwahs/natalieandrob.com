@@ -20,7 +20,25 @@ RSVP.Reservation = Ember.Object.extend(RSVP.Jsonable, {
   addressState: null,
   addressZipCode: null,
 
-  contacts: []
+  contacts: [],
+  
+  save: function() {
+    var data = {
+      reservation: this.getJson()
+    };
+
+    $.ajax({
+        url: '/reservation/' + this.get("rsvpCode"),
+        type: 'POST',
+        data: data,
+        success: function (result) {
+
+        },
+        error: function (response, textStatus, errorThrown) {
+          alert(response.responseJSON.message);
+        }
+    });
+  }
 });
 
 RSVP.Reservation.reopenClass({
@@ -72,5 +90,5 @@ RSVP.Reservation.reopenClass({
 
       return reservation;
     });
-  },
+  }
 });
