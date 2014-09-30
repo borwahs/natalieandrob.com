@@ -4,20 +4,20 @@
   </div>
   <div class="grid">
     <div class="unit half">
-      <input class="submit" type="submit" value="No, I Can Not Attend"></input>
+      <input class="attendButton" type="button" value="No, I Cannot Attend" {{ bind-attr class="isNotAttendingSelected:selected" }} {{ action "notAttending" }}></input>
     </div>
     <div class="unit half">
-      <input class="submit" type="submit" value="Yes, I Am Attending"></input>
+      <input class="attendButton" type="button" value="Yes, I Am Attending" {{ bind-attr class="isAttendingSelected:selected" }} {{ action "attending" }}></input>
     </div>
   </div>
   <div class="grid">
     <div class="unit whole">
-      <input class="submit" type="submit" value="Back" {{action "previous"}}></input>
+      <input class="submit" type="button" value="Cancel" {{action "previous"}}></input>
     </div>
   </div>
   <div class="grid">
     <div class="unit whole">
-      <input class="submit" type="submit" value="Next" {{action "next"}}></input>
+      <input class="submit" type="button" {{ bind-attr value="nextButtonText" }} {{action "next"}}></input>
     </div>
   </div>
 </section>

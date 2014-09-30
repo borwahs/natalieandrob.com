@@ -37,13 +37,13 @@ RSVP.RsvpController = Ember.ObjectController.extend({
 RSVP.RsvpBaseController = Ember.ObjectController.extend({
   nextRoute: "",
   previousRoute: "",
-  
+
   actions: {
     next: function() {
       RSVP.CurrentRsvp.save();
       this.transitionToRoute(this.get("nextRoute"), this.get("rsvpCode"));
     },
-    
+
     previous: function() {
       RSVP.CurrentRsvp.save();
       this.transitionToRoute(this.get("previousRoute"), this.get("rsvpCode"));
@@ -52,7 +52,37 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
 });
 
 RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
-  nextRoute: "rsvp-attendees"
+  nextRoute: function() {
+    if (!this.get('isAttendingBigDay')) {
+      return "rsvp-wrap-up";
+    }
+
+    return "rsvp-attendees";
+  }.property('isAttendingBigDay'),
+
+  isAttendingSelected: function() {
+    return this.get('isAttendingBigDay');
+  }.property('isAttendingBigDay'),
+
+  isNotAttendingSelected: function() {
+    return !this.get('isAttendingBigDay');
+  }.property('isAttendingBigDay'),
+
+  nextButtonText: function() {
+    if (!this.get('isAttendingBigDay')) {
+      return "Review & Submit";
+    }
+    return "Next Step";
+  }.property('isAttendingBigDay'),
+
+  actions: {
+    attending: function() {
+      this.set('isAttendingBigDay', true);
+    },
+    notAttending: function() {
+      this.set('isAttendingBigDay', false);
+    }
+  }
 });
 
 RSVP.RsvpAttendeesController = RSVP.RsvpBaseController.extend({
