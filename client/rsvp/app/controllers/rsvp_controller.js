@@ -49,14 +49,14 @@ RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
 
   disableNextRouteButton: function() {
     return !this.get('hasAttendingStateBeenSelected');
-  }.property('isAttendingBigDay'),
+  }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
 
   nextButtonCSSClasses: function() {
     if (this.get('disableNextRouteButton')) {
-      return "submit disabled";
+      return "submit next disabled";
     }
 
-    return "submit";
+    return "submit next";
   }.property('disableNextRouteButton'),
 
   nextRoute: function() {

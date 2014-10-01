@@ -318,8 +318,13 @@ input.submit {
   display: inline-block;
 }
 
-.rsvp-navigate .previous, .rsvp-navigate .next {
-  background-color: #FFAAAA;
+.rsvp-navigate input[type="button"] {
+  width: 100%;
+  padding: 10px 5px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  background-color: #961982;
 }
 
 .rsvp-navigate .cancel {
@@ -330,9 +335,7 @@ input.submit {
   background-color: @red-heart-color;
 }
 
-
-
-input.disabled {
+.rsvp-navigate .disabled {
   cursor: none;
   background-color: #ababab;
 }
