@@ -68,7 +68,6 @@ RSVP.RsvpBaseRoute = Ember.Route.extend({
 });
 
 RSVP.RsvpAttendanceRoute = RSVP.RsvpBaseRoute.extend();
-RSVP.RsvpAttendeesRoute = RSVP.RsvpBaseRoute.extend();
 RSVP.RsvpNotesRoute = RSVP.RsvpBaseRoute.extend();
 RSVP.RsvpWrapUpRoute = RSVP.RsvpBaseRoute.extend();
 RSVP.RsvpSuccessRoute = RSVP.RsvpBaseRoute.extend();

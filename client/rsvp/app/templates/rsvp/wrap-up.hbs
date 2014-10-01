@@ -10,10 +10,10 @@
 
     <div class="summary-section">
       <h5 class="sub-title"><span>Attending</span></h3>
-      <p>You have selected that you <b>{{isAttendingSummaryText}}</b> be attending.</p>
+      <p>You have selected that {{isAttendingSummaryText}} attending.</p>
     </div>
 
-    {{#if isAttendingBigDayBoolean}}
+    {{#if isAttendingBigDay}}
       <div class="summary-section">
         <h5 class="sub-title"><span>Guests</span></h3>
         <p>
@@ -35,10 +35,10 @@
     {{#if isInvitedToRehearsalDinner}}
       <div class="summary-section">
         <h5 class="sub-title"><span>Attending Rehearsal Dinner</span></h3>
-        <p>You have selected that you <b>{{isAttendingRehearsalDinnerSummaryText}}</b> be attending the Rehearsal Dinner.</p>
+        <p>You have selected that {{isAttendingRehearsalDinnerSummaryText}} attending the Rehearsal Dinner.</p>
       </div>
 
-      {{#if isAttendingRehearsalDinnerBoolean}}
+      {{#if isAttendingRehearsalDinner}}
         <div class="summary-section">
           <h5 class="sub-title"><span>Rehearsal Dinner Guests</span></h3>
           <p>

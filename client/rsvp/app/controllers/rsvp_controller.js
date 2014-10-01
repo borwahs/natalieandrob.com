@@ -17,6 +17,42 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
   bubbleUpTitle: function() {
     this.set(("rsvp.title"), this.get("title"));
   }.on("init"),
+  
+  isAttendingBigDay: function() {
+    return this.get('numWeddingAttendees') > 0;
+  }.property('numWeddingAttendees'),
+
+  isAttendingRehearsalDinner: function() {
+    return this.get('numRehearsalDinnerAttendees') > 0;
+  }.property('numRehearsalDinnerAttendees'),
+
+  numWeddingAttendees: function() {
+    if (this.get('contacts.length') == 0) {
+      return 0;
+    }
+
+    var contacts = this.get('contacts');
+    return contacts.filterBy('isAttendingBigDay', 1).get('length');
+  }.property('contacts.@each.isAttendingBigDay', 'contacts'),
+
+  numRehearsalDinnerAttendees: function() {
+    if (this.get('contacts.length') == 0) {
+      return 0;
+    }
+
+    var contacts = this.get('contacts');
+    return contacts.filterBy('isAttendingRehearsalDinner', 1).get('length');
+  }.property('contacts.@each.isAttendingRehearsalDinner', 'contacts'),
+  
+  contactsAttending: function() {
+    var contacts = this.get('contacts');
+    return contacts.filterBy('isAttendingBigDay', 1);
+  }.property('contacts.@each.isAttendingBigDay', 'contacts'),
+
+  contactsAttendingRehearsalDinner:  function() {
+    var contacts = this.get('contacts');
+    return contacts.filterBy('isAttendingRehearsalDinner', 1);
+  }.property('contacts.@each.isAttendingRehearsalDinner', 'contacts'),
 
   actions: {
     next: function() {
@@ -35,83 +71,9 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
   }
 });
 
-RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
-  title: "RSVP",
-  currentRoute: "rsvp.attendance",
-
-  hasAttendingStateBeenSelected: function() {
-    return this.get('isAttendingBigDay') != -1;
-  }.property('isAttendingBigDay'),
-
-  disableNextRouteButton: function() {
-    return !this.get('hasAttendingStateBeenSelected');
-  }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
-
-  nextButtonCSSClasses: function() {
-    if (this.get('disableNextRouteButton')) {
-      return "submit next disabled";
-    }
-
-    return "submit next";
-  }.property('disableNextRouteButton'),
-
-  nextRoute: function() {
-    if (this.get('isAttendingBigDay') != 1) {
-      return "rsvp.wrap-up";
-    }
-
-    return "rsvp.attendees";
-  }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
-
-  attendingButtonCSSClass: function() {
-    return this.get('isAttendingBigDay') == 1 ? "attendButton selected" : "attendButton";
-  }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
-
-  notAttendingButtonCSSClass: function() {
-    return this.get('isAttendingBigDay') == 0 ? "attendButton selected" : "attendButton";
-  }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
-
-  attendingRehearsalDinnerButtonCSSClass: function() {
-    return this.get('isAttendingRehearsalDinner') == 1 ? "attendButton selected" : "attendButton";
-  }.property('isAttendingRehearsalDinner', 'hasAttendingStateBeenSelected'),
-
-  notAttendingRehearsalDinnerButtonCSSClass: function() {
-    return this.get('isAttendingRehearsalDinner') == 0 ? "attendButton selected" : "attendButton";
-  }.property('isAttendingRehearsalDinner', 'hasAttendingStateBeenSelected'),
-
-  nextButtonText: function() {
-    if (this.get('isAttendingBigDay') == 0 ? true : false) {
-      return "Review RSVP";
-    }
-    return "Next Step";
-  }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
-
-  actions: {
-    attending: function() {
-      this.set('isAttendingBigDay', 1);
-    },
-    notAttending: function() {
-      this.set('isAttendingBigDay', 0);
-    },
-    attendingRehearsalDinner: function() {
-      this.set('isAttendingRehearsalDinner', 1);
-    },
-    notAttendingRehearsalDinner: function() {
-      this.set('isAttendingRehearsalDinner', 0);
-    }
-  }
-});
-
-RSVP.RsvpAttendeesController = RSVP.RsvpBaseController.extend({
-  title: "RSVP Attendees",
-  previousRoute: "rsvp.intro",
-  nextRoute: "rsvp.notes",
-  currentRoute: "rsvp.attendees"
-});
-
 RSVP.RsvpNotesController = RSVP.RsvpBaseController.extend({
   title: "Notes",
-  previousRoute: "rsvp.attendees",
+  previousRoute: "rsvp.index",
   currentRoute: "rsvp.notes",
   nextRoute: "rsvp.wrap-up"
 });
@@ -122,32 +84,6 @@ RSVP.RsvpWrapUpController = RSVP.RsvpBaseController.extend({
   nextRoute: "rsvp.success",
   currentRoute: "rsvp.wrap-up",
 
-  isAttendingBigDayBoolean: function() {
-    return this.get('isAttendingBigDay') == 1;
-  }.property('isAttendingBigDay'),
-
-  isAttendingRehearsalDinnerBoolean: function() {
-    return this.get('isAttendingRehearsalDinner') == 1;
-  }.property('isAttendingRehearsalDinner'),
-
-  numWeddingAttendees: function() {
-    if (this.get('isAttendingBigDay') != 1) {
-      return 0;
-    }
-
-    var contacts = this.get('contacts');
-    return contacts.filterBy('isAttendingBigDay', 1).get('length');
-  }.property('contacts.@each.isAttendingBigDay', 'isAttendingBigDay'),
-
-  numRehearsalDinnerAttendees: function() {
-    if (this.get('isAttendingRehearsalDinner') != 1) {
-      return 0;
-    }
-
-    var contacts = this.get('contacts');
-    return contacts.filterBy('isAttendingRehearsalDinner', 1).get('length');
-  }.property('contacts.@each.isAttendingRehearsalDinner', 'isAttendingRehearsalDinner'),
-
   showWeddingReceptionGuests: function() {
     return this.get('numWeddingAttendees') != 0;
   }.property('numWeddingAttendees'),
@@ -156,30 +92,28 @@ RSVP.RsvpWrapUpController = RSVP.RsvpBaseController.extend({
     return this.get('numRehearsalDinnerAttendees') != 0;
   }.property('numRehearsalDinnerAttendees'),
 
-  contactsAttending: function() {
-    var contacts = this.get('contacts');
-    return contacts.filterBy('isAttendingBigDay', 1);
-  }.property('contacts.@each.isAttendingBigDay', 'isAttendingBigDay'),
-
-  contactsAttendingRehearsalDinner:  function() {
-    var contacts = this.get('contacts');
-    return contacts.filterBy('isAttendingRehearsalDinner', 1);
-  }.property('contacts.@each.isAttendingRehearsalDinner', 'isAttendingRehearsalDinner'),
-
   isAttendingSummaryText: function() {
-    if (this.get('isAttendingBigDay') == 1) {
-      return "will";
+    var textToShow = "";
+    
+    if (this.get('isAttendingBigDay')) {
+      textToShow += this.get('numWeddingAttendees') + " person will";
+    } else {
+      textToShow += " will not";
     }
 
-    return "will not";
+    return textToShow + " be";
   }.property('isAttendingBigDay'),
 
   isAttendingRehearsalDinnerSummaryText: function() {
-    if (this.get('isAttendingRehearsalDinner') == 1) {
-      return "will";
+    var textToShow = "";
+    
+    if (this.get('isAttendingRehearsalDinner')) {
+      textToShow += this.get('numRehearsalDinnerAttendees') + " person will";
+    } else {
+      textToShow += " will not";
     }
 
-    return "will not";
+    return textToShow + " be";
   }.property('isAttendingRehearsalDinner'),
 
   notesForBrideGroomSummaryText: function() {
@@ -219,4 +153,11 @@ RSVP.RsvpIndexController = RSVP.RsvpBaseController.extend({
   title: "RSVP",
   currentRoute: "rsvp.index",
   nextRoute: "rsvp.attendees"
+});
+
+RSVP.RsvpAttendeesController = RSVP.RsvpBaseController.extend({
+  title: "RSVP Attendees",
+  previousRoute: "rsvp.index",
+  nextRoute: "rsvp.notes",
+  currentRoute: "rsvp.attendees"
 });
