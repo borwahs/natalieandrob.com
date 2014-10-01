@@ -16,8 +16,6 @@ var RESERVATION_JSON_TO_DB_SCHEMA_MAP = {
   emailAddress: "email_address",
   reservationNotes: "reservation_notes",
   isInvitedToRehearsalDinner: "is_invited_to_rehearsal_dinner",
-  isAttendingBigDay: "is_attending_big_day",
-  isAttendingRehearsalDinner: "is_attending_rehearsal_dinner",
   dietaryRestrictions: "dietary_restrictions",
   notesForBrideGroom: "notes_for_bride_groom"
 };
@@ -65,10 +63,8 @@ var UPDATE_RESERVATION_SQL = 'UPDATE reservation                        \
                                   reservation_notes = $7,               \
                                   dietary_restrictions = $8,            \
                                   notes_for_bride_groom = $9,           \
-                                  is_attending_big_day = $10,           \
-                                  is_attending_rehearsal_dinner = $11,  \
                                   modified_date = CURRENT_TIMESTAMP     \
-                              WHERE id = $12                            \
+                              WHERE id = $10                            \
                             ';
 var UPDATE_CONTACT_SQL = 'UPDATE contact                          \
                           SET                                     \
@@ -95,12 +91,11 @@ var INSERT_NEW_RESERVATION_SQL = 'INSERT INTO reservation                       
                                        address_City, address_State, address_Zip_Code,             \
                                        rsvp_Code, email_Address, reservation_Notes,               \
                                        dietary_Restrictions, notes_For_Bride_Groom,               \
-                                       is_Invited_To_Rehearsal_Dinner, is_Attending_Big_Day,      \
-                                       is_Attending_Rehearsal_Dinner,                             \
+                                       is_Invited_To_Rehearsal_Dinner,                            \
                                        create_date, modified_date)                                \
                                   VALUES                                                          \
                                        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,             \
-                                        $12, $13, $14, $15, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP  \
+                                        $12, $13, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP  \
                                   ) RETURNING id';
 
 
@@ -163,8 +158,6 @@ db.reservation = {
         reservation.reservationNotes,
         reservation.dietaryRestrictions,
         reservation.notesForBrideGroom,
-        reservation.isAttendingBigDay,
-        reservation.isAttendingRehearsalDinner,
         reservation.id
       ];
 
@@ -203,9 +196,7 @@ db.reservation = {
         reservation.emailAddress,
         reservation.reservationNotes,
         reservation.dietaryRestrictions,
-        reservation.notesForBrideGroom,
-        reservation.isAttendingBigDay,
-        reservation.isAttendingRehearsalDinner
+        reservation.notesForBrideGroom
       ];
 
       return db.executeQuery(client, INSERT_NEW_RESERVATION_SQL, reservationUpdateParams)
