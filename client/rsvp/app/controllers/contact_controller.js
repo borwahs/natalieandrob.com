@@ -1,11 +1,10 @@
 RSVP.ContactController = Ember.ObjectController.extend({
-  attendingBigDayButtonCSSClass: function() {
-    return this.get('isAttendingBigDay') == 1 ? "selected" : "";
+  isAttendingBigDayBool: function() {
+    return (this.get('isAttendingBigDay') == 1);  
   }.property('isAttendingBigDay'),
-
-  attendingRehearsalDinnerButtonCSSClass: function() {
-    console.log( this.get('isAttendingRehearsalDinner') == 1);
-    return this.get('isAttendingRehearsalDinner') == 1 ? "selected" : "";
+  
+  isAttendingRehearsalDinnerBool: function() {
+    return (this.get('isAttendingRehearsalDinner') == 1);  
   }.property('isAttendingRehearsalDinner'),
 
   guestName: function() {

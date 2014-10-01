@@ -16,10 +16,10 @@
           <div class="right attending-buttons">
               <ul>
                 <li>
-                  <input type="button" value="Yes" {{bind-attr class="attendingBigDayButtonCSSClass" }} {{action "setIsAttendingBigDayValue"}} />
+                  <input type="button" value="Yes" {{bind-attr class=isAttendingBigDayBool:selected}} {{action "setIsAttendingBigDayValue"}} />
                 </li>
                 <li>
-                  <input type="button" value="No"  {{bind-attr class="attendingBigDayButtonCSSClass" }} {{action "setNotAttendingBigDayValue"}} />
+                  <input type="button" value="No"  {{bind-attr class=isAttendingBigDayBool::selected}} {{action "setNotAttendingBigDayValue"}} />
                 </li>
             </div>
         </p>
@@ -31,10 +31,10 @@
             <div class="right attending-buttons">
               <ul>
                 <li>
-                  <input type="button" value="Yes" {{bind-attr class="attendingRehearsalDinnerButtonCSSClass" }} {{action "setIsAttendingRehearsalDinnerValue"}} />
+                  <input type="button" value="Yes" {{bind-attr class=isAttendingRehearsalDinnerBool:selected}} {{action "setIsAttendingRehearsalDinnerValue"}} />
                 </li>
                 <li>
-                  <input type="button" value="No" {{bind-attr class="attendingRehearsalDinnerButtonCSSClass" }} {{action "setNotAttendingRehearsalDinnerValue"}} />
+                  <input type="button" value="No" {{bind-attr class=isAttendingRehearsalDinnerBool::selected}} {{action "setNotAttendingRehearsalDinnerValue"}} />
                 </li>
             </div>
           </p>
