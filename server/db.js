@@ -66,7 +66,8 @@ var UPDATE_RESERVATION_SQL = 'UPDATE reservation                        \
                                   dietary_restrictions = $8,            \
                                   notes_for_bride_groom = $9,           \
                                   is_attending_big_day = $10,           \
-                                  is_attending_rehearsal_dinner = $11   \
+                                  is_attending_rehearsal_dinner = $11,  \
+                                  modified_date = CURRENT_TIMESTAMP     \
                               WHERE id = $12                            \
                             ';
 var UPDATE_CONTACT_SQL = 'UPDATE contact                          \
@@ -75,17 +76,20 @@ var UPDATE_CONTACT_SQL = 'UPDATE contact                          \
                               middle_name = $2,                   \
                               last_name = $3,                     \
                               is_attending_big_day = $4,          \
-                              is_attending_rehearsal_dinner = $5  \
+                              is_attending_rehearsal_dinner = $5, \
+                              modified_date = CURRENT_TIMESTAMP   \
                           WHERE id = $6                           \
                         ';
 
 var INSERT_NEW_CONTACT_SQL = 'INSERT INTO contact                                     \
                                 (reservation_id, first_name, middle_name, last_name,  \
                                  is_child, is_attending_big_day,                      \
-                                 is_attending_rehearsal_dinner )                      \
-                                 VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id';
+                                 is_attending_rehearsal_dinner, create_date,          \
+                                 modified_date)                                       \
+                                 VALUES ($1, $2, $3, $4, $5, $6, $7,                  \
+                                     CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING id';
 
-var INSERT_NEW_RESERVATION_SQL = 'INSERT INTO reservation
+var INSERT_NEW_RESERVATION_SQL = 'INSERT INTO reservation                                         \
                                       (reservation_Title, rsvp_Code_Source,                       \
                                        address_Line_One, address_Line_Two,                        \
                                        address_City, address_State, address_Zip_Code,             \
