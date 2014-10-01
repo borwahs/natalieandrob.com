@@ -33,3 +33,4 @@ npm-debug.log
 #ignore guest list
 guestlist.csv
 guestlist.json
+guestlistwithcode.csv
