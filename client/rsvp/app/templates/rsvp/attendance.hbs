@@ -44,7 +44,7 @@
   <div class="unit whole rsvp-navigate">
     <ul>
       <li><input class="submit previous cancel" type="submit" value="Cancel" {{action "previous"}}></input></li>
-      <li><input class="submit next" type="submit" value="Next >" {{ bind-attr class="nextButtonCSSClasses" value="nextButtonText" disabled="disableNextRouteButton" }} {{action "next"}}></input></li>
+      <li><input type="submit" {{ bind-attr class="nextButtonCSSClasses" value="nextButtonText" disabled="disableNextRouteButton" }} {{action "next"}}></input></li>
     </ul>
   </div>
 </div>
