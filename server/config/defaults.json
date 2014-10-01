@@ -5,8 +5,15 @@
     "host": "0.0.0.0",
     "port": 9000
   },
+  "mail": {
+    "fromAddress": "this@this.com",
+    "toAddress": "that@that.com",
+    "provider": "gmail",
+    "providerUserName": "test@test.com",
+    "providerPassword": "somePassWORD"
+  },
   "static": {
-    "serveStatic": true,
+    "serveStatic": false,
     "client" : {
       "path": "./build"
     },

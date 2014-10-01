@@ -1,0 +1,26 @@
+{{#if userIsAttendingEvent}}
+  <div class="grid">
+    <div class="unit half">
+      <p>Do you have any dietary restrictions?</p>
+      {{textarea class="text" rows="3" value=dietaryRestrictions}}
+    </div>
+    <div class="unit half">
+      <p>Anything else you would like to tell us?</p>
+      {{textarea class="text" rows="3" value=notesForBrideGroom}}
+    </div>
+  </div>
+{{else}}
+  <div class="grid">
+    <div class="unit whole">
+      You are not selected to attend the event. Please go to the Attendance screen to change your reservation.
+    </div>
+  </div>
+{{/if}}
+<div class="grid">
+  <div class="unit whole rsvp-navigate">
+    <ul>
+    <li><input class="submit previous" type="submit" value="< Back" {{action "previous"}}></input></li>
+    <li><input class="submit next" type="submit" value="Next >" {{action "next"}}></input></li>
+    </ul>
+  </div>
+</div>

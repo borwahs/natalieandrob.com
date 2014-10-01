@@ -1,0 +1,72 @@
+[
+    {
+        "rsvpCodeSource": "false|test|true",
+        "reservationTitle": "Mr. & Mrs. Robert Shaw",
+        "addressLineOne": "12345 Street One",
+        "addressLineTwo": "Apt 111",
+        "addressCity": "Some City",
+        "addressState": "IN",
+        "addressZipCode": "554433",
+        "rsvpCode": "d18cb7",
+        "emailAddress": "test@test.com",
+        "reservationNotes": "",
+        "dietaryRestrictions": "",
+        "notesForBrideGroom": "",
+        "isInvitedToRehearsalDinner": true,
+        "isAttendingBigDay": 1,
+        "isAttendingRehearsalDinner": 0,
+        "contacts": [
+            {
+                "firstName": "FirstName1",
+                "middleName": "MiddleName1",
+                "lastName": "LastName1",
+                "isChild": false,
+                "isAttendingBigDay": 1,
+                "isAttendingRehearsalDinner": 0
+            },
+            {
+                "firstName": "FirstName2",
+                "middleName": "MiddleName2",
+                "lastName": "LastName2",
+                "isChild": false,
+                "isAttendingBigDay": 1,
+                "isAttendingRehearsalDinner": 0
+            }
+        ]
+    },
+    {
+        "rsvpCodeSource": "test|test|test",
+        "isInvitedToRehearsalDinner": false,
+        "isAttendingBigDay": -1,
+        "isAttendingRehearsalDinner": -1,
+        "reservationTitle": "Mr. & Mrs. Natalie Merz",
+        "addressLineOne": "1 This Way",
+        "addressLineTwo": "",
+        "addressCity": "Firstly",
+        "addressState": "IN",
+        "addressZipCode": "11223",
+        "reservationNotes": "",
+        "dietaryRestrictions": "",
+        "notesForBrideGroom": "",
+        "rsvpCode": "abcde",
+        "emailAddress": "rabcd@rest.com",
+        "contacts": [
+            {
+                "firstName": "Some",
+                "middleName": "Middle",
+                "lastName": "Name",
+                "isChild": false,
+                "isAttendingBigDay": -1,
+                "isAttendingRehearsalDinner": -1
+            },
+            {
+                "firstName": "Fname",
+                "middleName": "Mname",
+                "lastName": "Lname",
+                "isChild": true,
+                "isAttendingBigDay": -1,
+                "isAttendingRehearsalDinner": -1
+            }
+        ]
+    }
+]
