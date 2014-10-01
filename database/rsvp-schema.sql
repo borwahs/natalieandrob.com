@@ -28,5 +28,7 @@ CREATE TABLE IF NOT EXISTS contact (
   last_name                     VARCHAR(255),
   is_child                      BOOLEAN,
   is_attending_big_day          INT NOT NULL,
-  is_attending_rehearsal_dinner INT NOT NULL
+  is_attending_rehearsal_dinner INT NOT NULL,
+  create_date                   TIMESTAMP NOT NULL,
+  modified_date                 TIMESTAMP NOT NULL
 );
