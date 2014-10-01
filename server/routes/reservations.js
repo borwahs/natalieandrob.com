@@ -3,6 +3,7 @@ var Joi = require('joi');
 var DB = require('../db');
 var Hapi = require('hapi');
 var Util = require('util');
+var Config = require('../config');
 var _ = require('../libs/underscore.1.6.0.min');
 var nodemailer = require('nodemailer');
 
@@ -128,12 +129,15 @@ var transporter = nodemailer.createTransport({
 });
 
 function sendEmailWithDetails(rsvpCode, reservationData) {
-  transporter.sendMail({
-      from: Config.mail.fromAddress,
-      to: Config.mail.toAddress,
-      subject: Util.format('Reservation Saved - %s : RSVP Code [%s]', reservationData.reservationTitle, rsvpCode),
-      text: JSON.stringify(reservationData, undefined, 2)
-  });
+  try
+  {
+    transporter.sendMail({
+        from: Config.mail.fromAddress,
+        to: Config.mail.toAddress,
+        subject: Util.format('Reservation Saved - %s : RSVP Code [%s]', reservationData.reservationTitle, rsvpCode),
+        text: JSON.stringify(reservationData, undefined, 2)
+    });
+  } catch (err) {}
 }
 
 exports.retrieveReservation = {
