@@ -1,22 +1,27 @@
 RSVP.IndexController = Ember.Controller.extend({
+  showError: false,
   rsvpCode: null,
-  showInvalidRSVPCodeErrorMessage: false,
 
   reset: function() {
     this.setProperties({
-      rsvpCode: null
+      rsvpCode: "",
+      showError: false
     });
   },
 
   actions: {
     submit: function() {
-      var rsvpCode = this.get('rsvpCode');
-
-      this.transitionTo('rsvp', rsvpCode).then(function() {
-        this.set('showInvalidRSVPCodeErrorMessage', false);
-      }, function() {
-        this.set('showInvalidRSVPCodeErrorMessage', true);
-      });
+      var that = this;
+      
+      var rsvpCode = this.get("rsvpCode");
+      RSVP.Reservation.getReservation(rsvpCode)
+        .then(function(reservation) {
+          that.reset();
+          that.transitionTo("rsvp", rsvpCode);
+        }, function(err) {
+          that.set("showError", true);
+          that.set("rsvpCode", null);
+        });
     }
   }
 });
