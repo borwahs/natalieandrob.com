@@ -30,7 +30,7 @@ fs.readFile(fileName, function (err, data) {
 
     console.log(reservation);
 
-    reserveArray.push(reservation.reservationTitle);
+    reserveArray.push(reservation.addressTitle);
     reserveArray.push(reservation.rsvpCodeSource);
 
     reserveArray.push(reservation.addressLineOne);

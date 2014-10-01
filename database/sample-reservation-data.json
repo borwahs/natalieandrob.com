@@ -1,7 +1,7 @@
 [
     {
         "rsvpCodeSource": "false|test|true",
-        "reservationTitle": "Mr. & Mrs. Robert Shaw",
+        "addressTitle": "Mr. & Mrs. Robert Shaw",
         "addressLineOne": "12345 Street One",
         "addressLineTwo": "Apt 111",
         "addressCity": "Some City",
@@ -39,7 +39,7 @@
         "isInvitedToRehearsalDinner": false,
         "isAttendingBigDay": -1,
         "isAttendingRehearsalDinner": -1,
-        "reservationTitle": "Mr. & Mrs. Natalie Merz",
+        "addressTitle": "Mr. & Mrs. Natalie Merz",
         "addressLineOne": "1 This Way",
         "addressLineTwo": "",
         "addressCity": "Firstly",
