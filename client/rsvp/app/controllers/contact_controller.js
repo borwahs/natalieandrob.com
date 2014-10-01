@@ -1,10 +1,11 @@
 RSVP.ContactController = Ember.ObjectController.extend({
-  attendingButtonCSSClass: function() {
-    return this.get('isAttendingBigDay') == 1 ? "attend-button selected" : "attend-button";
+  attendingBigDayButtonCSSClass: function() {
+    return this.get('isAttendingBigDay') == 1 ? "selected" : "";
   }.property('isAttendingBigDay'),
 
   attendingRehearsalDinnerButtonCSSClass: function() {
-    return this.get('isAttendingRehearsalDinner') == 1 ? "attend-button selected" : "attend-button";
+    console.log( this.get('isAttendingRehearsalDinner') == 1);
+    return this.get('isAttendingRehearsalDinner') == 1 ? "selected" : "";
   }.property('isAttendingRehearsalDinner'),
 
   guestName: function() {
@@ -30,20 +31,26 @@ RSVP.ContactController = Ember.ObjectController.extend({
     return this.get('isAttendingRehearsalDinner') == 1 ? "Yes" : "No";
   }.property('isAttendingRehearsalDinner'),
 
+  showNameEditControls: function() {
+    return this.get('isAttendingBigDay') == 1;
+  }.property('isAttendingBigDay'),
+
   disableControlsIfNotAttendingBigDay: function() {
     return this.get('isAttendingBigDay') != 1;
   }.property('isAttendingBigDay'),
 
-  disableControlsIfNotAttendingRehearsalDinner: function() {
-  return this.get('isAttendingRehearsalDinner') == 1;
-  }.property('isAttendingRehearsalDinner'),
-
   actions: {
-    setIsAttendingValue: function() {
-      this.set('isAttendingBigDay', this.get('isAttendingBigDay') == 1 ? 0 : 1);
+    setIsAttendingBigDayValue: function() {
+      this.set('isAttendingBigDay', 1);
     },
     setIsAttendingRehearsalDinnerValue: function() {
-      this.set('isAttendingRehearsalDinner', this.get('isAttendingRehearsalDinner') == 1 ? 0 : 1);
+      this.set('isAttendingRehearsalDinner', 1);
+    },
+    setNotAttendingBigDayValue: function() {
+      this.set('isAttendingBigDay', 0);
+    },
+    setNotAttendingRehearsalDinnerValue: function() {
+      this.set('isAttendingRehearsalDinner', 0);
     }
   }
 });

@@ -13,36 +13,51 @@
           <div class="left">
             Will be attending Wedding Reception?
           </div>
-          <div class="right">
-            <input type="button" {{bind-attr value="isAttendingButtonText" class="attendingButtonCSSClass" }} {{action "setIsAttendingValue"}} />
-          </div>
+          <div class="right attending-buttons">
+              <ul>
+                <li>
+                  <input type="button" value="Yes" {{bind-attr class="attendingBigDayButtonCSSClass" }} {{action "setIsAttendingBigDayValue"}} />
+                </li>
+                <li>
+                  <input type="button" value="No"  {{bind-attr class="attendingBigDayButtonCSSClass" }} {{action "setNotAttendingBigDayValue"}} />
+                </li>
+            </div>
         </p>
         {{#if parentController.isInvitedToRehearsalDinner}}
           <p>
             <div class="left">
             Will be attending Rehearsal Dinner?
             </div>
-            <div class="right">
-            <input type="button" {{bind-attr value="isAttendingRehearsalDinnerButtonText" disabled="disableControlsIfNotAttendingBigDay" class="attendingRehearsalDinnerButtonCSSClass" }} {{action "setIsAttendingRehearsalDinnerValue"}} />
+            <div class="right attending-buttons">
+              <ul>
+                <li>
+                  <input type="button" value="Yes" {{bind-attr class="attendingRehearsalDinnerButtonCSSClass" }} {{action "setIsAttendingRehearsalDinnerValue"}} />
+                </li>
+                <li>
+                  <input type="button" value="No" {{bind-attr class="attendingRehearsalDinnerButtonCSSClass" }} {{action "setNotAttendingRehearsalDinnerValue"}} />
+                </li>
             </div>
           </p>
         {{/if}}
-        <p>
-          <div class="left">
-            First Name:
-          </div>
-          <div class="right">
-            {{input type="text" class="text-box" value=firstName disabled=disableControlsIfNotAttendingBigDay size="25"}}
-          </div>
-        </p>
-        <p>
-          <div class="left">
-            Last Name:
-          </div>
-          <div class="right">
-            {{input type="text" class="text-box" value=lastName disabled=disableControlsIfNotAttendingBigDay size="25"}}
-          </div>
-        </p>
+        
+        {{#if showNameEditControls}}
+          <p>
+            <div class="left">
+              First Name:
+            </div>
+            <div class="right">
+              {{input type="text" class="text-box" value=firstName disabled=disableControlsIfNotAttendingBigDay size="25"}}
+            </div>
+          </p>
+          <p>
+            <div class="left">
+              Last Name:
+            </div>
+            <div class="right">
+              {{input type="text" class="text-box" value=lastName disabled=disableControlsIfNotAttendingBigDay size="25"}}
+            </div>
+          </p>
+        {{/if}}
       </div>
     </div>
   {{/each}}
