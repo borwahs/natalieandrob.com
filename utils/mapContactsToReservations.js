@@ -40,8 +40,6 @@ fs.readFile(filePath, "utf-8", function (err, data) {
     delete reservation["addressZipCode"];
     delete reservation["id"];
     delete reservation["isInvitedToRehearsalDinner"];
-    delete reservation["isAttendingBigDay"];
-    delete reservation["isAttendingRehearsalDinner"];
     delete reservation["addressArray"];
 
     return reservation;
@@ -72,8 +70,6 @@ function mapContactInfo(addressJSON) {
 
     reservation.id = i++;
     reservation.isInvitedToRehearsalDinner = false;
-    reservation.isAttendingBigDay = -1;
-    reservation.isAttendingRehearsalDinner = -1;
 
 
 

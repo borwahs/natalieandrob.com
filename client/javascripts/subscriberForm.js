@@ -11,7 +11,6 @@ function initSubscribeForm()
     var data = $(this).serialize();
     var xhr = $.post("/subscribers", data);
     xhr.done(function(response) {
-      console.log("Subscribed!", response);
       subscribeFormEl.fadeOut("slow", function() {
         $(this).hide();
         subscribeFormSuccessEl.fadeIn("slow");

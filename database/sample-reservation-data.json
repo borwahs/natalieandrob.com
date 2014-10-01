@@ -13,8 +13,6 @@
         "dietaryRestrictions": "",
         "notesForBrideGroom": "",
         "isInvitedToRehearsalDinner": true,
-        "isAttendingBigDay": 1,
-        "isAttendingRehearsalDinner": 0,
         "contacts": [
             {
                 "firstName": "FirstName1",
@@ -37,8 +35,6 @@
     {
         "rsvpCodeSource": "test|test|test",
         "isInvitedToRehearsalDinner": false,
-        "isAttendingBigDay": -1,
-        "isAttendingRehearsalDinner": -1,
         "addressTitle": "Mr. & Mrs. Natalie Merz",
         "addressLineOne": "1 This Way",
         "addressLineTwo": "",

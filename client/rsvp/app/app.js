@@ -6,7 +6,6 @@ require("client/javascripts/vendor/ember.1.7.0.min");
 require("client/dependencies/compiled/templates");
 
 RSVP = Ember.Application.create({
-  LOG_TRANSITIONS: true,
   rootElement: "#app",
   rootURL: '/rsvp/'
 });

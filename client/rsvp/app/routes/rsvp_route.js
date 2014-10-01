@@ -43,19 +43,10 @@ RSVP.CurrentRsvp = RSVP.WorkingRsvpController.create();
 
 RSVP.RsvpRoute = Ember.Route.extend({
   model: function(params) {
-    console.log("LOADING MODEL", params);
     return RSVP.Reservation.getReservation(params.rsvp_code).then(function(model) {
-      console.log("GOT MODEL FROM SERVER");
       RSVP.CurrentRsvp.set("workingRsvp", model);
-      console.log("SET MODEL ON CLIENTp");
       return model;
     });
-  }
-});
-
-RSVP.RsvpIndexRoute = Ember.Route.extend({
-  beforeModel: function() {
-    this.transitionTo("rsvp.attendance");
   }
 });
 
@@ -74,7 +65,7 @@ RSVP.RsvpBaseRoute = Ember.Route.extend({
 });
 
 RSVP.RsvpAttendanceRoute = RSVP.RsvpBaseRoute.extend();
-RSVP.RsvpAttendeesRoute = RSVP.RsvpBaseRoute.extend();
 RSVP.RsvpNotesRoute = RSVP.RsvpBaseRoute.extend();
 RSVP.RsvpWrapUpRoute = RSVP.RsvpBaseRoute.extend();
 RSVP.RsvpSuccessRoute = RSVP.RsvpBaseRoute.extend();
+RSVP.RsvpIndexRoute = RSVP.RsvpBaseRoute.extend();
