@@ -20,12 +20,11 @@ var INSERT_NEW_RESERVATION_SQL = 'INSERT INTO reservation                       
                                        address_City, address_State, address_Zip_Code,             \
                                        rsvp_Code, email_Address, reservation_Notes,               \
                                        dietary_Restrictions, notes_For_Bride_Groom,               \
-                                       is_Invited_To_Rehearsal_Dinner, is_Attending_Big_Day,      \
-                                       is_Attending_Rehearsal_Dinner,                             \
+                                       is_Invited_To_Rehearsal_Dinner,                            \
                                        create_date, modified_date)                                \
                                   VALUES                                                          \
                                        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,             \
-                                        $12, $13, $14, $15, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP  \
+                                        $12, $13, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP  \
                                   ) RETURNING id';
 
 
@@ -92,8 +91,6 @@ function convertReservationJsonToInsertParams(reservation) {
   reserveArray.push(reservation.notesForBrideGroom);
 
   reserveArray.push(reservation.isInvitedToRehearsalDinner);
-  reserveArray.push(reservation.isAttendingBigDay);
-  reserveArray.push(reservation.isAttendingRehearsalDinner);
 
   return reserveArray;
 }

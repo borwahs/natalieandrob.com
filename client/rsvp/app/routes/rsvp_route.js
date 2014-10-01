@@ -53,12 +53,6 @@ RSVP.RsvpRoute = Ember.Route.extend({
   }
 });
 
-RSVP.RsvpIndexRoute = Ember.Route.extend({
-  beforeModel: function() {
-    this.transitionTo("rsvp.attendance");
-  }
-});
-
 RSVP.RsvpBaseRoute = Ember.Route.extend({
   model: function(params) {
     // TODO: This isn't really needed. Already have access to this
@@ -74,7 +68,7 @@ RSVP.RsvpBaseRoute = Ember.Route.extend({
 });
 
 RSVP.RsvpAttendanceRoute = RSVP.RsvpBaseRoute.extend();
-RSVP.RsvpAttendeesRoute = RSVP.RsvpBaseRoute.extend();
 RSVP.RsvpNotesRoute = RSVP.RsvpBaseRoute.extend();
 RSVP.RsvpWrapUpRoute = RSVP.RsvpBaseRoute.extend();
 RSVP.RsvpSuccessRoute = RSVP.RsvpBaseRoute.extend();
+RSVP.RsvpIndexRoute = RSVP.RsvpBaseRoute.extend();

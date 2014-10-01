@@ -1,33 +1,46 @@
 <div class="attendees">
-  {{#if userIsAttendingEvent}}
-    <div class="grid">
-      <div class="unit whole separator">
-        <p>Please review the following guest names and select whether they will be attending or not.</p>
-      </div>
+  <div class="grid">
+    <div class="unit whole separator">
+      <p>Please review the following guest names and select whether they will be attending or not.</p>
     </div>
+  </div>
 
-    {{#each contacts itemController="contact"}}
-      <div class="grid">
-        <div class="unit whole summary-section">
-          <h5 class="sub-title"><span>{{guestName}}</span></h3>
+  {{#each contacts itemController="contact"}}
+    <div class="grid">
+      <div class="unit whole summary-section">
+        <h5 class="sub-title"><span>{{guestName}}</span></h3>
+        <p>
+          <div class="left">
+            Will be attending Wedding Reception?
+          </div>
+          <div class="right attending-buttons">
+              <ul>
+                <li>
+                  <input type="button" value="Yes" {{bind-attr class="attendingBigDayButtonCSSClass" }} {{action "setIsAttendingBigDayValue"}} />
+                </li>
+                <li>
+                  <input type="button" value="No"  {{bind-attr class="attendingBigDayButtonCSSClass" }} {{action "setNotAttendingBigDayValue"}} />
+                </li>
+            </div>
+        </p>
+        {{#if parentController.isInvitedToRehearsalDinner}}
           <p>
             <div class="left">
-              Will be attending Wedding Reception?
+            Will be attending Rehearsal Dinner?
             </div>
-            <div class="right">
-              <input type="button" {{bind-attr value="isAttendingButtonText" class="attendingButtonCSSClass" }} {{action "setIsAttendingValue"}} />
+            <div class="right attending-buttons">
+              <ul>
+                <li>
+                  <input type="button" value="Yes" {{bind-attr class="attendingRehearsalDinnerButtonCSSClass" }} {{action "setIsAttendingRehearsalDinnerValue"}} />
+                </li>
+                <li>
+                  <input type="button" value="No" {{bind-attr class="attendingRehearsalDinnerButtonCSSClass" }} {{action "setNotAttendingRehearsalDinnerValue"}} />
+                </li>
             </div>
           </p>
-          {{#if parentController.isInvitedToRehearsalDinner}}
-            <p>
-              <div class="left">
-              Will be attending Rehearsal Dinner?
-              </div>
-              <div class="right">
-              <input type="button" {{bind-attr value="isAttendingRehearsalDinnerButtonText" disabled="disableControlsIfNotAttendingBigDay" class="attendingRehearsalDinnerButtonCSSClass" }} {{action "setIsAttendingRehearsalDinnerValue"}} />
-              </div>
-            </p>
-          {{/if}}
+        {{/if}}
+        
+        {{#if showNameEditControls}}
           <p>
             <div class="left">
               First Name:
@@ -44,16 +57,11 @@
               {{input type="text" class="text-box" value=lastName disabled=disableControlsIfNotAttendingBigDay size="25"}}
             </div>
           </p>
-        </div>
-      </div>
-    {{/each}}
-  {{else}}
-    <div class="grid">
-      <div class="unit whole">
-        You are not selected to attend the event. Please go to the Attendance screen to change your reservation.
+        {{/if}}
       </div>
     </div>
-  {{/if}}
+  {{/each}}
+
   <div class="grid">
     <div class="unit whole rsvp-navigate">
       <ul>
