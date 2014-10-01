@@ -75,6 +75,14 @@ RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
     return this.get('isAttendingBigDay') == 0 ? "attendButton selected" : "attendButton";
   }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
 
+  attendingRehearsalDinnerButtonCSSClass: function() {
+    return this.get('isAttendingRehearsalDinner') == 1 ? "attendButton selected" : "attendButton";
+  }.property('isAttendingRehearsalDinner', 'hasAttendingStateBeenSelected'),
+
+  notAttendingRehearsalDinnerButtonCSSClass: function() {
+    return this.get('isAttendingRehearsalDinner') == 0 ? "attendButton selected" : "attendButton";
+  }.property('isAttendingRehearsalDinner', 'hasAttendingStateBeenSelected'),
+
   nextButtonText: function() {
     if (this.get('isAttendingBigDay') == 0 ? true : false) {
       return "Review RSVP";
@@ -88,6 +96,12 @@ RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
     },
     notAttending: function() {
       this.set('isAttendingBigDay', 0);
+    },
+    attendingRehearsalDinner: function() {
+      this.set('isAttendingRehearsalDinner', 1);
+    },
+    notAttendingRehearsalDinner: function() {
+      this.set('isAttendingRehearsalDinner', 0);
     }
   }
 });

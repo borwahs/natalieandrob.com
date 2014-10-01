@@ -1,4 +1,21 @@
 <div class="grid">
+  <div class="unit whole">
+    <p>
+      Dear {{reservationTitle}},
+    </p>
+
+    <p>
+      Please let us know if you are able to attend our wedding and if so, who will be coming. The following screens will help you RSVP with the information we need to ensure we all have a great weekend. If you have any questions or issues, please reach out to us at the following email address: <a href="mailto:rob.natalie.wedding@gmail.com">rob.natalie.wedding@gmail.com</a>.
+    </p>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="unit whole">
+    <h5 class="sub-title rsvp">Wedding Reception</h3>
+    <p>Cocktail hour starts at 5:00pm on November 8th, 2014 with dinner and dancing to follow!</p>
+  </div>
+
   <div class="unit half">
     <input type="button" value="No, I Cannot Attend" {{ bind-attr class="notAttendingButtonCSSClass" }} {{ action "notAttending" }}></input>
   </div>
@@ -6,6 +23,24 @@
     <input type="button" value="Yes, I Am Attending" {{ bind-attr class="attendingButtonCSSClass" }} {{ action "attending" }}></input>
   </div>
 </div>
+
+
+{{#if isInvitedToRehearsalDinner}}
+  <div class="grid">
+    <div class="unit whole">
+      <h5 class="sub-title rsvp">Rehearsal Dinner</h3>
+      <p>We would love to have you join us for the Rehearsal Dinner on Friday. It will begin at 7:00pm.</p>
+    </div>
+  
+    <div class="unit half">
+      <input type="button" value="No, I Cannot Attend" {{ bind-attr class="notAttendingRehearsalDinnerButtonCSSClass" }} {{ action "notAttendingRehearsalDinner" }}></input>
+    </div>
+    <div class="unit half">
+      <input type="button" value="Yes, I Am Attending" {{ bind-attr class="attendingRehearsalDinnerButtonCSSClass" }} {{ action "attendingRehearsalDinner" }}></input>
+    </div>
+  </div>
+{{/if}}
+
 <div class="grid">
   <div class="unit whole rsvp-navigate">
     <ul>
