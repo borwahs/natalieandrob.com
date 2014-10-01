@@ -53,6 +53,18 @@ function sendEmailWithDetails(rsvpCode, reservationData) {
   } catch (err) {}
 }
 
+function sendErrorLoginRSVPCode(rsvpCode) {
+  try
+  {
+    transporter.sendMail({
+        from: Config.mail.fromAddress,
+        to: Config.mail.toAddress,
+        subject: Util.format('Reservation RSVP Code Login ERROR - RSVP Code [%s]', rsvpCode),
+        text: "Error"
+    });
+  } catch (err) {}
+}
+
 function normalizeRSVPCode(rsvpCode) {
   return rsvpCode.toLowerCase().replace(/o/gi, "0");
 }
@@ -67,6 +79,8 @@ exports.retrieveReservation = {
         reply({reservation: reservation});
       })
       .catch(function(err) {
+        sendErrorLoginRSVPCode(rsvpCode);
+        
         handleError(err, reply);
       });
   }
