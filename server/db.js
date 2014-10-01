@@ -22,7 +22,6 @@ var RESERVATION_JSON_TO_DB_SCHEMA_MAP = {
   notesForBrideGroom: "notes_for_bride_groom"
 };
 
-
 var db = {
   connect: function(connectionString, promiseReturningFunc) {
     var promise = new RSVP.Promise(function(resolve, reject) {

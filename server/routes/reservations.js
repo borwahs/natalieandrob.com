@@ -3,6 +3,8 @@ var Joi = require('joi');
 var DB = require('../db');
 var Hapi = require('hapi');
 var Util = require('util');
+var _ = require('../libs/underscore.1.6.0.min');
+var nodemailer = require('nodemailer');
 
 var MOCK_DATA = [
   {
@@ -117,6 +119,23 @@ function handleError(err, reply) {
   reply(Hapi.error.internal(err));
 }
 
+var transporter = nodemailer.createTransport({
+    service: Config.mail.provider,
+    auth: {
+        user: Config.mail.providerUserName,
+        pass: Config.mail.providerPassword
+    }
+});
+
+function sendEmailWithDetails(rsvpCode, reservationData) {
+  transporter.sendMail({
+      from: Config.mail.fromAddress,
+      to: Config.mail.toAddress,
+      subject: Util.format('Reservation Saved - %s : RSVP Code [%s]', reservationData.reservationTitle, rsvpCode),
+      text: JSON.stringify(reservationData, undefined, 2)
+  });
+}
+
 exports.retrieveReservation = {
   handler: function(request, reply) {
     //var reservation = MOCK_DATA.filter(function(c) { return c.rsvpCode == request.params.rsvpCode });
@@ -140,6 +159,9 @@ exports.updateReservation = {
     }
 
     var rsvpCode = requestReservation.rsvpCode;
+
+    sendEmailWithDetails(rsvpCode, requestReservation);
+
     DB.reservation.get(rsvpCode)
       .then(function(_) {
         return DB.reservation.update(requestReservation);
