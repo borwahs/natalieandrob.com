@@ -123,6 +123,7 @@ RSVP.RsvpNotesController = RSVP.RsvpBaseController.extend({
 RSVP.RsvpWrapUpController = RSVP.RsvpBaseController.extend({
   title: "Wrap-Up",
   previousRoute: "rsvp.notes",
+  nextRoute: "rsvp.success",
   currentRoute: "rsvp.wrap-up",
 
   numWeddingAttendees: function() {
@@ -188,4 +189,16 @@ RSVP.RsvpWrapUpController = RSVP.RsvpBaseController.extend({
 
     return "No dietary restrictions were noted.";
   }.property('dietaryRestrictions')
+});
+
+RSVP.RsvpSuccessController = RSVP.RsvpBaseController.extend({
+  title: "RSVP Saved!",
+
+  thankYouText: function() {
+    if (this.get('isAttendingBigDay') == 1) {
+      return "We are looking forward to celebrating our special day with you. See you November 8th!";
+    }
+
+    return "We will miss you on November 8th but hope we can catch up soon!"
+  }.property('isAttendingBigDay')
 });

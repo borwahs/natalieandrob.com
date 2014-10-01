@@ -7,5 +7,6 @@ RSVP.Router.map(function() {
     this.route('attendees');
     this.route('notes');
     this.route('wrap-up');
+    this.route('success');
   });
 });
