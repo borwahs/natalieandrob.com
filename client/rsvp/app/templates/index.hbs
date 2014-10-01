@@ -6,6 +6,11 @@
     <div class="unit whole">
       <p>To get started, enter the code found on your invitation (<a href="#">where's my code?</a>)</p>
     </div>
+    {{#if showInvalidRSVPCodeErrorMessage}}
+    <div class="unit whole">
+      <p class="error-msg">Uh oh! The code entered does not match a valid RSVP code. Please try again or contact us!</p>
+    </div>
+    {{/if}}
   </div>
 
   <div class="grid">
