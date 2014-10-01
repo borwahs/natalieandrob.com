@@ -108,7 +108,7 @@ RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
 
 RSVP.RsvpAttendeesController = RSVP.RsvpBaseController.extend({
   title: "RSVP Attendees",
-  previousRoute: "rsvp.attendance",
+  previousRoute: "rsvp.intro",
   nextRoute: "rsvp.notes",
   currentRoute: "rsvp.attendees"
 });
@@ -217,4 +217,10 @@ RSVP.RsvpSuccessController = RSVP.RsvpBaseController.extend({
 
     return "We will miss you on November 8th but hope we can catch up soon!"
   }.property('isAttendingBigDay')
+});
+
+RSVP.RsvpIndexController = RSVP.RsvpBaseController.extend({
+  title: "RSVP",
+  currentRoute: "rsvp.index",
+  nextRoute: "rsvp.attendees"
 });
