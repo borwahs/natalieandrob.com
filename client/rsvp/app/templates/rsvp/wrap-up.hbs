@@ -13,17 +13,24 @@
       <p>You have selected that you <b>{{isAttendingSummaryText}}</b> be attending.</p>
     </div>
 
-    <div class="summary-section">
-      <h5 class="sub-title"><span>Guests</span></h3>
-      <p>The following people will be attending the reception:
-        <br />
-        <ul>
-        {{#each contactsAttending}}
-          <li>{{firstName}} {{lastName}}</li>
-        {{/each}}
-        </ul>
-      </p>
-    </div>
+    {{#if isAttendingBigDayBoolean}}
+      <div class="summary-section">
+        <h5 class="sub-title"><span>Guests</span></h3>
+        <p>
+          {{#if showWeddingReceptionGuests}}
+            The following people will be attending the reception:
+            <br />
+            <ul>
+            {{#each contactsAttending}}
+              <li>{{firstName}} {{lastName}}</li>
+            {{/each}}
+            </ul>
+          {{else}}
+            You did not select any guests to attend the Wedding Reception.
+          {{/if}}
+        </p>
+      </div>
+    {{/if}}
 
     {{#if isInvitedToRehearsalDinner}}
       <div class="summary-section">
@@ -31,17 +38,24 @@
         <p>You have selected that you <b>{{isAttendingRehearsalDinnerSummaryText}}</b> be attending the Rehearsal Dinner.</p>
       </div>
 
-      <div class="summary-section">
-        <h5 class="sub-title"><span>Rehearsal Dinner Guests</span></h3>
-        <p>The following people will be attending the rehearsal dinner:
-          <br />
-          <ul>
-          {{#each contactsAttendingRehearsalDinner}}
-            <li>{{firstName}} {{lastName}}</li>
-          {{/each}}
-          </ul>
-        </p>
-      </div>
+      {{#if isAttendingRehearsalDinnerBoolean}}
+        <div class="summary-section">
+          <h5 class="sub-title"><span>Rehearsal Dinner Guests</span></h3>
+          <p>
+            {{#if showRehearsalDinnerGuests}}
+              The following people will be attending the rehearsal dinner:
+              <br />
+              <ul>
+              {{#each contactsAttendingRehearsalDinner}}
+                <li>{{firstName}} {{lastName}}</li>
+              {{/each}}
+              </ul>
+            {{else}}
+              You did not select any guests to attend the Rehearsal Dinner.
+            {{/if}}
+          </p>
+        </div>
+      {{/if}}
     {{/if}}
 
     <div class="summary-section">

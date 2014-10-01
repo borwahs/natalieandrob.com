@@ -126,6 +126,14 @@ RSVP.RsvpWrapUpController = RSVP.RsvpBaseController.extend({
   nextRoute: "rsvp.success",
   currentRoute: "rsvp.wrap-up",
 
+  isAttendingBigDayBoolean: function() {
+    return this.get('isAttendingBigDay') == 1;
+  }.property('isAttendingBigDay'),
+
+  isAttendingRehearsalDinnerBoolean: function() {
+    return this.get('isAttendingRehearsalDinner') == 1;
+  }.property('isAttendingRehearsalDinner'),
+
   numWeddingAttendees: function() {
     if (this.get('isAttendingBigDay') != 1) {
       return 0;
@@ -143,6 +151,14 @@ RSVP.RsvpWrapUpController = RSVP.RsvpBaseController.extend({
     var contacts = this.get('contacts');
     return contacts.filterBy('isAttendingRehearsalDinner', 1).get('length');
   }.property('contacts.@each.isAttendingRehearsalDinner', 'isAttendingRehearsalDinner'),
+
+  showWeddingReceptionGuests: function() {
+    return this.get('numWeddingAttendees') != 0;
+  }.property('numWeddingAttendees'),
+
+  showRehearsalDinnerGuests: function() {
+    return this.get('numRehearsalDinnerAttendees') != 0;
+  }.property('numRehearsalDinnerAttendees'),
 
   contactsAttending: function() {
     var contacts = this.get('contacts');
