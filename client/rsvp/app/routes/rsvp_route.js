@@ -43,11 +43,8 @@ RSVP.CurrentRsvp = RSVP.WorkingRsvpController.create();
 
 RSVP.RsvpRoute = Ember.Route.extend({
   model: function(params) {
-    console.log("LOADING MODEL", params);
     return RSVP.Reservation.getReservation(params.rsvp_code).then(function(model) {
-      console.log("GOT MODEL FROM SERVER");
       RSVP.CurrentRsvp.set("workingRsvp", model);
-      console.log("SET MODEL ON CLIENTp");
       return model;
     });
   }
