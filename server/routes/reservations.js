@@ -140,10 +140,16 @@ function sendEmailWithDetails(rsvpCode, reservationData) {
   } catch (err) {}
 }
 
+function normalizeRSVPCode(rsvpCode) {
+  return rsvpCode.toLowerCase().replace(/o/gi, "0");
+}
+
 exports.retrieveReservation = {
   handler: function(request, reply) {
-    //var reservation = MOCK_DATA.filter(function(c) { return c.rsvpCode == request.params.rsvpCode });
-    DB.reservation.get(request.params.rsvpCode)
+
+    var rsvpCode = normalizeRSVPCode(request.params.rsvpCode);
+
+    DB.reservation.get(rsvpCode)
       .then(function(reservation) {
         reply({reservation: reservation});
       })
@@ -157,12 +163,14 @@ exports.updateReservation = {
   handler: function(request, reply) {
     var requestReservation = request.payload.reservation;
 
+
+
     if (!requestReservation || !requestReservation.rsvpCode) {
       reply(Hapi.error.badRequest("Invalid request"));
       return;
     }
 
-    var rsvpCode = requestReservation.rsvpCode;
+    var rsvpCode = normalizeRSVPCode(requestReservation.rsvpCode);
 
     sendEmailWithDetails(rsvpCode, requestReservation);
 
