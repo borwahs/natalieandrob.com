@@ -114,12 +114,36 @@ h5.sub-title {
   font-weight: 400;
 }
 
-.wrap-up h5.sub-title {
+.wrap-up h5.sub-title, .attendees h5.sub-title {
   font-weight: 700;
 }
 
-.wrap-up h5.sub-title span {
+.wrap-up h5.sub-title span, .attendees h5.sub-title span {
   border-bottom: 1px dotted #000;
+}
+
+.attendees .left, .attendees .right {
+  width: 45%;
+  display: inline-block;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.attendees .attend-button {
+  border: 0;
+  width: 100%;
+  padding: 5px 5px;
+  border: 3px #ababab solid;
+  background: #fff;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
+.attendees .selected {
+  border: 3px @red-heart-color solid;
+  background: @red-heart-color;
+  color: #fff;
 }
 
 h5.rsvp {
@@ -131,7 +155,7 @@ h5.rsvp {
   margin-left: 35px;
 }
 
-.wrap-up .summary-section {
+.summary-section {
   margin-top: 30px;
 }
 
@@ -464,6 +488,18 @@ footer .small-icon {
   }
 
 }
+
+
+input.text-box {
+  border: 0;
+  width: 100%;
+  padding: 5px 5px;
+  border: 3px #ababab solid;
+  background: #fff;
+  color: black;
+  font-weight: bold;
+}
+
 
 input.attendButton {
   border: 0;
