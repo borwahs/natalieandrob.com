@@ -79,6 +79,27 @@ var UPDATE_CONTACT_SQL = 'UPDATE contact                          \
                           WHERE id = $6                           \
                         ';
 
+var INSERT_NEW_CONTACT_SQL = 'INSERT INTO contact                                     \
+                                (reservation_id, first_name, middle_name, last_name,  \
+                                 is_child, is_attending_big_day,                      \
+                                 is_attending_rehearsal_dinner )                      \
+                                 VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id';
+
+var INSERT_NEW_RESERVATION_SQL = 'INSERT INTO reservation
+                                      (reservation_Title, rsvp_Code_Source,                       \
+                                       address_Line_One, address_Line_Two,                        \
+                                       address_City, address_State, address_Zip_Code,             \
+                                       rsvp_Code, email_Address, reservation_Notes,               \
+                                       dietary_Restrictions, notes_For_Bride_Groom,               \
+                                       is_Invited_To_Rehearsal_Dinner, is_Attending_Big_Day,      \
+                                       is_Attending_Rehearsal_Dinner,                             \
+                                       create_date, modified_date)                                \
+                                  VALUES                                                          \
+                                       ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,             \
+                                        $12, $13, $14, $15, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP  \
+                                  ) RETURNING id';
+
+
 db.reservation = {
   get: function(code) {
     return db.connect(DEFAULT_CONNECTION_STRING, function(client) {
@@ -162,7 +183,48 @@ db.reservation = {
                   }));
                 });
     });
+  },
+
+  insert: function(reservation) {
+    return db.connect(DEFAULT_CONNECTION_STRING, function(client) {
+      var reservationUpdateParams = [
+        reservation.addressTitle,
+        reservation.rsvpCodeSource,
+        reservation.addressLineOne,
+        reservation.addressLineTwo,
+        reservation.addressCity,
+        reservation.addressState,
+        reservation.addressZipCode,
+        reservation.rsvpCode,
+        reservation.emailAddress,
+        reservation.reservationNotes,
+        reservation.dietaryRestrictions,
+        reservation.notesForBrideGroom,
+        reservation.isAttendingBigDay,
+        reservation.isAttendingRehearsalDinner
+      ];
+
+      return db.executeQuery(client, INSERT_NEW_RESERVATION_SQL, reservationUpdateParams)
+                .then(function() {
+                  return reservation.contacts.map(function(contact) {
+                    return [
+                      contact.firstName,
+                      contact.middleName,
+                      contact.lastName,
+                      contact.isAttendingBigDay,
+                      contact.isAttendingRehearsalDinner,
+                      contact.id
+                    ];
+                  });
+                })
+                .then(function(contacts) {
+                  return RSVP.all(contacts.map(function(contact) {
+                      return db.executeQuery(client, INSERT_NEW_CONTACT_SQL, contact);
+                  }));
+                });
+    });
   }
+
 }
 
 module.exports = db;
