@@ -1,32 +1,4 @@
 RSVP.RsvpController = Ember.ObjectController.extend({
-  shouldDisableContactBigDayCheckboxes: function() {
-    return !this.get('isAttendingBigDay');
-  }.property('isAttendingBigDay'),
-
-  shouldDisableContactRehearsalDinnerCheckboxes: function() {
-    return !this.get('isAttendingRehearsalDinner');
-  }.property('isAttendingRehearsalDinner'),
-
-  numWeddingAttendees: function() {
-    if (!this.get('isAttendingBigDay'))
-    {
-      return 0;
-    }
-
-    var contacts = this.get('contacts');
-    return contacts.filterBy('isAttendingBigDay', true).get('length');
-  }.property('contacts.@each.isAttendingBigDay', 'isAttendingBigDay'),
-
-  numRehearsalDinnerAttendees: function() {
-    if (!this.get('isAttendingRehearsalDinner'))
-    {
-      return 0;
-    }
-
-    var contacts = this.get('contacts');
-    return contacts.filterBy('isAttendingRehearsalDinner', true).get('length');
-  }.property('contacts.@each.isAttendingRehearsalDinner', 'isAttendingRehearsalDinner'),
-
   actions: {
     saveReservation: function(event) {
       this.get("model").save();
@@ -41,7 +13,7 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
   needs: "rsvp",
   currentRoute: "",
   rsvp: Ember.computed.alias("controllers.rsvp"),
-  
+
   bubbleUpTitle: function() {
     this.set(("rsvp.title"), this.get("title"));
   }.on("init"),
@@ -70,7 +42,7 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
 RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
   title: "RSVP",
   currentRoute: "rsvp.attendance",
-  
+
   hasAttendingStateBeenSelected: function() {
     return this.get('isAttendingBigDay') != -1;
   }.property('isAttendingBigDay'),
@@ -105,7 +77,7 @@ RSVP.RsvpAttendanceController = RSVP.RsvpBaseController.extend({
 
   nextButtonText: function() {
     if (this.get('isAttendingBigDay') == 0 ? true : false) {
-      return "Review & Submit";
+      return "Review RSVP";
     }
     return "Next Step";
   }.property('isAttendingBigDay', 'hasAttendingStateBeenSelected'),
@@ -138,4 +110,68 @@ RSVP.RsvpWrapUpController = RSVP.RsvpBaseController.extend({
   title: "Wrap-Up",
   previousRoute: "rsvp.notes",
   currentRoute: "rsvp.wrap-up",
+
+  numWeddingAttendees: function() {
+    if (this.get('isAttendingBigDay') != 1) {
+      return 0;
+    }
+
+    var contacts = this.get('contacts');
+    return contacts.filterBy('isAttendingBigDay', 1).get('length');
+  }.property('contacts.@each.isAttendingBigDay', 'isAttendingBigDay'),
+
+  numRehearsalDinnerAttendees: function() {
+    if (this.get('isAttendingRehearsalDinner') != 1) {
+      return 0;
+    }
+
+    var contacts = this.get('contacts');
+    return contacts.filterBy('isAttendingRehearsalDinner', 1).get('length');
+  }.property('contacts.@each.isAttendingRehearsalDinner', 'isAttendingRehearsalDinner'),
+
+  contactsAttending: function() {
+    var contacts = this.get('contacts');
+    return contacts.filterBy('isAttendingBigDay', 1);
+  }.property('contacts.@each.isAttendingBigDay', 'isAttendingBigDay'),
+
+  contactsAttendingRehearsalDinner:  function() {
+    var contacts = this.get('contacts');
+    return contacts.filterBy('isAttendingRehearsalDinner', 1);
+  }.property('contacts.@each.isAttendingRehearsalDinner', 'isAttendingRehearsalDinner'),
+
+  isAttendingSummaryText: function() {
+    if (this.get('isAttendingBigDay') == 1) {
+      return "will";
+    }
+
+    return "will not";
+  }.property('isAttendingBigDay'),
+
+  isAttendingRehearsalDinnerSummaryText: function() {
+    if (this.get('isAttendingRehearsalDinner') == 1) {
+      return "will";
+    }
+
+    return "will not";
+  }.property('isAttendingRehearsalDinner'),
+
+  notesForBrideGroomSummaryText: function() {
+    var notesForBrideGroom = this.get('notesForBrideGroom');
+
+    if (notesForBrideGroom != "") {
+      return notesForBrideGroom;
+    }
+
+    return "No notes for the bride & groom.";
+  }.property('notesForBrideGroom'),
+
+  dietaryRestrictionsSummaryText: function() {
+    var dietaryRestrictions = this.get('dietaryRestrictions');
+
+    if (dietaryRestrictions != "") {
+      return dietaryRestrictions;
+    }
+
+    return "No dietary restrictions were noted.";
+  }.property('dietaryRestrictions')
 });

@@ -1,8 +1,66 @@
 <div class="grid">
+  <div class="unit whole separator">
+    <p>Please review the following information to ensure the RSVP is correct before submitting.</p>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="unit whole wrap-up">
+    <p>Reservation for <span class="reservation-title">{{reservationTitle}}</span></p>
+
+    <div class="summary-section">
+      <h5 class="sub-title"><span>Attending</span></h3>
+      <p>You have selected that you <b>{{isAttendingSummaryText}}</b> be attending.</p>
+    </div>
+
+    <div class="summary-section">
+      <h5 class="sub-title"><span>Guests</span></h3>
+      <p>The following people will be attending the reception:
+        <br />
+        <ul>
+        {{#each contactsAttending}}
+          <li>{{firstName}} {{lastName}}</li>
+        {{/each}}
+        </ul>
+      </p>
+    </div>
+
+    {{#if isInvitedToRehearsalDinner}}
+      <div class="summary-section">
+        <h5 class="sub-title"><span>Attending Rehearsal Dinner</span></h3>
+        <p>You have selected that you <b>{{isAttendingRehearsalDinnerSummaryText}}</b> be attending the Rehearsal Dinner.</p>
+      </div>
+
+      <div class="summary-section">
+        <h5 class="sub-title"><span>Rehearsal Dinner Guests</span></h3>
+        <p>The following people will be attending the rehearsal dinner:
+          <br />
+          <ul>
+          {{#each contactsAttendingRehearsalDinner}}
+            <li>{{firstName}} {{lastName}}</li>
+          {{/each}}
+          </ul>
+        </p>
+      </div>
+    {{/if}}
+
+    <div class="summary-section">
+      <h5 class="sub-title"><span>Dietary Restrictions</span></h3>
+      <p>{{dietaryRestrictionsSummaryText}}</p>
+    </div>
+
+    <div class="summary-section">
+      <h5 class="sub-title"><span>Notes for Bride & Groom</span></h3>
+      <p>{{notesForBrideGroomSummaryText}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="grid">
   <div class="unit whole rsvp-navigate">
     <ul>
-    <li><input class="submit previous" type="submit" value="< Back" {{action "previous"}}></input></li>
-    <li><input class="submit next submit-rsvp" type="submit" value="Submit" {{action "next"}}></input></li>
+      <li><input class="submit previous" type="submit" value="< Back" {{action "previous"}}></input></li>
+      <li><input class="submit next submit-rsvp" type="submit" value="Submit" {{action "next"}}></input></li>
     </ul>
   </div>
 </div>

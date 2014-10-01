@@ -66,7 +66,7 @@ RSVP.RsvpBaseRoute = Ember.Route.extend({
 
     return rsvp;
   },
-  
+
   setupController: function(controller, model) {
     this._super(controller, model);
     controller.bubbleUpTitle();
