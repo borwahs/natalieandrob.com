@@ -106,6 +106,60 @@ h5.sub-title {
   font-weight: 400;
 }
 
+.separator {
+  border-bottom: 1px dashed @red-heart-color;
+}
+
+.wrap-up .reservation-title {
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+.wrap-up h5.sub-title, .attendees h5.sub-title {
+  font-weight: 700;
+}
+
+.wrap-up h5.sub-title span, .attendees h5.sub-title span {
+  border-bottom: 1px dotted #000;
+}
+
+.attendees .left, .attendees .right {
+  width: 45%;
+  display: inline-block;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.attendees .attend-button {
+  border: 0;
+  width: 100%;
+  padding: 5px 5px;
+  border: 3px #ababab solid;
+  background: #fff;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
+.attendees .selected {
+  border: 3px @red-heart-color solid;
+  background: @red-heart-color;
+  color: #fff;
+}
+
+h5.rsvp {
+  font-weight: 700;
+}
+
+.wrap-up ul {
+  list-style-type: square;
+  margin-left: 35px;
+}
+
+.summary-section {
+  margin-top: 30px;
+}
+
 .icon-col {
   padding-top: 4px;
 }
@@ -223,7 +277,7 @@ input {
   -moz-border-radius: 5px;
 }
 
-input.text {
+input.text, textarea.text {
   border: 2px solid #aaa;
   font-size: 20px;
   padding: 10px;
@@ -242,6 +296,45 @@ input.submit {
   text-align: center;
   color: white;
   font-weight: bold;
+}
+
+.error-msg { color: red; }
+
+.rsvp-navigate {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px dashed @red-heart-color;
+  text-align: center;
+}
+
+.rsvp-navigate ul {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  list-style-type: none;
+}
+
+.rsvp-navigate li {
+  width: 40%;
+  display: inline-block;
+}
+
+.rsvp-navigate .previous, .rsvp-navigate .next {
+  background-color: #FFAAAA;
+}
+
+.rsvp-navigate .cancel {
+  background-color: #FF7400;
+}
+
+.rsvp-navigate .submit-rsvp {
+  background-color: @red-heart-color;
+}
+
+
+
+input.disabled {
+  cursor: none;
+  background-color: #ababab;
 }
 
 div.logo {
@@ -395,4 +488,43 @@ footer .small-icon {
     display: none !important;
   }
 
+}
+
+
+input.text-box {
+  border: 0;
+  width: 100%;
+  padding: 5px 5px;
+  border: 3px #ababab solid;
+  background: #fff;
+  color: black;
+  font-weight: bold;
+}
+
+
+input.attendButton {
+  border: 0;
+  width: 100%;
+  padding: 10px 5px;
+  border: 3px #ababab solid;
+  background: #fff;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
+input.selected {
+  border: 3px @red-heart-color solid;
+  background: @red-heart-color;
+  color: #fff;
+}
+
+.rsvp {
+  p {
+    margin: 0;
+  }
+
+  .section-header {
+    margin: 10px 0 0 0;
+  }
 }

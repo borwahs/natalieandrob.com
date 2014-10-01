@@ -5,12 +5,27 @@
     "host": "0.0.0.0",
     "port": 9000
   },
+  "mail": {
+    "fromAddress": "this@this.com",
+    "toAddress": "that@that.com",
+    "provider": "gmail",
+    "providerUserName": "test@test.com",
+    "providerPassword": "somePassWORD"
+  },
   "static": {
     "serveStatic": false,
-    "path": "../build"
+    "client" : {
+      "path": "./build"
+    },
+    "dashboard": {
+      "path": "./dashboard"
+    }
   },
-  "redis": {
+  "postgres": {
     "host": "127.0.0.1",
-    "port": "6379"
+    "port": "5432",
+    "database": "rsvp",
+    "username": "rsvp",
+    "password": "2014"
   }
 }

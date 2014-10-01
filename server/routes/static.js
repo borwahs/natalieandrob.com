@@ -1,18 +1,28 @@
 var Config = require("../config");
 
-exports.proxy = {
-   handler: {
-     proxy: {
-       host: Config.harp.host,
-       port: Config.harp.port
-     }
+exports.clientProxy = {
+  handler: {
+    proxy: {
+      host: Config.harp.host,
+      port: Config.harp.port
+    }
   }
 };
 
-exports.static = {
+exports.clientStatic = {
   handler: {
     directory: {
-      path: Config.static.path,
+      path: Config.static.client.path,
+      listing: false,
+      index: true
+    }
+  }
+};
+
+exports.dashboardStatic = {
+  handler: {
+    directory: {
+      path: Config.static.dashboard.path,
       listing: false,
       index: true
     }

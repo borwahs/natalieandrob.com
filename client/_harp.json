@@ -1,0 +1,6 @@
+{
+  "globals": {
+    "showRsvpBanner": true,
+    "showRsvpNotReadyBanner": false
+  }
+}

@@ -11,10 +11,24 @@ The following is a list of open-source components used:
 * [LESS](http://lesscss.org/)
 * [Gridism](http://cobyism.com/gridism/)
 * [Eric Meyer's Reset CSS v2.0](http://meyerweb.com/eric/tools/css/reset/)
+* [jQuery](http://jquery.com/)
+* [underscore.js](http://underscorejs.org/)
+* [Ember](http://emberjs.com/)
 
 ## Icon Melon
 
 This site is using SVG icons from [iconmelon](http://iconmelon.com/).
+
+# Database Setup
+
+First, download Postgres and get it running. Then run the following shell script:
+
+   $ ./database/setup-postgres-db.sh
+
+Insert sample data (or data that matches the sample data found under database/ folder). It accepts a filepath as the first parameter. Otherwise, it defaults to the sample data.
+
+    $ node utils/insert-rsvp-data.js
+
 
 # Usage
 
