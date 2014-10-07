@@ -16,10 +16,10 @@ var INSERT_NEW_CONTACT_SQL = 'INSERT INTO contact (reservation_id, first_name, m
 var INSERT_NEW_RESERVATION_SQL = 'INSERT INTO reservation (reservation_Title, rsvp_Code_Source, '
     + ' address_Line_One, address_Line_Two, '
     + 'address_City, address_State, address_Zip_Code, rsvp_Code, email_Address, reservation_Notes, '
-    + 'dietary_Restrictions, notes_For_Bride_Groom, is_Invited_To_Rehearsal_Dinner, '
+    + 'dietary_Restrictions, notes_For_Bride_Groom, is_Invited_To_Rehearsal_Dinner, has_submitted '
     + ' create_date, modified_date) '
     + ' VALUES '
-    + ' ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, '
+    + ' ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14'
     + ' CURRENT_TIMESTAMP, CURRENT_TIMESTAMP'
     + ' ) RETURNING id';
 
@@ -53,6 +53,18 @@ function sendEmailWithDetails(rsvpCode, reservationData) {
   } catch (err) {}
 }
 
+function sendErrorLoginRSVPCode(rsvpCode) {
+  try
+  {
+    transporter.sendMail({
+        from: Config.mail.fromAddress,
+        to: Config.mail.toAddress,
+        subject: Util.format('Reservation RSVP Code Login ERROR - RSVP Code [%s]', rsvpCode),
+        text: "Error"
+    });
+  } catch (err) {}
+}
+
 function normalizeRSVPCode(rsvpCode) {
   return rsvpCode.toLowerCase().replace(/o/gi, "0");
 }
@@ -67,6 +79,8 @@ exports.retrieveReservation = {
         reply({reservation: reservation});
       })
       .catch(function(err) {
+        sendErrorLoginRSVPCode(rsvpCode);
+        
         handleError(err, reply);
       });
   }

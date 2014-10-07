@@ -56,9 +56,15 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
 
   actions: {
     next: function() {
-      RSVP.CurrentRsvp.save();
-
       var currentRoute = this.get('currentRoute');
+      var hasSubmitted = this.get('hasSubmitted');
+      
+      if (currentRoute === "rsvp.wrap-up" && !hasSubmitted) {
+        this.set('hasSubmitted', true);
+      }
+      
+      RSVP.CurrentRsvp.save();
+      
       this.transitionToRoute(this.get("nextRoute"), this.get("rsvpCode")).then(function(route) {
         route.controller.set('previousRoute', currentRoute);
       });

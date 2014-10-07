@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS reservation (
   dietary_restrictions            VARCHAR(2048),
   notes_for_bride_groom           VARCHAR(2048),
   is_invited_to_rehearsal_dinner  BOOLEAN,
+  has_submitted                   BOOLEAN,
   create_date                     TIMESTAMP NOT NULL,
   modified_date                   TIMESTAMP NOT NULL,
   PRIMARY KEY(id, rsvp_code)
