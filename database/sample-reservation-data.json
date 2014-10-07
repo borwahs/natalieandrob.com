@@ -13,6 +13,7 @@
         "dietaryRestrictions": "",
         "notesForBrideGroom": "",
         "isInvitedToRehearsalDinner": true,
+        "hasSubmitted": false,
         "contacts": [
             {
                 "firstName": "FirstName1",
@@ -46,6 +47,7 @@
         "notesForBrideGroom": "",
         "rsvpCode": "abcde",
         "emailAddress": "rabcd@rest.com",
+        "hasSubmitted": false,
         "contacts": [
             {
                 "firstName": "Some",

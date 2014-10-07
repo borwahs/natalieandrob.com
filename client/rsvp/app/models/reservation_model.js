@@ -17,6 +17,8 @@ RSVP.Reservation = Ember.Object.extend(RSVP.Jsonable, {
   addressCity: null,
   addressState: null,
   addressZipCode: null,
+  
+  hasSubmitted: false,
 
   contacts: [],
 
@@ -79,6 +81,8 @@ RSVP.Reservation.reopenClass({
         addressCity: response.reservation.addressCity,
         addressState: response.reservation.addressState,
         addressZipCode: response.reservation.addressZipCode,
+        
+        hasSubmitted: response.reservation.hasSubmitted,
 
         contacts: contacts
       });
