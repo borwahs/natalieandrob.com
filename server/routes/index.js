@@ -3,6 +3,7 @@ var Static = require("./static");
 var Sessions = require("./sessions");
 var Config = require("../config");
 var Reservations = require("./reservations");
+var Weather = require("./weather");
 
 exports.endpoints = [
   // just so we can test it is working
@@ -15,6 +16,9 @@ exports.endpoints = [
 
   // sessions / login
   { method: "POST", path: "/sessions/login", config: Sessions.login },
+  
+  // weather
+  { method: "GET", path: "/weather", config: Weather.get },
 
   // reservations
   { method: "GET", path: "/reservation/{rsvpCode}", config: Reservations.retrieveReservation },

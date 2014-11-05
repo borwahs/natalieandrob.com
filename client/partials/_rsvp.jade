@@ -8,5 +8,6 @@ if showRsvpBanner
 if showRsvpNotReadyBanner
   div.browser-warning.container
     section.wrap.grid
-      div.unit.whole
-        | The RSVP system is almost complete. Please check back on October 1st to RSVP! Thanks for your patience.
+      div.unit.whole#weather
+        | Check current weather forecast:
+        a(href="https://api.forecast.io/forecast/5cf35f19e7d7486dc45f8bdf44b1c68f/39.6647,-86.1251,2014-11-08T12:00:00-0400") forecast.io
