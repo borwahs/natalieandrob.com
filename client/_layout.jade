@@ -2,7 +2,7 @@ doctype html
 html(lang="en")
   head
     title
-      | Natalie & Rob
+      | Madeleine & Joe
     meta(name="viewport",content="width=device-width,initial-scale=1")
     link(rel="icon",href="/images/favicon.ico")
     script(src="//code.jquery.com/jquery-1.11.0.min.js")
@@ -10,23 +10,18 @@ html(lang="en")
     link(href='/stylesheets/reset.css',rel='stylesheet',type='text/css')
     link(href='/stylesheets/gridism.css',rel='stylesheet',type='text/css')
     link(href='/stylesheets/all.css',rel='stylesheet',type='text/css')
-    link(href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900',rel='stylesheet' type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Pacifico',rel='stylesheet',type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,300',rel='stylesheet',type='text/css')
   body
-    != partial("partials/_svg-icons.jade")
-
     <!--[if lt IE 9]>
     div.browser-warning
       section.wrap.grid
         div.unit.whole
           | You are using a browser that is not supported. Please note that things may not display correctly.
     <![endif]-->
-    
-    if current.path.length < 2
-      != partial("partials/_rsvp.jade")
 
     if current.path.length < 2
-      a#scrollTop.scroll(href="#header")
-        | Up &#8593;
+      != partial("partials/_rsvp.jade")
 
     != partial("partials/_header")
 
@@ -38,9 +33,6 @@ html(lang="en")
           a(href="#")
             svg#toggle-icon.icon(viewBox="0 0 32 32")
                 use(xlink:href="#menu")
-
-    if current.path.length < 2
-      section.hero
 
     if current.path.length < 2
       section.grid.container#desktop-nav
@@ -59,20 +51,9 @@ html(lang="en")
 
     != partial("partials/_footer")
 
-    script.
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-46717714-2']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
 
     script(src="/javascripts/cookies.js")
     script(src="/javascripts/introAnimation.js")
     script(src="/javascripts/subscriberForm.js")
     script(src="/javascripts/navigation.js")
-    script(src="/javascripts/weather.js")
     script(src="/javascripts/main.js")

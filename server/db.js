@@ -75,16 +75,17 @@ var UPDATE_CONTACT_SQL = 'UPDATE contact                          \
                               last_name = $3,                     \
                               is_attending_big_day = $4,          \
                               is_attending_rehearsal_dinner = $5, \
+                              meal_selection = $6,                 \
                               modified_date = CURRENT_TIMESTAMP   \
-                          WHERE id = $6                           \
+                          WHERE id = $7                          \
                         ';
 
 var INSERT_NEW_CONTACT_SQL = 'INSERT INTO contact                                     \
                                 (reservation_id, first_name, middle_name, last_name,  \
                                  is_child, is_attending_big_day,                      \
-                                 is_attending_rehearsal_dinner, create_date,          \
+                                 is_attending_rehearsal_dinner, meal_selection, create_date,          \
                                  modified_date)                                       \
-                                 VALUES ($1, $2, $3, $4, $5, $6, $7,                  \
+                                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8,                  \
                                      CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING id';
 
 var INSERT_NEW_RESERVATION_SQL = 'INSERT INTO reservation                                         \
@@ -106,6 +107,8 @@ db.reservation = {
     return db.connect(DEFAULT_CONNECTION_STRING, function(client) {
       return db.executeQuery(client, GET_RESERVATION_SQL, [code])
                 .then(function(results) {
+                  console.log(results);
+                  console.log(code);
                   if (results.rows.length === 0) {
                     throw new Error("Could not find reservation for given RSVP code: " + code);
                   }
@@ -133,6 +136,7 @@ db.reservation = {
                                   isAttendingBigDay: row.is_attending_big_day,
                                   isAttendingRehearsalDinner: row.is_attending_rehearsal_dinner,
                                   isChild: row.is_child,
+                                  mealSelection: row.meal_selection
                                 };
 
                                 return contact;
@@ -149,6 +153,7 @@ db.reservation = {
   },
 
   update: function(reservation) {
+    console.log("1");
     return db.connect(DEFAULT_CONNECTION_STRING, function(client) {
       var reservationUpdateParams = [
         reservation.addressLineOne,
@@ -164,8 +169,10 @@ db.reservation = {
         reservation.id
       ];
 
+      console.log("2");
       return db.executeQuery(client, UPDATE_RESERVATION_SQL, reservationUpdateParams)
                 .then(function() {
+                  console.log("3");
                   return reservation.contacts.map(function(contact) {
                     return [
                       contact.firstName,
@@ -173,11 +180,13 @@ db.reservation = {
                       contact.lastName,
                       contact.isAttendingBigDay,
                       contact.isAttendingRehearsalDinner,
+                      contact.mealSelection,
                       contact.id
                     ];
                   });
                 })
                 .then(function(contacts) {
+                    console.log("4");
                   return RSVP.all(contacts.map(function(contact) {
                       return db.executeQuery(client, UPDATE_CONTACT_SQL, contact);
                   }));
@@ -208,11 +217,14 @@ db.reservation = {
                 .then(function() {
                   return reservation.contacts.map(function(contact) {
                     return [
+                      reservation.id,
                       contact.firstName,
                       contact.middleName,
                       contact.lastName,
+                      contact.isChild,
                       contact.isAttendingBigDay,
                       contact.isAttendingRehearsalDinner,
+                      contact.mealSelection,
                       contact.id
                     ];
                   });

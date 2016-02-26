@@ -9,9 +9,9 @@ var RSVP = require("rsvp");
 var INSERT_NEW_CONTACT_SQL = 'INSERT INTO contact                                     \
                                 (reservation_id, first_name, middle_name, last_name,  \
                                  is_child, is_attending_big_day,                      \
-                                 is_attending_rehearsal_dinner, create_date,          \
+                                 is_attending_rehearsal_dinner, meal_selection, create_date,          \
                                  modified_date)                                       \
-                                 VALUES ($1, $2, $3, $4, $5, $6, $7,                  \
+                                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8,                  \
                                      CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING id';
 
 var INSERT_NEW_RESERVATION_SQL = 'INSERT INTO reservation                                         \
@@ -20,13 +20,12 @@ var INSERT_NEW_RESERVATION_SQL = 'INSERT INTO reservation                       
                                        address_City, address_State, address_Zip_Code,             \
                                        rsvp_Code, email_Address, reservation_Notes,               \
                                        dietary_Restrictions, notes_For_Bride_Groom,               \
-                                       is_Invited_To_Rehearsal_Dinner, has_submitted              \
+                                       is_Invited_To_Rehearsal_Dinner, has_submitted,              \
                                        create_date, modified_date)                                \
                                   VALUES                                                          \
                                        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,             \
                                         $12, $13, $14, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP       \
                                   ) RETURNING id';
-
 
 function main() {
   var fileName = process.argv[2];
@@ -61,13 +60,13 @@ var readFile = function(file) {
       }
     })
   });
-  
+
   return promise;
 }
 
 function promiseLogger(preamble) {
   return function(val) {
-    console.log(preamble, val);
+    // console.log(preamble, val);
     return val;
   }
 }
@@ -91,7 +90,7 @@ function convertReservationJsonToInsertParams(reservation) {
   reserveArray.push(reservation.notesForBrideGroom);
 
   reserveArray.push(reservation.isInvitedToRehearsalDinner);
-  
+
   reserveArray.push(reservation.hasSubmitted);
 
   return reserveArray;
@@ -99,7 +98,7 @@ function convertReservationJsonToInsertParams(reservation) {
 
 function convertContactJsonToInsertParams(contact) {
   var contactInsertParams = [];
-  
+  console.log(contact.reservationId);
   contactInsertParams.push(contact.reservationId);
   contactInsertParams.push(contact.firstName);
   contactInsertParams.push(contact.middleName);
@@ -107,32 +106,33 @@ function convertContactJsonToInsertParams(contact) {
   contactInsertParams.push(contact.isChild);
   contactInsertParams.push(contact.isAttendingBigDay);
   contactInsertParams.push(contact.isAttendingRehearsalDinner);
+  contactInsertParams.push(contact.mealSelection);
 
   return contactInsertParams;
 }
 
 function insertReservations(reservations) {
   var deferred = RSVP.defer();
-  
+
   var sequentialInsertPromise = reservations.reduce(function(promise, reservation) {
     return promise.then(function() {
       return insertReservation(reservation);
     });
   }, RSVP.resolve());
-  
+
   sequentialInsertPromise.then(function() {
     deferred.resolve(reservations);
   }, deferred.reject);
-  
+
   return deferred.promise;
 }
 
 function insertReservation(reservation) {
   var insertParams = convertReservationJsonToInsertParams(reservation);
-  console.log("INSERTING RESERVATION", insertParams);
+  // console.log("INSERTING RESERVATION", insertParams);
   var dbPromise = DB.connect(DB.connectionString, function(client) {
     var executionPromise = DB.executeQuery(client, INSERT_NEW_RESERVATION_SQL, insertParams);
-    
+
     executionPromise
       .then(function(results) {
         return results.rows[0].id;
@@ -142,58 +142,59 @@ function insertReservation(reservation) {
         return reservation;
       })
       .then(promiseLogger("INSERTED RESERVATION"))
-      
+
     return executionPromise;
   });
-  
+
   return dbPromise;
 }
 
 function convertReservationsToContacts(reservations) {
   var contacts = reservations.reduce(function(acc, reservation) {
     var contactsWithReservationId = reservation.contacts.map(function(contact) {
-      console.log("RESERVATION", reservation);
+
       contact.reservationId = reservation.id;
+      console.log("contact", contact);
       return contact;
     });
-    
+
     contactsWithReservationId.forEach(function(contact) {
       acc.push(contact);
     });
-    
+
     return acc;
   }, []);
-  
+
   return contacts;
 }
 
 function insertContacts(contacts) {
   var deferred = RSVP.defer();
-  
+
   var sequentialInsertPromise = contacts.reduce(function(promise, contact) {
     return promise.then(function() {
       return insertContact(contact);
     });
   }, RSVP.resolve());
-  
+
   sequentialInsertPromise.then(function() {
     deferred.resolve(contacts);
   }, deferred.reject);
-  
+
   return deferred.promise;
 }
 
 function insertContact(contact) {
   var insertParams = convertContactJsonToInsertParams(contact);
-  console.log("INSERTING CONTACT", insertParams);
+   console.log("INSERTING CONTACT", insertParams);
   var dbPromise = DB.connect(DB.connectionString, function(client) {
     var executionPromise = DB.executeQuery(client, INSERT_NEW_CONTACT_SQL, insertParams);
-    
+
     executionPromise.then(promiseLogger("INSERTED CONTACT"))
-      
+
     return executionPromise;
   });
-  
+
   return dbPromise;
 }
 

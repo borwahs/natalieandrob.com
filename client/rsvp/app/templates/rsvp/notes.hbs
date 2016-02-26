@@ -1,8 +1,10 @@
 <div class="grid">
-  <div class="unit half">
-    <p>Do you have any dietary restrictions?</p>
-    {{textarea class="text" rows="3" value=dietaryRestrictions}}
-  </div>
+  {{#if isAttendingBigDay}}
+    <div class="unit half">
+      <p>Do you or your guests have any dietary restrictions?</p>
+      {{textarea class="text" rows="3" value=dietaryRestrictions}}
+    </div>
+  {{/if}}
   <div class="unit half">
     <p>Anything else you would like to tell us?</p>
     {{textarea class="text" rows="3" value=notesForBrideGroom}}

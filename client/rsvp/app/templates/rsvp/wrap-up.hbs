@@ -21,8 +21,8 @@
             The following people will be attending the reception:
             <br />
             <ul>
-            {{#each contactsAttending}}
-              <li>{{firstName}} {{lastName}}</li>
+            {{#each contactsAttending itemController="contact"}}
+              <li>{{firstName}} {{lastName}} ({{mealSelectionText}})</li>
             {{/each}}
             </ul>
           {{else}}

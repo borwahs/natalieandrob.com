@@ -21,7 +21,8 @@
                 "lastName": "LastName1",
                 "isChild": false,
                 "isAttendingBigDay": 1,
-                "isAttendingRehearsalDinner": 0
+                "isAttendingRehearsalDinner": 0,
+                "mealSelection": -1
             },
             {
                 "firstName": "FirstName2",
@@ -29,7 +30,8 @@
                 "lastName": "LastName2",
                 "isChild": false,
                 "isAttendingBigDay": 1,
-                "isAttendingRehearsalDinner": 0
+                "isAttendingRehearsalDinner": 0,
+                "mealSelection": -1
             }
         ]
     },
@@ -55,7 +57,8 @@
                 "lastName": "Name",
                 "isChild": false,
                 "isAttendingBigDay": -1,
-                "isAttendingRehearsalDinner": -1
+                "isAttendingRehearsalDinner": -1,
+                "mealSelection": -1
             },
             {
                 "firstName": "Fname",
@@ -63,7 +66,8 @@
                 "lastName": "Lname",
                 "isChild": true,
                 "isAttendingBigDay": -1,
-                "isAttendingRehearsalDinner": -1
+                "isAttendingRehearsalDinner": -1,
+                "mealSelection": -1
             }
         ]
     }

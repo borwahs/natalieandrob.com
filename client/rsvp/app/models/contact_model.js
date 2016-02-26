@@ -4,8 +4,9 @@ RSVP.Contact = Ember.Object.extend(RSVP.Jsonable, {
   middleName: null,
   lastName: null,
   isChild: false,
-  isAttendingBigDay: 0, // -1 = not set, 0 = no, 1 = yes
-  isAttendingRehearsalDinner: 0, // -1 = not set, 0 = no, 1 = yes
+  isAttendingBigDay: -1, // -1 = not set, 0 = no, 1 = yes
+  isAttendingRehearsalDinner: -1, // -1 = not set, 0 = no, 1 = yes
+  mealSelection: -1, // -1 = not set, 0 = chicken, 1 = veg
 
   fullName: function() {
     return this.get('firstName') + ' ' + this.get('middleName') + ' ' + this.get('lastName');

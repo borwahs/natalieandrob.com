@@ -30,7 +30,7 @@ fs.readFile(filePath, "utf-8", function (err, data) {
   var addressJSONStripped = _.map(addressJSON, function(reservation) {
 
 
-
+    console.log(reservation.rsvpCode)
     delete reservation["contacts"];
     delete reservation["addressContacts"];
     delete reservation["addressLineOne"];
@@ -39,16 +39,15 @@ fs.readFile(filePath, "utf-8", function (err, data) {
     delete reservation["addressState"];
     delete reservation["addressZipCode"];
     delete reservation["id"];
-    delete reservation["isInvitedToRehearsalDinner"];
     delete reservation["addressArray"];
 
     return reservation;
 
   });
 
-  console.log(addressJSONStripped);
+  //console.log(addressJSONStripped);
 
-  var newCSV = CSVParse.unparse(addressJSONStripped);
+  var newCSV = CSVParse.unparse(addressJSONStripped,{quotes: true});
 
   var newCSVFile = path.join(__dirname, 'guestlistwithcode.csv');
 
@@ -66,36 +65,32 @@ function mapContactInfo(addressJSON) {
 
   var i = 0;
 
+  var codes = {};
+
   var reservations = _.map(addressJSON, function(reservation) {
 
     reservation.id = i++;
     reservation.isInvitedToRehearsalDinner = false;
 
 
-
-    var contactsInvitedToRehearsalDinner = false;
-    if (reservation.makeItAWeekend === "Yes")
-    {
-      reservation.isInvitedToRehearsalDinner = true;
-      contactsInvitedToRehearsalDinner = true;
-    }
-
-
     var namesList = reservation.addressContacts.split(",");
+
+    reservation.addressTitle = reservation.addressTitle.trim();
 
     var contacts = _.map(namesList, function(reservationContactName) {
       var contact = {};
 
       contact.firstName = null;
       contact.lastName = null;
-      contact.isInvitedToRehearsalDinner = contactsInvitedToRehearsalDinner;
+      contact.isInvitedToRehearsalDinner = -1;
       contact.isAttendingBigDay = -1;
       contact.isAttendingRehearsalDinner = -1;
+      contact.mealSelection = 0;
 
       var contactNameSplit = reservationContactName.trim().split(" ");
 
 
-      if (contactNameSplit.length == 1 && contactNameSplit[0] === "????") {
+      if (contactNameSplit.length == 1 && contactNameSplit[0] === "Guest") {
         contact.firstName = "";
         contact.lastName = "";
 
@@ -111,7 +106,7 @@ function mapContactInfo(addressJSON) {
     });
 
 
-    reservation.addressArray = [reservation.addressTitle,
+    reservation.addressArray = [reservation.addressTitle.trim(),
                                 reservation.addressLineOne,
                                 reservation.addressLineTwo,
                                 reservation.addressCity,
@@ -126,7 +121,14 @@ function mapContactInfo(addressJSON) {
 
     reservation.rsvpCodeSource = reservation.addressArray.join('|');
 
-    reservation.rsvpCode = md5(reservation.rsvpCodeSource).substring(0,6);
+    reservation.rsvpCode = md5(reservation.rsvpCodeSource).substring(20,24);
+    if (reservation.rsvpCode.substring(0, 1) === "0") {
+      reservation.rsvpCode = "c" + reservation.rsvpCode.substring(1,4);
+    }
+    if (codes[reservation.rsvpCode] == 1) {
+      console.log("COLLISION");
+    }
+    codes[reservation.rsvpCode] = 1;
 
     rsvpCodes.push( reservation.rsvpCode );
 

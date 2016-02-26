@@ -13,7 +13,7 @@
     "providerPassword": "Castelli2016"
   },
   "static": {
-    "serveStatic": false,
+    "serveStatic": true,
     "client" : {
       "path": "./build"
     },

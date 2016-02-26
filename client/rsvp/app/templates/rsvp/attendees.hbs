@@ -39,8 +39,8 @@
             </div>
           </p>
         {{/if}}
-        
-        {{#if showNameEditControls}}
+
+        {{#if showWeddingControls}}
           <p>
             <div class="left">
               First Name:
@@ -57,6 +57,22 @@
               {{input type="text" class="text-box" value=lastName disabled=disableControlsIfNotAttendingBigDay size="25"}}
             </div>
           </p>
+
+          <div>
+            <div class="left">
+              Meal Selection:
+            </div>
+            <div class="right attending-buttons">
+              <ul>
+                <li>
+                  <input type="button" value="Chicken"  {{bind-attr class=hasSelectedChickenMeal:selected disabled=disableControlsIfNotAttendingBigDay}} {{action "setChickenMealValue"}} />
+                </li>
+                <li>
+                  <input type="button" value="Vegetarian"  {{bind-attr class=hasSelectedVegetarianMeal:selected disabled=disableControlsIfNotAttendingBigDay}} {{action "setVegetarianMealValue"}} />
+                </li>
+              </ul>
+            </div>
+          </div>
         {{/if}}
       </div>
     </div>

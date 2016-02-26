@@ -17,7 +17,7 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
   bubbleUpTitle: function() {
     this.set(("rsvp.title"), this.get("title"));
   }.on("init"),
-  
+
   isAttendingBigDay: function() {
     return this.get('numWeddingAttendees') > 0;
   }.property('numWeddingAttendees'),
@@ -43,7 +43,7 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
     var contacts = this.get('contacts');
     return contacts.filterBy('isAttendingRehearsalDinner', 1).get('length');
   }.property('contacts.@each.isAttendingRehearsalDinner', 'contacts'),
-  
+
   contactsAttending: function() {
     var contacts = this.get('contacts');
     return contacts.filterBy('isAttendingBigDay', 1);
@@ -58,13 +58,13 @@ RSVP.RsvpBaseController = Ember.ObjectController.extend({
     next: function() {
       var currentRoute = this.get('currentRoute');
       var hasSubmitted = this.get('hasSubmitted');
-      
+
       if (currentRoute === "rsvp.wrap-up" && !hasSubmitted) {
         this.set('hasSubmitted', true);
       }
-      
+
       RSVP.CurrentRsvp.save();
-      
+
       this.transitionToRoute(this.get("nextRoute"), this.get("rsvpCode")).then(function(route) {
         route.controller.set('previousRoute', currentRoute);
       });
@@ -100,7 +100,7 @@ RSVP.RsvpWrapUpController = RSVP.RsvpBaseController.extend({
 
   isAttendingSummaryText: function() {
     var textToShow = "";
-    
+
     if (this.get('isAttendingBigDay')) {
       textToShow += this.get('numWeddingAttendees') + " person will";
     } else {
@@ -112,7 +112,7 @@ RSVP.RsvpWrapUpController = RSVP.RsvpBaseController.extend({
 
   isAttendingRehearsalDinnerSummaryText: function() {
     var textToShow = "";
-    
+
     if (this.get('isAttendingRehearsalDinner')) {
       textToShow += this.get('numRehearsalDinnerAttendees') + " person will";
     } else {
@@ -148,10 +148,10 @@ RSVP.RsvpSuccessController = RSVP.RsvpBaseController.extend({
 
   thankYouText: function() {
     if (this.get('isAttendingBigDay') == 1) {
-      return "We are looking forward to celebrating our special day with you. See you November 8th!";
+      return "We are looking forward to celebrating our special day with you. See you April 23rd!";
     }
 
-    return "We will miss you on November 8th but hope we can catch up soon!"
+    return "We will miss you on April 23rd but hope we can catch up soon!"
   }.property('isAttendingBigDay')
 });
 

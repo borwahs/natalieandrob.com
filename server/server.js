@@ -3,7 +3,11 @@ var Joi = require("joi");
 var Config = require("./config");
 var Routes = require("./routes");
 
-var server = Hapi.createServer(Config.host, Config.port);
+var server = Hapi.createServer(Config.host, Config.port, {
+  cors: {
+    origin: ['*']
+  }
+});
 
 // register all the routes
 server.route(Routes.endpoints);

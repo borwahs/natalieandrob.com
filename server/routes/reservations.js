@@ -8,9 +8,9 @@ var _ = require('../libs/underscore.1.6.0.min');
 var nodemailer = require('nodemailer');
 
 var INSERT_NEW_CONTACT_SQL = 'INSERT INTO contact (reservation_id, first_name, middle_name, last_name, '
-    + ' is_child, is_attending_big_day, is_attending_rehearsal_dinner )'
+    + ' is_child, is_attending_big_day, is_attending_rehearsal_dinner, meal_selection )'
     + ' VALUES '
-    + ' ($1, $2, $3, $4, $5, $6, $7'
+    + ' ($1, $2, $3, $4, $5, $6, $7, $8'
     + ' ) RETURNING id';
 
 var INSERT_NEW_RESERVATION_SQL = 'INSERT INTO reservation (reservation_Title, rsvp_Code_Source, '
@@ -80,7 +80,7 @@ exports.retrieveReservation = {
       })
       .catch(function(err) {
         sendErrorLoginRSVPCode(rsvpCode);
-        
+
         handleError(err, reply);
       });
   }
