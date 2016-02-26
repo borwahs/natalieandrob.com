@@ -23,7 +23,11 @@ html(lang="en")
     if current.path.length < 2
       != partial("partials/_rsvp.jade")
 
-    != partial("partials/_header")
+    section.hero
+      != partial("partials/_header")
+      if current.path.length < 2
+        section#desktop-nav
+          != partial("partials/_navigation")
 
     if current.path.length < 2
       section.grid.relative#mobile-nav
@@ -33,11 +37,6 @@ html(lang="en")
           a(href="#")
             svg#toggle-icon.icon(viewBox="0 0 32 32")
                 use(xlink:href="#menu")
-
-    if current.path.length < 2
-      section.grid.container#desktop-nav
-        div.unit.whole
-          != partial("partials/_navigation")
 
     section#content
       div.wrap

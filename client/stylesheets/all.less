@@ -250,6 +250,11 @@ div.rings {
 
 section#desktop-nav {
   text-align: center;
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(255,255,255,.5);
+  width: 100%;
+  padding: 20px 0;
 }
 
 section#desktop-nav ul li {
@@ -362,6 +367,7 @@ section.hero {
   background-position: 75% 40%;
   height: 500px;
   width: 100%;
+  position: relative;
 }
 
 .hero h1 {
@@ -587,6 +593,7 @@ footer .small-icon {
       line-height: .5em;
     }
 
+    #desktop-nav {display: none !important;}
     #map { height: 300px; }
 
     #menu-toggle { display: block; }
@@ -606,7 +613,7 @@ footer .small-icon {
       line-height: 1em;
     }
 
-
+    #desktop-nav {display: none !important;}
     #header-info { float: left; }
 
     header {
@@ -629,7 +636,7 @@ footer .small-icon {
     header #title {
       float: none;
     }
-
+    #desktop-nav {display: none !important;}
     #menu-toggle { display: block; }
     #header-info { float: left; }
 }
