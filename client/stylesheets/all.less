@@ -372,22 +372,42 @@ section.hero {
 
 .hero h1 {
   color: #fff;
-  font-size: 35px;
-  font-weight: 300;
+  font-size: 50px;
+  font-weight: 400;
   text-align: right;
-  font-family: "Pacifico";
+  font-family: "starlightregular", "Pacifico";
   text-shadow: 3px 3px 3px #000;
-  margin-bottom: 10px;
+  margin-bottom: -20px;
   margin-right: 40px;
 }
 
-.hero p {
+.hero .dates {
+  position: absolute;
+  top: 80px;
+  right: 0px;
   color: #fff;
   font-size: 25px;
   line-height: 30px;
   text-align: right;
   text-shadow: 3px 3px 3px #000;
   margin-right: 40px;
+}
+
+@media only screen
+  and (max-width : 625px) {
+
+  .hero h1 {
+    margin: 0;
+    text-align: center;
+  }
+}
+@media only screen
+  and (max-width : 850px) {
+
+  .hero .dates {
+  top: auto;
+  bottom: 30px;
+  }
 }
 
 #accommodations h1 {
@@ -639,6 +659,37 @@ footer .small-icon {
     #desktop-nav {display: none !important;}
     #menu-toggle { display: block; }
     #header-info { float: left; }
+}
+
+@media only screen
+  and (max-width : 750px) {
+  div.tower::after {
+  display: none;
+}
+div.vanderbilt::before {
+  display: none;
+}
+
+div.house::before {
+  display: none;
+}
+
+
+div.cubs::before {
+  display: none;
+}
+
+div.trees::after {
+  display: none;
+}
+
+div.hearts::before {
+  display: none;
+}
+
+div.rings {
+  display: none;
+}
 }
 
 @media only screen
